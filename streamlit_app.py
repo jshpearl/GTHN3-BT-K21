@@ -452,228 +452,443 @@ def render_lesson_ui(lesson_key, lesson_data, audio_prefix, img_lesson_num):
     st.markdown(f"### 📘 {lesson_data['title']}")
     sec_listening, sec_reading, sec_writing = st.tabs(["I. PHẦN NGHE (听力)", "II. PHẦN ĐỌC (阅读)", "III. PHẦN VIẾT (书写)"])
 
-    # --- PHẦN NGHE ---
+    # Submission state keys
+    sub_lis_key = f"{lesson_key}_lis_submitted"
+    sub_read_key = f"{lesson_key}_read_submitted"
+    sub_write_key = f"{lesson_key}_write_submitted"
+
+    if sub_lis_key not in st.session_state: st.session_state[sub_lis_key] = False
+    if sub_read_key not in st.session_state: st.session_state[sub_read_key] = False
+    if sub_write_key not in st.session_state: st.session_state[sub_write_key] = False
+
+    # ------------------------------------------------------
+    # I. PHẦN NGHE
+    # ------------------------------------------------------
     with sec_listening:
         st.subheader("I. 听力 - PHẦN NGHE (20 câu)")
+
+        is_lis_submitted = st.session_state[sub_lis_key]
+
+        wrong_lis = []
+        score_lis = 0
+        if is_lis_submitted:
+            for q in lesson_data['listening']['part1']:
+                u_ans = st.session_state.get(f"{lesson_key}_lis_p1_{q['id']}", "Chưa chọn")
+                if u_ans == q['correct']: score_lis += 1
+                else: wrong_lis.append(q['id'])
+            for q in lesson_data['listening']['part2']:
+                u_ans = st.session_state.get(f"{lesson_key}_lis_p2_{q['id']}", "Chưa chọn")
+                if u_ans == q['correct']: score_lis += 1
+                else: wrong_lis.append(q['id'])
+            for q in lesson_data['listening']['part3']:
+                u_ans = st.session_state.get(f"{lesson_key}_lis_p3_{q['id']}", "Chưa chọn")
+                if u_ans.startswith(q['correct']): score_lis += 1
+                else: wrong_lis.append(q['id'])
+            for q in lesson_data['listening']['part4']:
+                u_ans = st.session_state.get(f"{lesson_key}_lis_p4_{q['id']}", "Chưa chọn")
+                if u_ans.startswith(q['correct']): score_lis += 1
+                else: wrong_lis.append(q['id'])
+
+            score_percent = int(score_lis / 20 * 100)
+            st.success(f"🎉 **KẾT QUẢ PHẦN NGHE ({lesson_key.upper()}): {score_lis}/20 CÂU ĐÚNG ({score_percent}%)**")
+            
+            if wrong_lis:
+                wrong_str = ", ".join([f"Câu {qid}" for qid in wrong_lis])
+                st.warning(
+                    f"🔔 **NHẮC NHỞ HỌC VIÊN ({student_name.upper() if student_name else 'HỌC SINH'}):**\n\n"
+                    f"⚠️ Bạn làm chưa đúng **{len(wrong_lis)}/20 câu**: **{wrong_str}**.\n\n"
+                    f"👉 **Vui lòng cuộn xuống kiểm tra chi tiết từng câu làm sai (khung màu vàng ⚠️) và đọc kỹ Script Nghe để rút kinh nghiệm nhé!**"
+                )
+            else:
+                st.success(f"🎉 **XUẤT SẮC!** Học sinh **{student_name.upper() if student_name else 'Học sinh'}** đã làm đúng **20/20** tất cả các câu Phần Nghe!")
+
+            col_btn1, col_btn2 = st.columns([1, 4])
+            with col_btn1:
+                if st.button(f"🔄 LÀM LẠI PHẦN NGHE", key=f"reset_lis_{lesson_key}"):
+                    st.session_state[sub_lis_key] = False
+                    st.rerun()
+
+            st.markdown("---")
+
+        # Part 1
         st.markdown("#### **第一部分 (Phần 1 - Câu 1-5): Nghe đối thoại, nối hình (A - F)**")
         play_audio(f"{audio_prefix}-1")
         display_listening_image(img_lesson_num)
         
-        ans_lis_p1 = {}
         for q in lesson_data['listening']['part1']:
             q_id = q['id']
-            ans_lis_p1[q_id] = st.selectbox(
-                f"Câu {q_id}:",
-                ["Chưa chọn"] + q['options'],
-                key=f"{lesson_key}_lis_p1_{q_id}"
-            )
+            with st.container(border=True):
+                st.markdown(f"**Câu {q_id}:**")
+                u_ans = st.selectbox(
+                    f"Chọn đáp án câu {q_id}:",
+                    ["Chưa chọn"] + q['options'],
+                    key=f"{lesson_key}_lis_p1_{q_id}",
+                    disabled=is_lis_submitted
+                )
+                if is_lis_submitted:
+                    if u_ans == q['correct']:
+                        st.success(f"✅ **Chính xác!** (Đáp án: **{q['correct']}**)")
+                        if 'script' in q and q['script']:
+                            with st.expander(f"📖 Xem Script Nghe Câu {q_id}"):
+                                s_clean = q['script'].replace('\\n', '\n')
+                                st.markdown(s_clean)
+                    else:
+                        st.error(f"❌ **Chưa đúng!** | Lựa chọn của bạn: **{u_ans}** | Đáp án đúng: **{q['correct']}**")
+                        if 'script' in q and q['script']:
+                            s_text = q['script'].replace('\\n', '\n')
+                            st.warning(f"⚠️ **[CÂU SAI - CẦN XEM LẠI] SCRIPT NGHE CÂU {q_id}:**\n\n{s_text}")
 
         st.markdown("---")
+        # Part 2
         st.markdown("#### **第二部分 (Phần 2 - Câu 6-10): Nghe câu, phán đoán Đúng (✔) / Sai (✘)**")
         play_audio(f"{audio_prefix}-2")
         
-        ans_lis_p2 = {}
         for q in lesson_data['listening']['part2']:
             q_id = q['id']
-            formatted_q = format_q_text(q['text'])
-            st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-            ans_lis_p2[q_id] = st.radio(
-                f"Chọn đáp án câu {q_id}:",
-                ["Chưa chọn", "✔", "✘"],
-                key=f"{lesson_key}_lis_p2_{q_id}",
-                horizontal=True
-            )
+            with st.container(border=True):
+                formatted_q = format_q_text(q['text'])
+                st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
+                u_ans = st.radio(
+                    f"Chọn đáp án câu {q_id}:",
+                    ["Chưa chọn", "✔", "✘"],
+                    key=f"{lesson_key}_lis_p2_{q_id}",
+                    horizontal=True,
+                    disabled=is_lis_submitted
+                )
+                if is_lis_submitted:
+                    if u_ans == q['correct']:
+                        st.success(f"✅ **Chính xác!** (Đáp án: **{q['correct']}**)")
+                        if 'script' in q and q['script']:
+                            with st.expander(f"📖 Xem Script Nghe Câu {q_id}"):
+                                s_clean = q['script'].replace('\\n', '\n')
+                                st.markdown(s_clean)
+                    else:
+                        st.error(f"❌ **Chưa đúng!** | Lựa chọn của bạn: **{u_ans}** | Đáp án đúng: **{q['correct']}**")
+                        if 'script' in q and q['script']:
+                            s_text = q['script'].replace('\\n', '\n')
+                            st.warning(f"⚠️ **[CÂU SAI - CẦN XEM LẠI] SCRIPT NGHE CÂU {q_id}:**\n\n{s_text}")
 
         st.markdown("---")
+        # Part 3
         st.markdown("#### **第三部分 (Phần 3 - Câu 11-15): Nghe đối thoại ngắn, chọn đáp án**")
         play_audio(f"{audio_prefix}-3")
         
-        ans_lis_p3 = {}
         for q in lesson_data['listening']['part3']:
             q_id = q['id']
-            formatted_q = format_q_text(q['text'])
-            st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-            ans_lis_p3[q_id] = st.radio(
-                f"Lựa chọn câu {q_id}:",
-                ["Chưa chọn"] + q['options'],
-                key=f"{lesson_key}_lis_p3_{q_id}"
-            )
+            with st.container(border=True):
+                formatted_q = format_q_text(q['text'])
+                st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
+                u_ans = st.radio(
+                    f"Lựa chọn câu {q_id}:",
+                    ["Chưa chọn"] + q['options'],
+                    key=f"{lesson_key}_lis_p3_{q_id}",
+                    disabled=is_lis_submitted
+                )
+                if is_lis_submitted:
+                    if u_ans.startswith(q['correct']):
+                        st.success(f"✅ **Chính xác!** (Đáp án: **{q['correct']}**)")
+                        if 'script' in q and q['script']:
+                            with st.expander(f"📖 Xem Script Nghe Câu {q_id}"):
+                                s_clean = q['script'].replace('\\n', '\n')
+                                st.markdown(s_clean)
+                    else:
+                        st.error(f"❌ **Chưa đúng!** | Lựa chọn của bạn: **{u_ans}** | Đáp án đúng: **{q['correct']}**")
+                        if 'script' in q and q['script']:
+                            s_text = q['script'].replace('\\n', '\n')
+                            st.warning(f"⚠️ **[CÂU SAI - CẦN XEM LẠI] SCRIPT NGHE CÂU {q_id}:**\n\n{s_text}")
 
         st.markdown("---")
+        # Part 4
         st.markdown("#### **第四部分 (Phần 4 - Câu 16-20): Nghe đối thoại dài, chọn đáp án**")
         play_audio(f"{audio_prefix}-4")
         
-        ans_lis_p4 = {}
         for q in lesson_data['listening']['part4']:
             q_id = q['id']
-            formatted_q = format_q_text(q['text'])
-            st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-            ans_lis_p4[q_id] = st.radio(
-                f"Lựa chọn câu {q_id}:",
-                ["Chưa chọn"] + q['options'],
-                key=f"{lesson_key}_lis_p4_{q_id}"
-            )
+            with st.container(border=True):
+                formatted_q = format_q_text(q['text'])
+                st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
+                u_ans = st.radio(
+                    f"Lựa chọn câu {q_id}:",
+                    ["Chưa chọn"] + q['options'],
+                    key=f"{lesson_key}_lis_p4_{q_id}",
+                    disabled=is_lis_submitted
+                )
+                if is_lis_submitted:
+                    if u_ans.startswith(q['correct']):
+                        st.success(f"✅ **Chính xác!** (Đáp án: **{q['correct']}**)")
+                        if 'script' in q and q['script']:
+                            with st.expander(f"📖 Xem Script Nghe Câu {q_id}"):
+                                s_clean = q['script'].replace('\\n', '\n')
+                                st.markdown(s_clean)
+                    else:
+                        st.error(f"❌ **Chưa đúng!** | Lựa chọn của bạn: **{u_ans}** | Đáp án đúng: **{q['correct']}**")
+                        if 'script' in q and q['script']:
+                            s_text = q['script'].replace('\\n', '\n')
+                            st.warning(f"⚠️ **[CÂU SAI - CẦN XEM LẠI] SCRIPT NGHE CÂU {q_id}:**\n\n{s_text}")
 
         st.markdown("---")
-        if st.button(f"🚀 NỘP BÀI PHẦN NGHE ({lesson_key.upper()})", key=f"sub_lis_{lesson_key}"):
-            if not student_name:
-                st.error("⚠️ Vui lòng nhập Họ tên ở đầu trang trước khi nộp bài!")
-            else:
-                score = 0
-                for q in lesson_data['listening']['part1']:
-                    if ans_lis_p1[q['id']] == q['correct']: score += 1
-                for q in lesson_data['listening']['part2']:
-                    if ans_lis_p2[q['id']] == q['correct']: score += 1
-                for q in lesson_data['listening']['part3']:
-                    if ans_lis_p3[q['id']].startswith(q['correct']): score += 1
-                for q in lesson_data['listening']['part4']:
-                    if ans_lis_p4[q['id']].startswith(q['correct']): score += 1
+        if not is_lis_submitted:
+            if st.button(f"🚀 NỘP BÀI PHẦN NGHE ({lesson_key.upper()})", key=f"sub_lis_{lesson_key}"):
+                if not student_name:
+                    st.error("⚠️ Vui lòng nhập Họ tên ở đầu trang trước khi nộp bài!")
+                else:
+                    st.session_state[sub_lis_key] = True
+                    score = 0
+                    for q in lesson_data['listening']['part1']:
+                        if st.session_state.get(f"{lesson_key}_lis_p1_{q['id']}", "") == q['correct']: score += 1
+                    for q in lesson_data['listening']['part2']:
+                        if st.session_state.get(f"{lesson_key}_lis_p2_{q['id']}", "") == q['correct']: score += 1
+                    for q in lesson_data['listening']['part3']:
+                        if st.session_state.get(f"{lesson_key}_lis_p3_{q['id']}", "").startswith(q['correct']): score += 1
+                    for q in lesson_data['listening']['part4']:
+                        if st.session_state.get(f"{lesson_key}_lis_p4_{q['id']}", "").startswith(q['correct']): score += 1
 
-                score_str = f"{score}/20"
-                st.balloons()
-                st.success(f"🎉 Kết quả Phần Nghe {lesson_key.upper()} của **{student_name}**: **{score_str}** câu đúng!")
-                send_results_to_gsheet(student_name, f"Bài {img_lesson_num}", "PHẦN NGHE", score_str)
+                    score_str = f"{score}/20"
+                    st.balloons()
+                    send_results_to_gsheet(student_name, f"Bài {img_lesson_num}", "PHẦN NGHE", score_str)
+                    st.rerun()
 
-                with st.expander("📖 Xem Văn bản ghi âm (Script Nghe) & Giải thích"):
-                    st.markdown(f"### 录音文本 (Văn bản ghi âm Bài {img_lesson_num})")
-                    for p in ['part1', 'part2', 'part3', 'part4']:
-                        for q in lesson_data['listening'][p]:
-                            st.text(f"Câu {q['id']}: Đáp án {q['correct']}\n{q['script']}\n")
+        with st.expander("📖 Xem toàn bộ Script Nghe (Tất cả 20 câu)"):
+            st.markdown(f"### 录音文本 (Văn bản ghi âm Bài {img_lesson_num})")
+            for p in ['part1', 'part2', 'part3', 'part4']:
+                for q in lesson_data['listening'][p]:
+                    s_clean = q['script'].replace('\\n', '\n')
+                    st.markdown(f"**Câu {q['id']}:** Đáp án **{q['correct']}**")
+                    st.code(s_clean, language="text")
 
-    # --- PHẦN ĐỌC ---
+    # ------------------------------------------------------
+    # II. PHẦN ĐỌC
+    # ------------------------------------------------------
     with sec_reading:
         st.subheader("II. 阅读 - PHẦN ĐỌC (15 câu)")
-        
-        # Phần 1: Ghép câu (Mỗi lựa chọn 1 dòng riêng biệt)
+
+        is_read_submitted = st.session_state[sub_read_key]
+
+        wrong_read = []
+        score_read = 0
+        if is_read_submitted:
+            for q in lesson_data['reading']['part1']:
+                u_ans = st.session_state.get(f"{lesson_key}_read_p1_{q['id']}", "Chưa chọn")
+                if u_ans == q['correct']: score_read += 1
+                else: wrong_read.append(q['id'])
+            for q in lesson_data['reading']['part2']:
+                u_ans = st.session_state.get(f"{lesson_key}_read_p2_{q['id']}", "Chưa chọn")
+                if u_ans.startswith(q['correct']): score_read += 1
+                else: wrong_read.append(q['id'])
+            for q in lesson_data['reading']['part3']:
+                u_ans = st.session_state.get(f"{lesson_key}_read_p3_{q['id']}", "Chưa chọn")
+                if u_ans.startswith(q['correct']): score_read += 1
+                else: wrong_read.append(q['id'])
+
+            score_percent = int(score_read / 15 * 100)
+            st.success(f"🎉 **KẾT QUẢ PHẦN ĐỌC ({lesson_key.upper()}): {score_read}/15 CÂU ĐÚNG ({score_percent}%)**")
+
+            if wrong_read:
+                wrong_str = ", ".join([f"Câu {qid}" for qid in wrong_read])
+                st.warning(
+                    f"🔔 **NHẮC NHỞ HỌC VIÊN ({student_name.upper() if student_name else 'HỌC SINH'}):**\n\n"
+                    f"⚠️ Bạn có **{len(wrong_read)} câu chưa đúng**: **{wrong_str}**.\n\n"
+                    f"👉 **Vui lòng cuộn xuống kiểm tra chi tiết các câu làm sai và đối chiếu đáp án đúng để rút kinh nghiệm nhé!**"
+                )
+            else:
+                st.success(f"🎉 **XUẤT SẮC!** Học sinh **{student_name.upper() if student_name else 'Học sinh'}** đã làm đúng **15/15** tất cả các câu Phần Đọc!")
+
+            col_btn1, col_btn2 = st.columns([1, 4])
+            with col_btn1:
+                if st.button(f"🔄 LÀM LẠI PHẦN ĐỌC", key=f"reset_read_{lesson_key}"):
+                    st.session_state[sub_read_key] = False
+                    st.rerun()
+
+            st.markdown("---")
+
+        # Part 1: Ghép câu
         st.markdown("#### **第一部分 (Phần 1 - Câu 21-25): Ghép câu phù hợp (A - F)**")
         if 'ref_part1' in lesson_data['reading']:
             st.markdown("**📋 DANH SÁCH LỰA CHỌN CÂU (MỖI CÂU 1 DÒNG):**")
             ref_html = "<div class='reading-option-box'>" + "".join([f"<div class='reading-option-item'>{opt}</div>" for opt in lesson_data['reading']['ref_part1']]) + "</div>"
             st.markdown(ref_html, unsafe_allow_html=True)
         
-        ans_read_p1 = {}
         for q in lesson_data['reading']['part1']:
             q_id = q['id']
             with st.container(border=True):
                 formatted_q = format_q_text(q['text'])
                 st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-                ans_read_p1[q_id] = st.selectbox(
+                u_ans = st.selectbox(
                     f"Nối với đáp án câu {q_id}:",
                     ["Chưa chọn"] + q['options'],
-                    key=f"{lesson_key}_read_p1_{q_id}"
+                    key=f"{lesson_key}_read_p1_{q_id}",
+                    disabled=is_read_submitted
                 )
+                if is_read_submitted:
+                    if u_ans == q['correct']:
+                        st.success(f"✅ **Chính xác!** (Đáp án: **{q['correct']}**)")
+                    else:
+                        st.error(f"❌ **Chưa đúng!** | Lựa chọn của bạn: **{u_ans}** | Đáp án đúng: **{q['correct']}**")
 
         st.markdown("---")
-        # Phần 2: Điền từ vào chỗ trống (Mỗi lựa chọn/từ 1 dòng riêng biệt)
+        # Part 2: Điền từ
         st.markdown("#### **第二部分 (Phần 2 - Câu 26-30): Chọn từ điền vào chỗ trống (A - F)**")
         if 'ref_part2' in lesson_data['reading']:
             st.markdown("**📋 DANH SÁCH TỪ VỰNG (MỖI CÂU / TỪ 1 DÒNG):**")
             ref_html2 = "<div class='reading-option-box'>" + "".join([f"<div class='reading-option-item'>{opt}</div>" for opt in lesson_data['reading']['ref_part2']]) + "</div>"
             st.markdown(ref_html2, unsafe_allow_html=True)
 
-        ans_read_p2 = {}
         for q in lesson_data['reading']['part2']:
             q_id = q['id']
             with st.container(border=True):
                 formatted_q = format_q_text(q['text'])
                 st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-                ans_read_p2[q_id] = st.selectbox(
+                u_ans = st.selectbox(
                     f"Chọn từ câu {q_id}:",
                     ["Chưa chọn"] + q['options'],
-                    key=f"{lesson_key}_read_p2_{q_id}"
+                    key=f"{lesson_key}_read_p2_{q_id}",
+                    disabled=is_read_submitted
                 )
+                if is_read_submitted:
+                    if u_ans.startswith(q['correct']):
+                        st.success(f"✅ **Chính xác!** (Đáp án: **{q['correct']}**)")
+                    else:
+                        st.error(f"❌ **Chưa đúng!** | Lựa chọn của bạn: **{u_ans}** | Đáp án đúng: **{q['correct']}**")
 
         st.markdown("---")
-        # Phần 3: Trắc nghiệm đoạn văn (Mỗi lựa chọn 1 dòng riêng biệt)
+        # Part 3: Trắc nghiệm đoạn văn
         st.markdown("#### **第三部分 (Phần 3 - Câu 31-35): Chọn đáp án đúng**")
-        
-        ans_read_p3 = {}
         for q in lesson_data['reading']['part3']:
             q_id = q['id']
             with st.container(border=True):
                 formatted_q = format_q_text(q['text'])
                 st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-                ans_read_p3[q_id] = st.radio(
+                u_ans = st.radio(
                     f"Lựa chọn câu {q_id}:",
                     ["Chưa chọn"] + q['options'],
-                    key=f"{lesson_key}_read_p3_{q_id}"
+                    key=f"{lesson_key}_read_p3_{q_id}",
+                    disabled=is_read_submitted
                 )
+                if is_read_submitted:
+                    if u_ans.startswith(q['correct']):
+                        st.success(f"✅ **Chính xác!** (Đáp án: **{q['correct']}**)")
+                    else:
+                        st.error(f"❌ **Chưa đúng!** | Lựa chọn của bạn: **{u_ans}** | Đáp án đúng: **{q['correct']}**")
 
         st.markdown("---")
-        if st.button(f"🚀 NỘP BÀI PHẦN ĐỌC ({lesson_key.upper()})", key=f"sub_read_{lesson_key}"):
-            if not student_name:
-                st.error("⚠️ Vui lòng nhập Họ tên ở đầu trang trước khi nộp bài!")
-            else:
-                score = 0
-                for q in lesson_data['reading']['part1']:
-                    if ans_read_p1[q['id']] == q['correct']: score += 1
-                for q in lesson_data['reading']['part2']:
-                    if ans_read_p2[q['id']].startswith(q['correct']): score += 1
-                for q in lesson_data['reading']['part3']:
-                    if ans_read_p3[q['id']].startswith(q['correct']): score += 1
+        if not is_read_submitted:
+            if st.button(f"🚀 NỘP BÀI PHẦN ĐỌC ({lesson_key.upper()})", key=f"sub_read_{lesson_key}"):
+                if not student_name:
+                    st.error("⚠️ Vui lòng nhập Họ tên ở đầu trang trước khi nộp bài!")
+                else:
+                    st.session_state[sub_read_key] = True
+                    score = 0
+                    for q in lesson_data['reading']['part1']:
+                        if st.session_state.get(f"{lesson_key}_read_p1_{q['id']}", "") == q['correct']: score += 1
+                    for q in lesson_data['reading']['part2']:
+                        if st.session_state.get(f"{lesson_key}_read_p2_{q['id']}", "").startswith(q['correct']): score += 1
+                    for q in lesson_data['reading']['part3']:
+                        if st.session_state.get(f"{lesson_key}_read_p3_{q['id']}", "").startswith(q['correct']): score += 1
 
-                score_str = f"{score}/15"
-                st.balloons()
-                st.success(f"🎉 Kết quả Phần Đọc {lesson_key.upper()} của **{student_name}**: **{score_str}** câu đúng!")
-                send_results_to_gsheet(student_name, f"Bài {img_lesson_num}", "PHẦN ĐỌC", score_str)
+                    score_str = f"{score}/15"
+                    st.balloons()
+                    send_results_to_gsheet(student_name, f"Bài {img_lesson_num}", "PHẦN ĐỌC", score_str)
+                    st.rerun()
 
-    # --- PHẦN VIẾT ---
+    # ------------------------------------------------------
+    # III. PHẦN VIẾT
+    # ------------------------------------------------------
     with sec_writing:
         st.subheader("III. 书写 - PHẦN VIẾT (10 câu)")
         st.warning("⚠️ **Lưu ý**: Phần viết yêu cầu chính xác đến từng dấu câu (dấu chấm 。, dấu phẩy ，).")
 
+        is_write_submitted = st.session_state[sub_write_key]
+
+        wrong_write = []
+        score_write = 0
+        if is_write_submitted:
+            for q in lesson_data['writing']['part1']:
+                u_ans = st.session_state.get(f"{lesson_key}_write_p1_{q['id']}", "").strip()
+                if u_ans in q['valid_answers']: score_write += 1
+                else: wrong_write.append(q['id'])
+            for q in lesson_data['writing']['part2']:
+                u_ans = st.session_state.get(f"{lesson_key}_write_p2_{q['id']}", "").strip()
+                if u_ans == q['correct']: score_write += 1
+                else: wrong_write.append(q['id'])
+
+            score_percent = int(score_write / 10 * 100)
+            st.success(f"🎉 **KẾT QUẢ PHẦN VIẾT ({lesson_key.upper()}): {score_write}/10 CÂU ĐÚNG ({score_percent}%)**")
+
+            if wrong_write:
+                wrong_str = ", ".join([f"Câu {qid}" for qid in wrong_write])
+                st.warning(
+                    f"🔔 **NHẮC NHỞ HỌC VIÊN ({student_name.upper() if student_name else 'HỌC SINH'}):**\n\n"
+                    f"⚠️ Bạn có **{len(wrong_write)} câu chưa đúng**: **{wrong_str}**.\n\n"
+                    f"👉 **Vui lòng cuộn xuống kiểm tra chi tiết các câu làm sai (đặc biệt lưu ý từng dấu câu, chữ Hán) để rút kinh nghiệm nhé!**"
+                )
+            else:
+                st.success(f"🎉 **XUẤT SẮC!** Học sinh **{student_name.upper() if student_name else 'Học sinh'}** đã làm đúng **10/10** tất cả các câu Phần Viết!")
+
+            col_btn1, col_btn2 = st.columns([1, 4])
+            with col_btn1:
+                if st.button(f"🔄 LÀM LẠI PHẦN VIẾT", key=f"reset_write_{lesson_key}"):
+                    st.session_state[sub_write_key] = False
+                    st.rerun()
+
+            st.markdown("---")
+
+        # Part 1: Sắp xếp câu
         st.markdown("#### **第一部分 (Phần 1 - Câu 36-40): Sắp xếp từ thành câu**")
-        ans_write_p1 = {}
         for q in lesson_data['writing']['part1']:
             q_id = q['id']
             with st.container(border=True):
                 st.markdown(f"**Câu {q_id}:** {q['words']}")
-                ans_write_p1[q_id] = st.text_input(
+                u_ans = st.text_input(
                     f"Nhập câu hoàn chỉnh cho câu {q_id}:",
-                    key=f"{lesson_key}_write_p1_{q_id}"
+                    key=f"{lesson_key}_write_p1_{q_id}",
+                    disabled=is_write_submitted
                 ).strip()
+                if is_write_submitted:
+                    if u_ans in q['valid_answers']:
+                        st.success("✅ **Chính xác!**")
+                    else:
+                        st.error(f"❌ **Chưa đúng!** | Lựa chọn của bạn: `{u_ans}` | Đáp án đúng: **{q['valid_answers'][0]}**")
 
         st.markdown("---")
+        # Part 2: Điền chữ Hán
         st.markdown("#### **第二部分 (Phần 2 - Câu 41-45): Xem phiên âm, viết chữ Hán**")
-        ans_write_p2 = {}
         for q in lesson_data['writing']['part2']:
             q_id = q['id']
             with st.container(border=True):
                 formatted_q = format_q_text(q['text'])
                 st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-                ans_write_p2[q_id] = st.text_input(
+                u_ans = st.text_input(
                     f"Nhập chữ Hán cho câu {q_id}:",
-                    key=f"{lesson_key}_write_p2_{q_id}"
+                    key=f"{lesson_key}_write_p2_{q_id}",
+                    disabled=is_write_submitted
                 ).strip()
+                if is_write_submitted:
+                    if u_ans == q['correct']:
+                        st.success(f"✅ **Chính xác!** (Đáp án: **{q['correct']}**)")
+                    else:
+                        st.error(f"❌ **Chưa đúng!** | Lựa chọn của bạn: `{u_ans}` | Đáp án đúng: **{q['correct']}**")
 
         st.markdown("---")
-        if st.button(f"🚀 NỘP BÀI PHẦN VIẾT ({lesson_key.upper()})", key=f"sub_write_{lesson_key}"):
-            if not student_name:
-                st.error("⚠️ Vui lòng nhập Họ tên ở đầu trang trước khi nộp bài!")
-            else:
-                score = 0
-                for q in lesson_data['writing']['part1']:
-                    user_ans = ans_write_p1[q['id']]
-                    if user_ans in q['valid_answers']:
-                        score += 1
-                        st.success(f"Câu {q['id']}: Chính xác!")
-                    else:
-                        st.error(f"Câu {q['id']}: Chưa chính xác. Đáp án đúng: {q['valid_answers'][0]}")
+        if not is_write_submitted:
+            if st.button(f"🚀 NỘP BÀI PHẦN VIẾT ({lesson_key.upper()})", key=f"sub_write_{lesson_key}"):
+                if not student_name:
+                    st.error("⚠️ Vui lòng nhập Họ tên ở đầu trang trước khi nộp bài!")
+                else:
+                    st.session_state[sub_write_key] = True
+                    score = 0
+                    for q in lesson_data['writing']['part1']:
+                        if st.session_state.get(f"{lesson_key}_write_p1_{q['id']}", "").strip() in q['valid_answers']:
+                            score += 1
+                    for q in lesson_data['writing']['part2']:
+                        if st.session_state.get(f"{lesson_key}_write_p2_{q['id']}", "").strip() == q['correct']:
+                            score += 1
 
-                for q in lesson_data['writing']['part2']:
-                    user_ans = ans_write_p2[q['id']]
-                    if user_ans == q['correct']:
-                        score += 1
-                        st.success(f"Câu {q['id']}: Chính xác!")
-                    else:
-                        st.error(f"Câu {q['id']}: Chưa chính xác. Đáp án đúng: {q['correct']}")
+                    score_str = f"{score}/10"
+                    st.balloons()
+                    send_results_to_gsheet(student_name, f"Bài {img_lesson_num}", "PHẦN VIẾT", score_str)
+                    st.rerun()
 
-                score_str = f"{score}/10"
-                st.balloons()
-                st.success(f"🎉 Kết quả Phần Viết {lesson_key.upper()} của **{student_name}**: **{score_str}** câu đúng!")
-                send_results_to_gsheet(student_name, f"Bài {img_lesson_num}", "PHẦN VIẾT", score_str)
-
-# TAB BÀI MỚI NHẤT TRƯỚC (BÀI 39 -> BÀI 38)
+# TAB BÀI MỚI NHẤT TRƯỚC (BÀI 3 -> BÀI 2)
 with tabs[0]:
     render_lesson_ui("bai3", LESSON_39_DATA, "03", "3")
 
