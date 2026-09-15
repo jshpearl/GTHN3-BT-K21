@@ -155,29 +155,53 @@ def play_audio(filename_patt):
 
 # Hàm tìm kiếm ảnh thông minh & linh hoạt (quét mọi tên file ảnh khả dĩ)
 def find_image_file(lesson_num):
-    lesson_str = str(lesson_num)
-    short_num = f"0{int(lesson_str)-36}" if lesson_str.isdigit() and int(lesson_str) >= 37 else lesson_str
+    lesson_str = str(lesson_num).strip()
     
-    possible_patterns = [
-        f"image-{lesson_str}", f"image_{lesson_str}", f"image{lesson_str}",
-        f"image-{short_num}", f"image_{short_num}", f"image{short_num}",
-        f"img-{lesson_str}", f"img_{lesson_str}", f"img{lesson_str}",
-        f"img-{short_num}", f"img_{short_num}", f"img{short_num}",
-        f"B{lesson_str}", f"B{short_num}",
-        "IMG_5090"
-    ]
-    
+    nums = [lesson_str]
+    if lesson_str.isdigit():
+        val = int(lesson_str)
+        nums.append(f"{val:02d}")
+        if val == 3:
+            nums.extend(["39", "03"])
+        elif val == 2:
+            nums.extend(["38", "02"])
+        elif val == 39:
+            nums.extend(["3", "03"])
+        elif val == 38:
+            nums.extend(["2", "02"])
+        elif val < 36:
+            nums.append(str(val + 36))
+            nums.append(f"0{val}")
+        elif val >= 36:
+            nums.append(str(val - 36))
+            nums.append(f"0{val - 36}")
+
+    unique_nums = []
+    for n in nums:
+        if n not in unique_nums:
+            unique_nums.append(n)
+
+    possible_patterns = []
+    for n in unique_nums:
+        possible_patterns.extend([
+            f"image-{n}", f"image_{n}", f"image{n}",
+            f"img-{n}", f"img_{n}", f"img{n}",
+            f"pic-{n}", f"pic_{n}", f"pic{n}",
+            f"B{n}", f"B_{n}", f"B-{n}"
+        ])
+    possible_patterns.append("IMG_5090")
+
     valid_exts = [".png", ".jpg", ".jpeg", ".webp", ".heic", ".heif", ".gif"]
     
-    # 1. Tìm trực tiếp trong thư mục gốc và thư mục ảnh
-    for folder in ["", "images", "img", "assets", "audio", "sound"]:
+    # 1. Tìm trực tiếp theo tên mẫu trong các thư mục phổ biến
+    for folder in ["", "images", "img", "assets", "audio", "sound", "pictures"]:
         for patt in possible_patterns:
             for ext in valid_exts + [e.upper() for e in valid_exts]:
                 p = os.path.join(folder, patt + ext) if folder else patt + ext
                 if os.path.exists(p):
                     return p
 
-    # 2. Tìm kiếm đệ quy không phân biệt hoa thường
+    # 2. Tìm kiếm đệ quy toàn bộ thư mục dự án
     for root, dirs, files in os.walk("."):
         if any(x in root for x in [".git", ".venv", "__pycache__", ".streamlit"]):
             continue
@@ -187,19 +211,44 @@ def find_image_file(lesson_num):
                 for patt in possible_patterns:
                     if patt.lower() in name.lower():
                         return os.path.join(root, f)
+                for n in unique_nums:
+                    if n in name:
+                        return os.path.join(root, f)
+
+    # 3. Dự phòng: Lấy tệp ảnh bất kỳ có trong dự án
+    for root, dirs, files in os.walk("."):
+        if any(x in root for x in [".git", ".venv", "__pycache__", ".streamlit"]):
+            continue
+        for f in files:
+            name, ext = os.path.splitext(f)
+            if ext.lower() in valid_exts:
+                return os.path.join(root, f)
+
     return None
+
+def load_image_safely(img_path):
+    try:
+        from PIL import Image
+        img = Image.open(img_path)
+        return img
+    except Exception:
+        try:
+            with open(img_path, "rb") as f:
+                return f.read()
+        except Exception:
+            return img_path
 
 def display_listening_image(lesson_num):
     found_img = find_image_file(lesson_num)
     if found_img:
         try:
-            st.image(found_img, caption=f"🖼️ Hình ảnh Lựa chọn Phần 1 (A-F) Bài {lesson_num}", use_container_width=True)
+            img_data = load_image_safely(found_img)
+            st.image(img_data, caption=f"🖼️ Hình ảnh Lựa chọn Phần 1 (A-F) Bài {lesson_num}", use_container_width=True)
             return
         except Exception as e:
-            st.error(f"⚠️ Không thể hiển thị ảnh '{found_img}': {str(e)}")
+            st.error(f"⚠️ Lỗi hiển thị tệp ảnh '{found_img}': {str(e)}")
     
-    short_code = f"0{int(lesson_num)-36}" if str(lesson_num).isdigit() and int(lesson_num) >= 37 else lesson_num
-    st.info(f"💡 [Gợi ý]: Tải ảnh minh họa Phần 1 đặt tên 'image-{lesson_num}.png' (hoặc image-{short_code}.png) trực tiếp vào cùng thư mục với file app.py.")
+    st.info(f"💡 [Gợi ý]: Tải ảnh minh họa Phần 1 đặt tên 'image-{lesson_num}.png' (hoặc image-03.png / image-39.png) vào cùng thư mục với app.py.")
 
 # ==========================================================
 # 2. DỮ LIỆU BÀI 38 & BÀI 39
