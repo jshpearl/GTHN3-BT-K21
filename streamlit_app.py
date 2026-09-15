@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import json
 import os
+import re
 
 # ==========================================================
 # 1. CẤU HÌNH TRANG WEB & CSS CUSTOMIZATION
@@ -65,10 +66,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Webhook URL Google Sheets chính thức
-GSHEET_URL = st.secrets.get(
-    "GOOGLE_SHEET_WEBHOOK", 
-    "https://script.google.com/macros/s/AKfycbyZ_pORxb7Hx8cKC-Zi9ARNeTfpE2Bw7bEjWmTK7gBnjbSHmUBJbEWxVUm8DD8cQkJ6/exec"
-)
+try:
+    GSHEET_URL = st.secrets.get(
+        "GOOGLE_SHEET_WEBHOOK", 
+        "https://script.google.com/macros/s/AKfycbyZ_pORxb7Hx8cKC-Zi9ARNeTfpE2Bw7bEjWmTK7gBnjbSHmUBJbEWxVUm8DD8cQkJ6/exec"
+    )
+except Exception:
+    GSHEET_URL = "https://script.google.com/macros/s/AKfycbyZ_pORxb7Hx8cKC-Zi9ARNeTfpE2Bw7bEjWmTK7gBnjbSHmUBJbEWxVUm8DD8cQkJ6/exec"
 
 def send_results_to_gsheet(student_name, lesson_title, section_name, score_str):
     if not GSHEET_URL:
