@@ -1,6 +1,4 @@
-import os
-
-code_content = '''import streamlit as st
+import streamlit as st
 import requests
 import json
 import os
@@ -600,9 +598,3 @@ with tabs[1]:
     render_lesson_ui("bai38", LESSON_38_DATA, "02", "38")
 
 st.markdown('<div class="footer-teacher">黄宝玉老师</div>', unsafe_allow_html=True)
-'''
-
-with open("/workspace/scratch/gen_app_v6.py", "w", encoding="utf-8") as f:
-    f.write(code_content)
-
-print("Generated gen_app_v6.py")
