@@ -16,6 +16,16 @@ st.set_page_config(
 # Custom CSS Tông Pastel dịu nhẹ & ép kiểu chữ rõ nét
 st.markdown("""
 <style>
+    
+    #MainMenu {visibility: hidden;}
+    header {visibility: hidden;}
+    footer {visibility: hidden;}
+    .stDeployButton {display: none;}
+    [data-testid="stToolbar"] {visibility: hidden !important;}
+    [data-testid="stDecoration"] {visibility: hidden !important;}
+    [data-testid="stStatusWidget"] {visibility: hidden !important;}
+    [data-testid="stHeader"] {visibility: hidden !important;}
+
     .main {
         background-color: #F8F9FA;
     }
@@ -195,7 +205,7 @@ def display_listening_image(lesson_num):
 # 2. DỮ LIỆU BÀI 38 & BÀI 39
 # ==========================================================
 LESSON_39_DATA = {
-    'title': '第39课：冬天快要到了 / BÀI 39: MÙA ĐÔNG SẮP ĐẾN RỒI',
+    'title': '第3课：冬天快要到了 / BÀI 3: MÙA ĐÔNG SẮP ĐẾN RỒI',
     'listening': {
         'part1': [
             {'id': 1, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F', 'script': '女：这是哪儿啊？你开错了吧？我们怎么回家啊？\\n男：别着急，车上有电子地图。'},
@@ -284,7 +294,7 @@ LESSON_39_DATA = {
 }
 
 LESSON_38_DATA = {
-    'title': '第38课：我们那儿的冬天跟北京一样冷 / BÀI 38: MÙA ĐÔNG Ở CHỖ CHÚNG TÔI LẠNH NHƯ Ở BẮC KINH',
+    'title': '第2课：我们那儿的冬天跟北京一样冷 / BÀI 2: MÙA ĐÔNG Ở CHỖ CHÚNG TÔI LẠNH NHƯ Ở BẮC KINH',
     'listening': {
         'part1': [
             {'id': 1, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A', 'script': '男：我不喜欢坐飞机，不但票价贵，而且还总晚点。\\n女：那是是因为最近天气不好。去远一点儿的地方还是坐飞机舒服。'},
@@ -387,7 +397,7 @@ if not student_name:
     st.warning("⚠️ Vui lòng nhập Họ và Tên ở đầu trang trước khi bắt đầu làm bài.")
 
 # Bài mới nhất luôn đặt ở Tab đầu tiên (Bài 39 -> Bài 38)
-tabs = st.tabs(["📚 BÀI 39", "📚 BÀI 38"])
+tabs = st.tabs(["📚 BÀI 3", "📚 BÀI 2"])
 
 def render_lesson_ui(lesson_key, lesson_data, audio_prefix, img_lesson_num):
     st.markdown(f"### 📘 {lesson_data['title']}")
@@ -616,9 +626,9 @@ def render_lesson_ui(lesson_key, lesson_data, audio_prefix, img_lesson_num):
 
 # TAB BÀI MỚI NHẤT TRƯỚC (BÀI 39 -> BÀI 38)
 with tabs[0]:
-    render_lesson_ui("bai39", LESSON_39_DATA, "03", "39")
+    render_lesson_ui("bai3", LESSON_39_DATA, "03", "3")
 
 with tabs[1]:
-    render_lesson_ui("bai38", LESSON_38_DATA, "02", "38")
+    render_lesson_ui("bai2", LESSON_38_DATA, "02", "2")
 
 st.markdown('<div class="footer-teacher">黄宝玉老师</div>', unsafe_allow_html=True)
