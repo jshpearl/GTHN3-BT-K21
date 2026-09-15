@@ -89,6 +89,21 @@ def send_results_to_gsheet(student_name, lesson_title, section_name, score_str):
         st.warning(f"⚠️ Chưa gửi được kết quả về Google Sheet: {str(e)}")
 
 # Hàm tìm kiếm file audio (hỗ trợ cả 02-1, 03-1, 38-1, 39-1...)
+
+def format_q_text(text):
+    if not text:
+        return ""
+    text = re.sub(r'\s*headquarters/\s*', '', text)
+    text = re.sub(r'\s*Time/\s*', '', text)
+    text = re.sub(r'\s*today/\s*', '', text)
+    text = re.sub(r'\s*speech\s*', '', text)
+    
+    # Replace literal \n with actual newline
+    text = text.replace('\\n', '\n')
+    
+    lines = [line.strip() for line in text.split('\n') if line.strip()]
+    return "<br>".join(lines)
+
 def find_audio_file(filename_patt):
     patterns = [filename_patt]
     num_part = filename_patt.split("-")[-1] if "-" in filename_patt else filename_patt
@@ -397,7 +412,8 @@ def render_lesson_ui(lesson_key, lesson_data, audio_prefix, img_lesson_num):
         ans_lis_p2 = {}
         for q in lesson_data['listening']['part2']:
             q_id = q['id']
-            st.markdown(f"**{q['text']}**")
+            formatted_q = format_q_text(q['text'])
+            st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
             ans_lis_p2[q_id] = st.radio(
                 f"Chọn đáp án câu {q_id}:",
                 ["Chưa chọn", "✔", "✘"],
@@ -412,7 +428,8 @@ def render_lesson_ui(lesson_key, lesson_data, audio_prefix, img_lesson_num):
         ans_lis_p3 = {}
         for q in lesson_data['listening']['part3']:
             q_id = q['id']
-            st.markdown(f"**{q['text']}**")
+            formatted_q = format_q_text(q['text'])
+            st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
             ans_lis_p3[q_id] = st.radio(
                 f"Lựa chọn câu {q_id}:",
                 ["Chưa chọn"] + q['options'],
@@ -426,7 +443,8 @@ def render_lesson_ui(lesson_key, lesson_data, audio_prefix, img_lesson_num):
         ans_lis_p4 = {}
         for q in lesson_data['listening']['part4']:
             q_id = q['id']
-            st.markdown(f"**{q['text']}**")
+            formatted_q = format_q_text(q['text'])
+            st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
             ans_lis_p4[q_id] = st.radio(
                 f"Lựa chọn câu {q_id}:",
                 ["Chưa chọn"] + q['options'],
@@ -474,7 +492,8 @@ def render_lesson_ui(lesson_key, lesson_data, audio_prefix, img_lesson_num):
         for q in lesson_data['reading']['part1']:
             q_id = q['id']
             with st.container(border=True):
-                st.markdown(f"**Câu {q_id}:** {q['text']}")
+                formatted_q = format_q_text(q['text'])
+                st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
                 ans_read_p1[q_id] = st.selectbox(
                     f"Nối với đáp án câu {q_id}:",
                     ["Chưa chọn"] + q['options'],
@@ -493,8 +512,8 @@ def render_lesson_ui(lesson_key, lesson_data, audio_prefix, img_lesson_num):
         for q in lesson_data['reading']['part2']:
             q_id = q['id']
             with st.container(border=True):
-                formatted_q = q['text'].replace("\n", "<br>")
-                st.markdown(f"**Câu {q_id}:**<br>{formatted_q}", unsafe_allow_html=True)
+                formatted_q = format_q_text(q['text'])
+                st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
                 ans_read_p2[q_id] = st.selectbox(
                     f"Chọn từ câu {q_id}:",
                     ["Chưa chọn"] + q['options'],
@@ -509,8 +528,8 @@ def render_lesson_ui(lesson_key, lesson_data, audio_prefix, img_lesson_num):
         for q in lesson_data['reading']['part3']:
             q_id = q['id']
             with st.container(border=True):
-                formatted_q = q['text'].replace("\n", "<br>")
-                st.markdown(f"**Câu {q_id}:**<br>{formatted_q}", unsafe_allow_html=True)
+                formatted_q = format_q_text(q['text'])
+                st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
                 ans_read_p3[q_id] = st.radio(
                     f"Lựa chọn câu {q_id}:",
                     ["Chưa chọn"] + q['options'],
@@ -557,7 +576,8 @@ def render_lesson_ui(lesson_key, lesson_data, audio_prefix, img_lesson_num):
         for q in lesson_data['writing']['part2']:
             q_id = q['id']
             with st.container(border=True):
-                st.markdown(f"**Câu {q_id}:** {q['text']}")
+                formatted_q = format_q_text(q['text'])
+                st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
                 ans_write_p2[q_id] = st.text_input(
                     f"Nhập chữ Hán cho câu {q_id}:",
                     key=f"{lesson_key}_write_p2_{q_id}"
