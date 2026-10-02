@@ -13,7 +13,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS Tông Pastel dịu nhẹ & ép kiểu chữ rõ nét + Ẩn bớt logo/menu
+# Custom CSS Tông Pastel dịu nhẹ & che logo/menu góc phải trên
 st.markdown("""
 <style>
     #MainMenu {visibility: hidden;}
@@ -78,25 +78,21 @@ st.markdown("""
         line-height: 1.7;
         margin-bottom: 10px;
     }
-    .wrong-script-box {
-        background-color: #FFF3CD;
-        border-left: 5px solid #FFC107;
-        padding: 12px;
+    .wrong-callout {
+        background-color: #FDEDEC;
+        border-left: 5px solid #E74C3C;
+        padding: 12px 15px;
         border-radius: 6px;
-        margin-top: 8px;
-        font-size: 15px;
-        line-height: 1.6;
-        color: #856404;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
-    .correct-script-box {
-        background-color: #D4EDDA;
-        border-left: 5px solid #28A745;
-        padding: 12px;
+    .correct-callout {
+        background-color: #EAFAF1;
+        border-left: 5px solid #2ECC71;
+        padding: 12px 15px;
         border-radius: 6px;
-        margin-top: 8px;
-        font-size: 15px;
-        line-height: 1.6;
-        color: #155724;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -112,9 +108,7 @@ except Exception:
 
 def send_results_to_gsheet(student_name, lesson_title, section_name, score_str):
     if not GSHEET_URL:
-        st.info("💡 Điểm số đã được tính!")
         return
-    
     payload = {
         "name": student_name,
         "student_name": student_name,
@@ -124,22 +118,21 @@ def send_results_to_gsheet(student_name, lesson_title, section_name, score_str):
     }
     try:
         requests.post(GSHEET_URL, json=payload, timeout=5)
-        st.success(f"✅ Đã gửi kết quả {section_name} ({score_str}) về Google Sheet thành công!")
-    except Exception as e:
-        st.warning(f"⚠️ Chưa gửi được kết quả về Google Sheet: {str(e)}")
+    except Exception:
+        pass
 
 def format_q_text(text):
     if not text:
         return ""
-    text = re.sub(r'\s*headquarters/\s*', '', text)
-    text = re.sub(r'\s*Time/\s*', '', text)
-    text = re.sub(r'\s*today/\s*', '', text)
-    text = re.sub(r'\s*speech\s*', '', text)
-    text = re.sub(r'\s*harvest/\s*', '', text)
-    text = re.sub(r'\s*family/\s*', '', text)
-    text = re.sub(r'\s*fountain/\s*', '', text)
-    text = re.sub(r'\s*profit/\s*', '', text)
-    text = re.sub(r'\s*coastal/\s*', '', text)
+    text = re.sub(r'\s*\s*', '', text)
+    text = re.sub(r'\s*\s*', '', text)
+    text = re.sub(r'\s*\s*', '', text)
+    text = re.sub(r'\s*\s*', '', text)
+    text = re.sub(r'\s*\s*', '', text)
+    text = re.sub(r'\s*\s*', '', text)
+    text = re.sub(r'\s*\s*', '', text)
+    text = re.sub(r'\s*\s*', '', text)
+    text = re.sub(r'\s*\s*', '', text)
     
     text = text.replace('\\n', '\n')
     lines = [line.strip() for line in text.split('\n') if line.strip()]
@@ -149,7 +142,17 @@ def find_audio_file(filename_patt):
     patterns = [filename_patt]
     num_part = filename_patt.split("-")[-1] if "-" in filename_patt else filename_patt
     
-    patterns.extend([f"0{num_part}", f"0{int(num_part):02d}", f"{num_part}"])
+    # Map lesson aliases
+    if "42" in filename_patt or "06" in filename_patt or filename_patt.endswith("-6"):
+        patterns.extend(["06-" + num_part, "42-" + num_part, "06_" + num_part])
+    elif "41" in filename_patt or "05" in filename_patt or filename_patt.endswith("-5"):
+        patterns.extend([f"05-{num_part}", f"41-{num_part}", f"05_{num_part}"])
+    elif "40" in filename_patt or "04" in filename_patt or filename_patt.endswith("-4"):
+        patterns.extend([f"04-{num_part}", f"40-{num_part}", f"04_{num_part}"])
+    elif "39" in filename_patt or "03" in filename_patt or filename_patt.endswith("-3"):
+        patterns.extend([f"03-{num_part}", f"39-{num_part}", f"03_{num_part}"])
+    elif "38" in filename_patt or "02" in filename_patt or filename_patt.endswith("-2"):
+        patterns.extend([f"02-{num_part}", f"38-{num_part}", f"02_{num_part}"])
 
     for folder in ["", "audio", "Audio", "assets", "sound", "sounds"]:
         for ext in [".mp3", ".MP3", ".wav", ".WAV", ".m4a"]:
@@ -184,23 +187,28 @@ def find_image_file(lesson_num):
     if lesson_str.isdigit():
         val = int(lesson_str)
         nums.append(f"{val:02d}")
-        if val == 5: nums.extend(["41", "05", "5"])
-        elif val == 4: nums.extend(["40", "04", "4"])
-        elif val == 3: nums.extend(["39", "03", "3"])
-        elif val == 2: nums.extend(["38", "02", "2"])
+        if val == 5: nums.extend(["41", "05"])
+        elif val == 4: nums.extend(["40", "04"])
+        elif val == 3: nums.extend(["39", "03"])
+        elif val == 2: nums.extend(["38", "02"])
+        elif val == 41: nums.extend(["5", "05"])
+        elif val == 40: nums.extend(["4", "04"])
+
+    unique_nums = []
+    for n in nums:
+        if n not in unique_nums:
+            unique_nums.append(n)
 
     possible_patterns = []
-    for n in nums:
+    for n in unique_nums:
         possible_patterns.extend([
             f"image-{n}", f"image_{n}", f"image{n}",
             f"img-{n}", f"img_{n}", f"img{n}",
             f"pic-{n}", f"pic_{n}", f"pic{n}",
             f"B{n}", f"B_{n}", f"B-{n}"
         ])
-    possible_patterns.append("IMG_5090")
 
     valid_exts = [".png", ".jpg", ".jpeg", ".webp", ".heic", ".heif", ".gif"]
-    
     for folder in ["", "images", "img", "assets", "audio", "sound", "pictures"]:
         for patt in possible_patterns:
             for ext in valid_exts + [e.upper() for e in valid_exts]:
@@ -217,7 +225,7 @@ def find_image_file(lesson_num):
                 for patt in possible_patterns:
                     if patt.lower() in name.lower():
                         return os.path.join(root, f)
-                for n in nums:
+                for n in unique_nums:
                     if n in name:
                         return os.path.join(root, f)
 
@@ -234,8 +242,7 @@ def find_image_file(lesson_num):
 def load_image_safely(img_path):
     try:
         from PIL import Image
-        img = Image.open(img_path)
-        return img
+        return Image.open(img_path)
     except Exception:
         try:
             with open(img_path, "rb") as f:
@@ -252,12 +259,458 @@ def display_listening_image(lesson_num):
             return
         except Exception as e:
             st.error(f"⚠️ Lỗi hiển thị tệp ảnh '{found_img}': {str(e)}")
-    
-    st.info(f"💡 [Gợi ý]: Tải ảnh minh họa Phần 1 đặt tên 'image-{lesson_num}.png' vào cùng thư mục với app.py.")
+    st.info(f"💡 [Gợi ý]: Tải ảnh minh họa Phần 1 đặt tên 'image-{lesson_num}.png' vào thư mục dự án.")
 
 # ==========================================================
-# 2. DỮ LIỆU CÁC BÀI HỌC (BÀI 5, BÀI 4, BÀI 3, BÀI 2)
+# 2. DỮ LIỆU CÂU HỎI BÀI 5 (LESSON 41), BÀI 4 (LESSON 40), BÀI 3 (LESSON 39), BÀI 2 (LESSON 38)
 # ==========================================================
+
+
+LESSON_42_DATA = {
+    'title': '第6课：复习（七） / BÀI 6: BÀI ÔN TẬP (7) (第42课)',
+    'listening': {
+        'part1': [
+            {'id': 1, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A', 'script': '女：喂，请问张经理在吗？\n男：他正在开会，您半个小时以后再打，好吗？'},
+            {'id': 2, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C', 'script': '女：这太小了，我穿不上。\n男：这几年你胖了不少，应该买大一号的。'},
+            {'id': 3, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B', 'script': '男：大夫，我孩子发烧了。\n女：别着急，我先给他检查一下。'},
+            {'id': 4, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'E', 'script': '女：您好，请问您买什么？\n男：我想问问去机场坐什么车？'},
+            {'id': 5, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F', 'script': '男：我们快走吧，飞机就要起飞了。\n女：这儿太大，我不知道去哪儿拿行李。'}
+        ],
+        'part2': [
+            {'id': 6, 'text': '6. ★ 这本书你可以借30天。', 'correct': '✔', 'script': '这本书我已经从图书馆借了二十天了，我还没有看完呢，还有十天就该还了。\n★ 这本书你可以借30天。'},
+            {'id': 7, 'text': '7. ★ 他在眼镜店里。', 'correct': '✔', 'script': '您是我们店今天的第一位客人，欢迎您，您要看眼镜吗？这边儿请。\n★ 他在眼镜店里。'},
+            {'id': 8, 'text': '8. ★ 老张要去机场接孩子。', 'correct': '✘', 'script': '老张和他妻子下星期二坐火车来北京西站，早上九点一刻到，你帮我去接一下他们吧。\n★ 老张要去机场接孩子。'},
+            {'id': 9, 'text': '9. ★ 他十年前去过那儿。', 'correct': '✔', 'script': '那个城市我去过一次，那是二零零一年冬天，我和几个同学一起去那儿玩儿，到现在已经十年了。\n★ 他十年前去过那儿。'},
+            {'id': 10, 'text': '10. ★ 现在是冬季。', 'correct': '✘', 'script': '这个季节就是这样，特别热，你还是秋天再来旅游吧，那时候天气不冷也不热。\n★ 现在是冬季。'}
+        ],
+        'part3': [
+            {'id': 11, 'text': '11. 男的要去问谁？', 'options': ['A. 老师', 'B. 学生', 'C. 司机'], 'correct': 'C', 'script': '女：奇怪，前面那辆车怎么不走了？\n男：可能是出问题了，我去问问那个司机。\n问：男的要去问谁？'},
+            {'id': 12, 'text': '12. 男的想做什么？', 'options': ['A. 买鞋', 'B. 换鞋', 'C. 穿鞋'], 'correct': 'B', 'script': '男：小姐，我昨天在这儿给孩子买了一双旅游鞋，有点儿小，能不能换双大点儿的？\n女：没问题，想要多大号的？\n问：男的想做什么？'},
+            {'id': 13, 'text': '13. 小王可能去哪儿？', 'options': ['A. 邮局', 'B. 银行', 'C. 药店'], 'correct': 'C', 'script': '女：小王，走这么快去哪儿啊？\n男：孩子病了，去给他买药。\n问：小王可能去哪儿？'},
+            {'id': 14, 'text': '14. 女的为什么不去吃午饭？', 'options': ['A. 还不饿', 'B. 等同学', 'C. 不太舒服'], 'correct': 'A', 'script': '男：十一点半了，该吃午饭了。\n女：我早上吃太多了，现在还不饿，我晚一会儿去。\n问：女的为什么不去吃午饭？'},
+            {'id': 15, 'text': '15. 男的是什么意思？', 'options': ['A. 他生病了', 'B. 今年特别冷', 'C. 每天都刮风'], 'correct': 'B', 'script': '女：北方的冬天真冷啊，我都不想出门了。\n男：以前没这么冷，今年的天气比较奇怪。\n问：男的是什么意思？'}
+        ],
+        'part4': [
+            {'id': 16, 'text': '16. 男的为什么觉得奇怪？', 'options': ['A. 他又饿了', 'B. 咖啡太甜了', 'C. 女的应该在教室'], 'correct': 'C', 'script': '男：真奇怪，你怎么在这里喝咖啡呢？\n女：在这儿喝咖啡很奇怪吗？\n男：我刚才看见你在教室里。\n女：不可能，你一定看错了，我上午一直在这儿。\n问：男的为什么觉得奇怪？'},
+            {'id': 17, 'text': '17. 小马什么时候结婚？', 'options': ['A. 星期四', 'B. 下个月', 'C. 明年夏天'], 'correct': 'B', 'script': '女：你听说了吗？小马要结婚了。\n男：是吗？什么时候？\n女：下个月十六号。\n男：这么快啊？他们认识还不到三个月吧？\n问：小马什么时候结婚？'},
+            {'id': 18, 'text': '18. 王雨现在可能在哪儿？', 'options': ['A. 楼下', 'B. 楼上', 'C. 办公室'], 'correct': 'A', 'script': '男：请问王雨在吗？\n女：对不起，他不在，下楼去送人了。\n男：他什么时候回来？\n女：几分钟就回来，他送了人就上来。\n问：王雨现在可能在哪儿？'},
+            {'id': 19, 'text': '19. 男的想看几点的电影？', 'options': ['A. 七点的', 'B. 八点半的', 'C. 几点的都可以'], 'correct': 'C', 'script': '女：这么多新电影，我们看什么？\n男：你想看什么我们就看什么。\n女：买几点的票呢？七点的还是八点半的？\n男：你说看几点的我们就看几点的。\n问：男的想看几点的电影？'},
+            {'id': 20, 'text': '20. 他们今天吃什么？', 'options': ['A. 药', 'B. 面条儿', 'C. 鸡蛋'], 'correct': 'B', 'script': '男：你吃药了吗？\n女：还没有，我吃完饭再吃。\n男：今天我们吃面条儿？\n女：是，吃鸡蛋面，马上就好。\n问：他们今天吃什么？'}
+        ]
+    },
+    'reading': {
+        'ref_part1': [
+            'A. 昨天的那个晚会演员演得好极了。',
+            'B. 她已经结婚了，孩子都两岁了。',
+            'C. 快考试了，他这几天都在家复习呢。',
+            'D. 楼下这只小狗是谁家的？',
+            'E. 当然。我们先坐公共汽车，然后换地铁。',
+            'F. 听说昨天晚上的游泳比赛他又是第一名。'
+        ],
+        'ref_part2': [
+            'A. 条',
+            'B. 完',
+            'C. 孩子',
+            'D. 厨房',
+            'E. 声音',
+            'F. 旅游'
+        ],
+        'part1': [
+            {'id': 21, 'text': '21. 我准备给你妹妹介绍个男朋友。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B'},
+            {'id': 22, 'text': '22. 真奇怪，附近人家里没有这种狗。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'D'},
+            {'id': 23, 'text': '23. 最近你弟弟怎么不来踢足球了？他忙什么呢？', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C'},
+            {'id': 24, 'text': '24. 我不喜欢看晚会。足球比赛多有意思啊！', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A'},
+            {'id': 25, 'text': '25. 他一直都很努力，所以才有那么好的成绩。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F'}
+        ],
+        'part2': [
+            {'id': 26, 'text': '26. 我试试这（   ）裤子可以吗？', 'options': ['A. 条', 'B. 完', 'C. 孩子', 'D. 厨房', 'E. 声音', 'F. 旅游'], 'correct': 'A'},
+            {'id': 27, 'text': '27. 这几年我一直忙工作，没时间去（   ）。', 'options': ['A. 条', 'B. 完', 'C. 孩子', 'D. 厨房', 'E. 声音', 'F. 旅游'], 'correct': 'F'},
+            {'id': 28, 'text': '28. 有些年轻人不爱做饭，所以他们的（   ）总是很干净。', 'options': ['A. 条', 'B. 完', 'C. 孩子', 'D. 厨房', 'E. 声音', 'F. 旅游'], 'correct': 'D'},
+            {'id': 29, 'text': '29. A：（   ）怎么又哭了？是不是饿了？\n    B：应该不是，她刚喝完牛奶。', 'options': ['A. 条', 'B. 完', 'C. 孩子', 'D. 厨房', 'E. 声音', 'F. 旅游'], 'correct': 'C'},
+            {'id': 30, 'text': '30. A：你能和我们一起出去玩儿吗？\n    B：等我一会儿，我的作业马上就做（   ）了。', 'options': ['A. 条', 'B. 完', 'C. 孩子', 'D. 厨房', 'E. 声音', 'F. 旅游'], 'correct': 'B'}
+        ],
+        'part3': [
+            {'id': 31, 'text': '31. 小明这几天不在北京，听说他和妈妈去上海旅游了。今天是5号，他们大概两个星期以后才回来。\n★ 小明大概什么时候回北京？', 'options': ['A. 7号', 'B. 18号', 'C. 19号以后'], 'correct': 'C'},
+            {'id': 32, 'text': '32. 我妹妹不喜欢画画儿、唱歌，只对踢足球感兴趣。她会踢足球，也爱看足球比赛。\n★ 我妹妹喜欢：', 'options': ['A. 唱歌', 'B. 踢足球', 'C. 画画儿'], 'correct': 'B'},
+            {'id': 33, 'text': '33. 我们班的张东比我高，但是他跑得没我快。小马比张东还高，但是跑得还没张东快。\n★ 谁跑得最快？', 'options': ['A. 我', 'B. 张东', 'C. 小马'], 'correct': 'A'},
+            {'id': 34, 'text': '34. 现在的孩子真不容易。从星期一到星期五每天都要上课，下了课还要做作业，周末也不能休息，起了床就出去学这学那，能不累吗？\n★ 现在的孩子：', 'options': ['A. 一点儿也不累', 'B. 每天都很忙', 'C. 周末起床很晚'], 'correct': 'B'},
+            {'id': 35, 'text': '35. 很多人都喜欢睡午觉。但是有些人吃了午饭就睡，这样对身体好吗？大夫告诉我们：吃了午饭要休息一下。睡午觉的时间也不能太长，一个小时最好。\n★ 睡午觉：', 'options': ['A. 对身体不好', 'B. 不能吃饭', 'C. 时间不能太长'], 'correct': 'C'}
+        ]
+    },
+    'writing': {
+        'part1': [
+            {'id': 36, 'words': '36. 小孩子 / 是 / 了 / 他们 / 已经 / 不', 'valid_answers': ['他们已经不是小孩子了。']},
+            {'id': 37, 'words': '37. 开始 / 马上 / 比赛 / 要 / 了', 'valid_answers': ['比赛马上就要开始了。']},
+            {'id': 38, 'words': '38. 哥哥 / 两岁 / 比 / 大 / 我', 'valid_answers': ['哥哥比我大两岁。']},
+            {'id': 39, 'words': '39. 没下 / 雪 / 一点儿 / 都 / 今年', 'valid_answers': ['今年一点儿雪都没下。']},
+            {'id': 40, 'words': '40. 了 / 听 / 十几分钟 / 音乐 / 昨天 / 我', 'valid_answers': ['昨天我听了十几分钟音乐。', '我昨天听了十几分钟音乐。']}
+        ],
+        'part2': [
+            {'id': 41, 'text': '41. 你不觉得这件事情很奇（guài）吗？', 'correct': '怪'},
+            {'id': 42, 'text': '42. 房间里的（dēng）怎么还开着呢？', 'correct': '灯'},
+            {'id': 43, 'text': '43. 快看，那只大熊猫爬到（shù）上去了。', 'correct': '树'},
+            {'id': 44, 'text': '44. 我和妹妹一样，都有睡觉前听音乐的习（guàn）。', 'correct': '惯'},
+            {'id': 45, 'text': '45. 这附近有个学校，每天下午都有很多爸爸妈妈接（hái）子。', 'correct': '孩'}
+        ]
+    }
+}
+
+LESSON_41_DATA = {
+    'title': '第5课：这个地方比那个地方安静一些 / BÀI 5: NƠI NÀY YÊN TĨNH HƠN NƠI ĐÓ BỘN PHẦN',
+    'listening': {
+        'part1': [
+            {'id': 1, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A', 'script': '男：你再坚持一会儿，马上就到了。\n女：我还从来没爬过这么高的山呢，累死了。'},
+            {'id': 2, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B', 'script': '男：我来北京两年了，还没去过长城呢。\n女：是吗？这个周末有时间我陪你一起去。'},
+            {'id': 3, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C', 'script': '女：这家饭店的环境真不错，很安静。\n男：对，这儿的菜也好吃极了，我经常和同事来。'},
+            {'id': 4, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B', 'script': '男：这马虽然长得矮，但是跑得很快。\n女：是吗？那我们来比一比，看谁的马能跑第一。'},
+            {'id': 5, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A', 'script': '男：你怎么又高兴了？\n女：你工作一直忙，一次电影都没跟我看过。'}
+        ],
+        'part2': [
+            {'id': 6, 'text': '6. ★ 他没看过那部电视剧。', 'correct': '✘', 'script': '那部电视剧太好了，我还想再看一遍。\n★ 他没看过那部电视剧。'},
+            {'id': 7, 'text': '7. ★ 王丽不会弹钢琴。', 'correct': '✘', 'script': '我问王丽会不会弹钢琴，她说小时候学过，可是弹得不太好。\n★ 王丽不会弹钢琴。'},
+            {'id': 8, 'text': '8. ★ 他下星期要去北京。', 'correct': '✔', 'script': '我下周要去北京旅游，听说你以前去过那儿，能给我介绍几个好玩儿的地方吗？\n★ 他下星期要去北京。'},
+            {'id': 9, 'text': '9. ★ 他身体不好。', 'correct': '✘', 'script': '跟你说了，抽烟对身体不好，别抽了！\n★ 他身体不好。'},
+            {'id': 10, 'text': '10. ★ 这本书一共35课。', 'correct': '✘', 'script': '我们学得很快，这本书我们已经学到第二十五课了，还有五课就学完了。\n★ 这本书一共35课。'}
+        ],
+        'part3': [
+            {'id': 11, 'text': '11. 女的今天要去哪儿？', 'options': ['A. 爬长城', 'B. 军事博物馆', 'C. 颐和园'], 'correct': 'B', 'script': '男：今天是周末，天气这么好，我们一起去爬长城吧。\n女：上周我去过了。一会儿要和中国朋友一起去军事博物馆。明天一起去颐和园划船怎么样？\n问：女的今天要去哪儿？'},
+            {'id': 12, 'text': '12. 女的怎么了？', 'options': ['A. 出差了', 'B. 妈妈住院了', 'C. 生病了'], 'correct': 'B', 'script': '男：怎么好几天没见到你了？出差了？\n女：我请假了，妈妈住院了。\n问：女的怎么了？'},
+            {'id': 13, 'text': '13. 男的是什么意思？', 'options': ['A. 唱得很好', 'B. 唱得不好', 'C. 听不懂'], 'correct': 'A', 'script': '女：大强，我这首法文歌唱得怎么样？\n男：这个世界上没有比你唱得更好的了！\n问：男的是什么意思？'},
+            {'id': 14, 'text': '14. 今年下了几次雪了？', 'options': ['A. 一次', 'B. 两次', 'C. 三次'], 'correct': 'C', 'script': '男：又下雪了！今年下过几次雪了？\n女：已经下过两次了，这是第三次了。\n问：今年下了几次雪了？'},
+            {'id': 15, 'text': '15. 男的应该往哪边走？', 'options': ['A. 向东', 'B. 向西', 'C. 向南'], 'correct': 'A', 'script': '男：你好！请问黄河公园离这儿还有多远？\n女：不远了，你向东再走六七百米就到了。\n问：男的应该往哪边走？'}
+        ],
+        'part4': [
+            {'id': 16, 'text': '16. 女的看过京剧吗？', 'options': ['A. 没看过', 'B. 看过一次', 'C. 常看'], 'correct': 'B', 'script': '男：玛丽，来中国以后你看过京剧吗？\n女：和中国朋友一起看过一次。\n男：你觉得有意思吗？能听懂吗？\n女：怎么说呢？我觉得和唱歌不一样，我听不懂。\n问：女的看过京剧吗？'},
+            {'id': 17, 'text': '17. 关于男的，可以知道什么？', 'options': ['A. 喜欢夏天', 'B. 怕热', 'C. 不喜欢秋天'], 'correct': 'B', 'script': '女：大明，一年四季，你最喜欢哪个季节？\n男：我啊，除了夏天以外，我都喜欢。\n女：能告诉我为什么吗？\n男：我怕热啊，这儿的夏天热极了，你不觉得吗？\n问：关于男的，可以知道什么？'},
+            {'id': 18, 'text': '18. 他们在吃什么菜？', 'options': ['A. 中国菜', 'B. 韩国烤牛肉', 'C. 日本菜'], 'correct': 'B', 'script': '男：田芳，这里的牛肉好吃吗？\n女：嗯，这儿的韩国烤牛肉真好吃！挺贵的吧？\n男：是比较贵！不过今天我请客，多吃点儿！\n女：谢谢，下次我请你吃中国菜！\n问： 他们在吃什么菜？'},
+            {'id': 19, 'text': '19. 男的是做什么工作的？', 'options': ['A. 司机', 'B. 老师', 'C. 医生'], 'correct': 'A', 'script': '女：张叔叔，您开车多久了？\n男：三十多年了，从18岁一直到现在。\n女：一天八小时都在开车，多累啊！没想过换一个工作吗？\n男：但是除了开车我什么都不会啊。\n问：男的是做什么工作的？'},
+            {'id': 20, 'text': '20. 男的为什么要做面条儿？', 'options': ['A. 过生日', 'B. 没钱', 'C. 喜欢吃'], 'correct': 'A', 'script': '男：祝你生日快乐！\n女：谢谢，谢谢。\n男：过生日要吃面条儿，这是我第一次做面条儿，看看好吃不好吃。\n女：一定很好吃。\n问： 男的为什么要做面条儿？'}
+        ]
+    },
+    'reading': {
+        'ref_part1': [
+            'A. 对不起，我昨天晚上睡得太晚了。',
+            'B. 真的？那我也买一双。',
+            'C. 当然是秋天，秋高气爽。',
+            'D. 我去过了，那儿确实非常美。',
+            'E. 太好了，我最喜欢吃苹果了。',
+            'F. 别着急，离开车还有半个小时呢。'
+        ],
+        'ref_part2': [
+            'A. 胖',
+            'B. 比',
+            'C. 更',
+            'D. 熊猫',
+            'E. 市',
+            'F. 轻'
+        ],
+        'part1': [
+            {'id': 21, 'text': '21. 我 今天买的这双鞋比那双便宜多了。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B'},
+            {'id': 22, 'text': '22. 你怎么现在才起床？', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A'},
+            {'id': 23, 'text': '23. 听说你上个月去云南旅游了？', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'D'},
+            {'id': 24, 'text': '24. 我们快走吧，要迟到了！', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F'},
+            {'id': 25, 'text': '25. 妈妈买了一箱水果回来。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'E'}
+        ],
+        'part2': [
+            {'id': 26, 'text': '26. 这个地方（   ）那个地方安静一些。', 'options': ['A. 胖', 'B. 比', 'C. 更', 'D. 熊猫', 'E. 市', 'F. 轻'], 'correct': 'B'},
+            {'id': 27, 'text': '27. 我想再去看看（   ）。', 'options': ['A. 胖', 'B. 比', 'C. 更', 'D. 熊猫', 'E. 市', 'F. 轻'], 'correct': 'D'},
+            {'id': 28, 'text': '28. 明天天气好，我们就去公园玩儿。如果下雨，就（   ）不去了。', 'options': ['A. 胖', 'B. 比', 'C. 更', 'D. 熊猫', 'E. 市', 'F. 轻'], 'correct': 'C'},
+            {'id': 29, 'text': '29. 他比以前（   ）多了。', 'options': ['A. 胖', 'B. 比', 'C. 更', 'D. 熊猫', 'E. 市', 'F. 轻'], 'correct': 'A'},
+            {'id': 30, 'text': '30. 这个城市的（   ）中心非常热闹。', 'options': ['A. 胖', 'B. 比', 'C. 更', 'D. 熊猫', 'E. 市', 'F. 轻'], 'correct': 'E'}
+        ],
+        'part3': [
+            {'id': 31, 'text': '31. 我和姐姐都喜欢听音乐，但是姐姐更喜欢唱歌，她唱得非常好听。\n★ 谁唱歌唱得好？', 'options': ['A. 我', 'B. 姐姐', 'C. 都好'], 'correct': 'B'},
+            {'id': 32, 'text': '32. 北方的冬天比南方冷得多，但是北方房间里有暖气，所以屋里很温暖。\n★ 关于北方的冬天，可以知道：', 'options': ['A. 屋里不冷', 'B. 屋里比外面冷', 'C. 没有南方冷'], 'correct': 'A'},
+            {'id': 33, 'text': '33. 这辆自行车比那辆贵两百块钱，但是质量好得多，我认为买这辆更合适。\n★ 他认为哪辆自行车更好？', 'options': ['A. 便宜的那辆', 'B. 贵的那辆', 'C. 旧的那辆'], 'correct': 'B'},
+            {'id': 34, 'text': '34. 听说这里的西瓜比超市便宜，而且更好吃，所以很多人专门来这儿买。\n★ 这里的西瓜：', 'options': ['A. 很贵', 'B. 不好吃', 'C. 又便宜又好吃'], 'correct': 'C'},
+            {'id': 35, 'text': '35. 我弟弟比我小三岁，但是他比我高，也比我重。\n★ 关于弟弟，可以知道：', 'options': ['A. 比我大', 'B. 比我矮', 'C. 比我高'], 'correct': 'C'}
+        ]
+    },
+    'writing': {
+        'part1': [
+            {'id': 36, 'words': '36. 安静一些 / 这个地方 / 比 / 那个地方', 'valid_answers': [' 这个地方比那个地方安静一些。'.replace(' ', ''), '这个地方比那个地方安静一些。']},
+            {'id': 37, 'words': '37. 他 / 更 / 努力 / 学习', 'valid_answers': ['他学习更努力。']},
+            {'id': 38, 'words': '38. 一次 / 我 / 想 / 再去看 / 熊猫', 'valid_answers': ['我想再去看一次熊猫。']},
+            {'id': 39, 'words': '39. 明天 / 我们 / 就去 / 天气好 / 公园 / 玩儿', 'valid_answers': ['明天天气好，我们就去公园玩儿。', '明天天气好我们就去公园玩儿。']},
+            {'id': 40, 'words': '40. 市 / 更加 / 热闹 / 中心', 'valid_answers': ['市中心更加热闹。']}
+        ],
+        'part2': [
+            {'id': 41, 'text': '41. 熊（xióng）猫是最可爱的动物。', 'correct': '熊'},
+            {'id': 42, 'text': '42. 他（bǐ）我大两岁。', 'correct': '比'},
+            {'id': 43, 'text': '43. 明天的天气（gèng）好。', 'correct': '更'},
+            {'id': 44, 'text': '44. 这个城（shì）很大。', 'correct': '市'},
+            {'id': 45, 'text': '45. 他年轻（qīng），有活力。', 'correct': '轻'}
+        ]
+    }
+}
+
+LESSON_40_DATA = {
+    'title': '第4课：我跟她都认识 / BÀI 4: TÔI VÀ CÔ ẤY ĐỀU QUEN BIẾT',
+    'listening': {
+        'part1': [
+            {'id': 1, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A', 'script': '男：准备好了吗？下面该你表演了。\n女：准备好了，我马上就来。'},
+            {'id': 2, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C', 'script': '男：生日快乐！这个礼物送给你。\n女：真漂亮，谢谢你。'},
+            {'id': 3, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B', 'script': '女：今天我们要去爬山，你怎么还穿皮鞋啊？\n男：我忘了，我马上上去换。'},
+            {'id': 4, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A', 'script': '男：树那么远，你看得清楚吗？\n女：我有眼镜，看得清楚。'},
+            {'id': 5, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B', 'script': '男：服务员，这儿只有一双筷子，请再给我们拿一双。\n女：好的，请您等一下，马上来。'}
+        ],
+        'part2': [
+            {'id': 6, 'text': '6. ★ 他回宿舍取照相机。', 'correct': '✔', 'script': '你等等我，照相机忘带了，我回趟宿舍，马上就回来。\n★ 他回宿舍取照相机。'},
+            {'id': 7, 'text': '7. ★ 那个地方的茶很有名。', 'correct': '✔', 'script': '那里的茶非常有名的，去那儿玩儿的人一般都会买一些带回来，送给家人或者朋友。\n★ 那个地方的茶很有名。'},
+            {'id': 8, 'text': '8. ★ 现在是夏天。', 'correct': '✘', 'script': '虽然已经是春天了，但天气还是很冷。你这次去开会，要多带点儿衣服，注意别感冒了。\n★ 现在是夏天。'},
+            {'id': 9, 'text': '9. ★ 他唱歌水平提高了。', 'correct': '✔', 'script': '在老师的帮助下，经过一段时间的练习，他的唱歌水平有了很大的提高。\n★ 他唱歌水平提高了。'},
+            {'id': 10, 'text': '10. ★ 这条裤子现在便宜得多。', 'correct': '✘', 'script': '我记得这条裤子上个月是八百元，现在只要四百元，我一次买了两条。\n★ 这条裤子现在便宜得多。'}
+        ],
+        'part3': [
+            {'id': 11, 'text': '11. 男的让女的帮他做什么？', 'options': ['A. 借书', 'B. 买书', 'C. 还书'], 'correct': 'C', 'script': '女：张东，我去图书馆借书，你陪我去好吗？\n男：对不起，我在等人，麻烦你帮我还这两本书吧。\n问：男的让女的帮他做什么？'},
+            {'id': 12, 'text': '12. 男的送什么礼物了？', 'options': ['A. 包', 'B. 衣服', 'C. 词典'], 'correct': 'A', 'script': '女：谢谢你送我的生日礼物！这个包我非常喜欢。\n男：不客气，祝你生日快乐！\n问：男的送什么礼物了？'},
+            {'id': 13, 'text': '13. 他们现在最可能在哪儿？', 'options': ['A. 饭店', 'B. 商店', 'C. 书店'], 'correct': 'B', 'script': '女：先生，这是您的裤子，请拿好，欢迎下次再来。\n男：好的，谢谢，再见。\n问：他们现在最可能在哪儿？'},
+            {'id': 14, 'text': '14. 男的觉得那张地图怎么样？', 'options': ['A. 看不清楚', 'B. 非常好', 'C. 太旧了'], 'correct': 'A', 'script': '女：你不是有一张世界地图吗？\n男：那张地图上的字太小了，好多地方都看不清楚。\n问：男的觉得那张地图怎么样？'},
+            {'id': 15, 'text': '15. 谁现在不在？', 'options': ['A. 张东', 'B. 老师', 'C. 校长'], 'correct': 'C', 'script': '女：请问，这里是校长办公室吗？\n男：是的， लेकिन/但是校长现在不在，他正在和三年级的老师开会呢。\n问：谁现在不在？'}
+        ],
+        'part4': [
+            {'id': 16, 'text': '16. 他们要去哪儿？', 'options': ['A. 医院', 'B. 机场', 'C. 饭店'], 'correct': 'C', 'script': '男：喂，我已经到饭店门口了，你在哪儿？\n女：我正往那儿走呢，马上就到。\n男：好，那一会儿见。\n女：好的，再见。\n问： 他们要去哪儿？'},
+            {'id': 17, 'text': '17. 女的可能在买什么？', 'options': ['A. 衣服', 'B. 鞋', 'C. 帽子'], 'correct': 'A', 'script': '女：麻烦给我拿一下那件红色的。\n男：您穿多大的？\n女：165的。\n男：对不起，红色的没有165的了。\n问：女的可能在买什么？'},
+            {'id': 18, 'text': '18. 男的希望女的做什么？', 'options': ['A. 买花', 'B. 介绍一下', 'C. 去左边'], 'correct': 'B', 'script': '男：你好，我想买些花送给妈妈。\n女：你想要素哪一种呢？\n男：我也不知道，能给我介绍一下吗？\n女：当然可以，您先来左边这儿看看。\n问：男的希望女的做什么？'},
+            {'id': 19, 'text': '19. 电影几点开始？', 'options': ['A. 7:00', 'B. 7:30', 'C. 7:45'], 'correct': 'B', 'script': '女：喂，已经七点一刻了，你怎么还没到啊？\n男：电影不是还有十五分钟才开始吗？我马上就到。\n女：我还没吃晚饭，你呢？\n男：吃了一碗面条儿，给你买了面包。\n问：电影几点开始？'},
+            {'id': 20, 'text': '20. 男的不喜欢吃什么？', 'options': ['A. 面条儿', 'B. 米饭', 'C. 面包'], 'correct': 'A', 'script': '男：天黑了，怎么不开灯呢？\n女：正想着晚上吃什么呢，忘了开了。\n男：除了面条儿，你做什么我都爱吃。\n女：好，先去洗个澡吧，半小时后吃饭。\n问：男的不喜欢吃什么？'}
+        ]
+    },
+    'reading': {
+        'ref_part1': [
+            'A. 您先去休息一会儿，她一会儿就过来。',
+            'B. 去过两次。那儿环境很好，非常漂亮。',
+            'C. 当然，你找我算找对人了，我跟她都认识。',
+            'D. 是啊，하지만/但是只有四双，大家都不够用。',
+            'E. 那怎么行？天太黑了，你自己走我不放心。',
+            'F. 对不起，先生，里面有人。'
+        ],
+        'ref_part2': [
+            'A. 比',
+            'B. 换',
+            'C. 极',
+            'D. 照相机',
+            'E. 越',
+            'F. 一样'
+        ],
+        'part1': [
+            {'id': 21, 'text': '21. 请问，你认识这照片上的两个人吗？', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C'},
+            {'id': 22, 'text': '22. 您别送了，我自己回去就行。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'E'},
+            {'id': 23, 'text': '23. 去公园去得怎么样？', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B'},
+            {'id': 24, 'text': '24. 我找张校长，他在吗？', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A'},
+            {'id': 25, 'text': '25. 怎么只有三双筷子？', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'D'}
+        ],
+        'part2': [
+            {'id': 26, 'text': '26. 这两双鞋颜色（   ），但是大小不一样。', 'options': ['A. 比', 'B. 换', 'C. 极', 'D. 照相机', 'E. 越', 'F. 一样'], 'correct': 'F'},
+            {'id': 27, 'text': '27. 这张照片照得好（   ）了！', 'options': ['A. 比', 'B. 换', 'C. 极', 'D. 照相机', 'E. 越', 'F. 一样'], 'correct': 'C'},
+            {'id': 28, 'text': '28. 这次出来，我忘了带（   ）。', 'options': ['A. 比', 'B. 换', 'C. 极', 'D. 照相机', 'E. 越', 'F. 一样'], 'correct': 'D'},
+            {'id': 29, 'text': '29. 天气（   ）来越冷了，你多穿点儿衣服。', 'options': ['A. 比', 'B. 换', 'C. 极', 'D. 照相机', 'E. 越', 'F. 一样'], 'correct': 'E'},
+            {'id': 30, 'text': '30. A：这件衬衫有点儿小，能（   ）一件吗？\n    B：没问题，给您。', 'options': ['A. 比', 'B. 换', 'C. 极', 'D. 照相机', 'E. 越', 'F. 一样'], 'correct': 'B'}
+        ],
+        'part3': [
+            {'id': 31, 'text': '31. 我们从九点半一直等到十一点，他还没来，大家都有点儿不高兴了。\n★ 他几点来的？', 'options': ['A. 9:30', 'B. 11:00', 'C. 11点还没来'], 'correct': 'C'},
+            {'id': 32, 'text': '32. 这个地方我来过一次，但是没去过那个公园，听说那个公园很大，也很有名，我想去看看。\n★ 关于他，可以知道：', 'options': ['A. 没来过这儿', 'B. 没听过那个公园', 'C. 想去那个公园'], 'correct': 'C'},
+            {'id': 33, 'text': '33. 我们这个地方一年四季都很冷，最热的时候温度也只有十度左右，所以去我们那儿旅游要多带厚衣服。\n★ 那儿什么时候去都要带厚衣服，因为：', 'options': ['A. 一直很冷', 'B. 总是刮风', 'C. 常年下雪'], 'correct': 'A'},
+            {'id': 34, 'text': '34. 那个饭店不仅菜做得很好吃，而且服务也特别好，去那儿吃饭的人很多，要是不早点儿去，就没座位了。\n★ 为什么去那个饭店要早点儿去？', 'options': ['A. 菜便宜', 'B. 地方远', 'C. 人很多'], 'correct': 'C'},
+            {'id': 35, 'text': '35. 他虽然只学了半年汉语，但是听和说都很好，写字也写得不错，大家都很喜欢跟他用汉语聊天儿。\n★ 他汉语学得怎么样？', 'options': ['A. 一般', 'B. 不好', 'C. 很好'], 'correct': 'C'}
+        ]
+    },
+    'writing': {
+        'part1': [
+            {'id': 36, 'words': '36. 演员 / 我 / 这个 / 只 / 过 / 一次 / 见', 'valid_answers': ['我只见过这个演员一次。']},
+            {'id': 37, 'words': '37. 非常 / 他 / 自信 / 总是', 'valid_answers': ['他总是非常自信。']},
+            {'id': 38, 'words': '38. 报名 / 你 / 想 / 学校 / 哪个', 'valid_answers': ['你想哪个学校报名？', '你想向哪个学校报名？']},
+            {'id': 39, 'words': '39. 极了 / 那儿 / 漂亮 / 的 / 风光', 'valid_answers': ['那儿的风光漂亮极了。']},
+            {'id': 40, 'words': '40. 一个 / 顾客 / 没有 / 都 / 商店里', 'valid_answers': ['商店里一个顾客都没有。']}
+        ],
+        'part2': [
+            {'id': 41, 'text': '41. 医（yuàn）里有很多病人。', 'correct': '院'},
+            {'id': 42, 'text': '42. 他（bǐ）我聪明。', 'correct': '比'},
+            {'id': 43, 'text': '43. （gèng）加努力才能成功。', 'correct': '更'},
+            {'id': 44, 'text': '44. 这个城（shì）非常漂亮。', 'correct': '市'},
+            {'id': 45, 'text': '45. 他还很年（qīng）。', 'correct': '轻'}
+        ]
+    }
+}
+
+LESSON_40_DATA = {
+    'title': '第40课：快上来吧，要开车了 / BÀI 4: MAU LÊN XE ĐI, XE SẮP CHẠY RỒI',
+    'listening': {
+        'part1': [
+            {'id': 1, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F', 'script': '男：快上来吧，要开车了。\n女：等一下，我拿一下包。'},
+            {'id': 2, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'E', 'script': '男：你今天怎么骑自行车来了？\n女：今天天气好，骑车锻炼一下身体。'},
+            {'id': 3, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C', 'script': '男：你看见我的护照了吗？\n女：就在桌子上呢，你自己看。'},
+            {'id': 4, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B', 'script': '男：先生，请问您买什么？\n女：我想买一条裤子。'},
+            {'id': 5, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A', 'script': '男：今天超市人真多。\n女：是啊，大家都在买东西。'}
+        ],
+        'part2': [
+            {'id': 6, 'text': '6. ★ 他回宿舍取照相机。', 'correct': '✔', 'script': '你等等我，照相机忘带了，我回趟宿舍，马上就回来。'},
+            {'id': 7, 'text': '7. ★ 那个地方的茶很有名。', 'correct': '✔', 'script': '那里的茶非常有名的，去那儿玩儿的人一般都会买一些带回来，送给家人或者朋友。'},
+            {'id': 8, 'text': '8. ★ 现在是夏天。', 'correct': '✘', 'script': '虽然已经是春天了，但天气还是很冷。你这次去开会，要多带点儿衣服，注意别感冒了。'},
+            {'id': 9, 'text': '9. ★ 他唱歌水平提高了。', 'correct': '✔', 'script': '在老师的帮助下，经过一段时间的练习，他的唱歌水平有了很大的提高。'},
+            {'id': 10, 'text': '10. ★ 这条裤子现在便宜得多。', 'correct': '✔', 'script': '我记得这条裤子上个月是八百元，现在只要四百元，我一次买了两条。'}
+        ],
+        'part3': [
+            {'id': 11, 'text': '11. 男的让女的帮他做什么？', 'options': ['A. 借书', 'B. 换书', 'C. 还书'], 'correct': 'C', 'script': '女：张东，我去图书馆借书，你陪 我去好吗？\n男：对不起，我在等人，麻烦你帮我还这两本书吧。\n问：男的让女的帮他做什么？'},
+            {'id': 12, 'text': '12. 男的送什么礼物了？', 'options': ['A. 包', 'B. 鲜花', 'C. 自行车'], 'correct': 'A', 'script': '女：谢谢你送我的生日礼物！这个包我非常喜欢。\n男：不客气，祝你生日快乐！\n问：男的送什么礼物了？'},
+            {'id': 13, 'text': '13. 他们现在最可能在哪儿？', 'options': ['A. 商店', 'B. 教室', 'C. 银行'], 'correct': 'A', 'script': '女：先生，这是您的裤子，请拿好，欢迎下次再来。\n男：好的，谢谢，再见。\n问：他们现在最可能在哪儿？'},
+            {'id': 14, 'text': '14. 男的觉得那张地图怎么样？', 'options': ['A. 很贵', 'B. 字很小', 'C. 太黑了'], 'correct': 'B', 'script': '女：你不是有一张世界地图吗？\n男：那张地图上的字太小了，好多地方都看不清楚。\n问：男的觉得那张地图怎么样？'},
+            {'id': 15, 'text': '15. 谁 现在不在？', 'options': ['A. 经理', 'B. 校长', 'C. 司机'], 'correct': 'B', 'script': '女：请问，这里是校长办公室吗？\n男：是的，하지만/但是校长现在不在，他正在和三年级的老师开会呢。\n问：谁现在不在？'}
+        ],
+        'part4': [
+            {'id': 16, 'text': '16. 他们要去哪儿？', 'options': ['A. 饭店', 'B. 展览馆', 'C. 图书馆'], 'correct': 'A', 'script': '男：喂，我已经到饭店门口了，你在哪儿？\n女：我正往那儿走呢，马上就到。\n男：好，那一会儿见。\n女：好的，再见。\n问：他们要去哪儿？'},
+            {'id': 17, 'text': '17. 女的可能在买什么？', 'options': ['A. 裤子', 'B. 大衣', 'C. 鞋'], 'correct': 'B', 'script': '女：麻烦给我拿一下那件红色的。\n男：您穿多大的？\n女：165的。\n男：对不起，红色的没有165的了。\n问：女的可能在买什么？'},
+            {'id': 18, 'text': '18. 男的希望女的做什么？', 'options': ['A. 走右边', 'B. 写名字', 'C. 给他介绍花'], 'correct': 'C', 'script': '男：你好，我想买些花送给妈妈。\n女：你想要哪一种呢？\n男：我也不知道，能给我介绍一下吗？\n女：当然可以，您先来左边这儿看看。\n问：男的希望女的做什么？'},
+            {'id': 19, 'text': '19. 电影几点开始？', 'options': ['A. 七点十五分', 'B. 七点半', 'C. 七点四十五分'], 'correct': 'B', 'script': '女：喂，已经七点一刻了，你怎么还没到啊？\n男：电影不是还有十五分钟才开始吗？我马上就到。\n女：我还没吃晚饭，你呢？\n男：吃了一碗面条儿，给你买了面包。\n问：电影几点开始？'},
+            {'id': 20, 'text': '20. 男的不喜欢吃什么？', 'options': ['A. 米饭', 'B. 面包', 'C. 面条儿'], 'correct': 'C', 'script': '男：天黑了，怎么不开灯呢？\n女：正想着晚上吃什么呢，忘了开了。\n男：除了面条儿，你做什么我都爱吃。\n女：好，先去洗个澡吧，半小时后吃饭。\n问：男的不喜欢吃什么？'}
+        ]
+    },
+    'reading': {
+        'ref_part1': [
+            'A. 银行马上就要关门了。',
+            'B. 服务员，这条裤子有点儿短，帮我再换一条吧。',
+            'C. 知道了，妈妈，我马上就开始复习。',
+            'D. 下周公司派我去上海，别忘了给鱼换水。',
+            'E. 当然。我们先坐公共汽车，然后换地铁。',
+            'F. 这是我送你的礼物，你看喜不喜欢？'
+        ],
+        'ref_part2': [
+            'A 双',
+            'B 送',
+            'C 注意',
+            'D 裤子',
+            'E 声音',
+            'F 清楚'
+        ],
+        'part1': [
+            {'id': 21, 'text': '21. 没问题！大概要几天换一次水？', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'D'},
+            {'id': 22, 'text': '22. 没关系，我明天去也可以。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A'},
+            {'id': 23, 'text': '23. 哥，祝你生日快乐！', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F'},
+            {'id': 24, 'text': '24. 他正在买衣服。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B'},
+            {'id': 25, 'text': '25. 别看电视了，你应该准备明天的考试了。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C'}
+        ],
+        'part2': [
+            {'id': 26, 'text': '26. 天气冷了，请（   ）身体。', 'options': ['A. 双', 'B. 送', 'C. 注意', 'D. 裤子', 'E. 声音', 'F. 清楚'], 'correct': 'C'},
+            {'id': 27, 'text': '27. 这儿的茶特别有名，你买点儿带回去（   ）给朋友吧。', 'options': ['A. 双', 'B. 送', 'C. 注意', 'D. 裤子', 'E. 声音', 'F. 清楚'], 'correct': 'B'},
+            {'id': 28, 'text': '28. 周末你是不是要带学生去爬山？穿这条（   ）吧。', 'options': ['A. 双', 'B. 送', 'C. 注意', 'D. 裤子', 'E. 声音', 'F. 清楚'], 'correct': 'D'},
+            {'id': 29, 'text': '29. A：您好，请问这附近有中国银行吗？\n    B：对不起，我也不太（   ），你再问问别人吧。', 'options': ['A. 双', 'B. 送', 'C. 注意', 'D. 裤子', 'E. 声音', 'F. 清楚'], 'correct': 'F'},
+            {'id': 30, 'text': '30. A：服务员，我们这桌少了一（   ）筷子。\n    B：对不起，我马上给您拿。', 'options': ['A. 双', 'B. 送', 'C. 注意', 'D. 裤子', 'E. 声音', 'F. 清楚'], 'correct': 'A'}
+        ],
+        'part3': [
+            {'id': 31, 'text': '31. 这条裤子颜色、肥瘦都很合适，要是再长一点儿就好了。\n★ 这条裤子哪儿不合适？', 'options': ['A. 颜色', 'B. 肥瘦', 'C. 长短'], 'correct': 'C'},
+            {'id': 32, 'text': '32. 我12号从北京出发，先去台湾，五天后再从台湾去香港。\n★ 他16号可能在哪儿？', 'options': ['A. 北京', 'B. 台湾', 'C. 香港'], 'correct': 'B'},
+            {'id': 33, 'text': '33. 你要是去办公室找王明，最好先给他打个电话，他有的时候出去办事，不一定每天都在。\n★ 根据上面的句子，可以知道王明：', 'options': ['A. 每天都在办公室', 'B. 总出差', 'C. 有时候出去办事'], 'correct': 'C'},
+            {'id': 34, 'text': '34. 小时候爸爸妈妈对我的要求是：好好学习，天天向上。意思是要努力学习，每天都有提高，得到更好的成绩。\n★ 爸爸妈妈希望“我”：', 'options': ['A. 学习好', 'B. 身体好', 'C. 工作好'], 'correct': 'A'},
+            {'id': 35, 'text': '35. 他刚才给我打电话，说那本书里还有一个问题，一会儿你去他那儿看看。以后要注意，一定要认真。\n★ 那本书：', 'options': ['A. 很有意思', 'B. 还有问题', 'C. 有不少错字'], 'correct': 'B'}
+        ]
+    },
+    'writing': {
+        'part1': [
+            {'id': 36, 'words': '36. 教室 / 请 / 进 / 来 / 快', 'valid_answers': ['请快进教室来。']},
+            {'id': 37, 'words': '37. 快要 / 电影 / 了 / 开始 / 马上', 'valid_answers': ['电影马上就要开始了。']},
+            {'id': 38, 'words': '38. 她 / 带 / 忘了 / 护照', 'valid_answers': ['她忘了带护照。']},
+            {'id': 39, 'words': '39. 这条 / 长 / 了 / 裤子 / 太', 'valid_answers': ['这条裤子太长了！', '这条裤子太长了。']},
+            {'id': 40, 'words': '40. 生日礼物 / 我打算 / 一个 / 送她', 'valid_answers': ['我打算送她一个生日礼物。']}
+        ],
+        'part2': [
+            {'id': 41, 'text': '41. 妈妈给我写了一（fēng）信。', 'correct': '封'},
+            {'id': 42, 'text': '42. 您（màn）走，欢迎下次再來。', 'correct': '慢'},
+            {'id': 43, 'text': '43. 下课以后我（mǎ）上回家吃饭。', 'correct': '马'},
+            {'id': 44, 'text': '44. （sòng）给你一个小礼物，希望你能喜欢。', 'correct': '送'},
+            {'id': 45, 'text': '45. 经（guò）半年多的努力学习，她的汉语水平有了很大提高。', 'correct': '过'}
+        ]
+    }
+}
+
+
+LESSON_42_DATA = {
+    'title': '第6课：复习（七） / BÀI 6: BÀI ÔN TẬP (7) (第42课)',
+    'listening': {
+        'part1': [
+            {'id': 1, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A', 'script': '女：喂，请问张经理在吗？\n男：他正在开会，您半个小时以后再打，好吗？'},
+            {'id': 2, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C', 'script': '女：这太小了，我穿不上。\n男：这几年你胖了不少，应该买大一号的。'},
+            {'id': 3, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B', 'script': '男：大夫，我孩子发烧了。\n女：别着急，我先给他检查一下。'},
+            {'id': 4, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'E', 'script': '女：您好，请问您买什么？\n男：我想问问去机场坐什么车？'},
+            {'id': 5, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F', 'script': '男：我们快走吧，飞机就要起飞了。\n女：这儿太大，我不知道去哪儿拿行李。'}
+        ],
+        'part2': [
+            {'id': 6, 'text': '6. ★ 这本书你可以借30天。', 'correct': '✔', 'script': '这本书我已经从图书馆借了二十天了，我还没有看完呢，还有十天就该还了。\n★ 这本书你可以借30天。'},
+            {'id': 7, 'text': '7. ★ 他在眼镜店里。', 'correct': '✔', 'script': '您是我们店今天的第一位客人，欢迎您，您要看眼镜吗？这边儿请。\n★ 他在眼镜店里。'},
+            {'id': 8, 'text': '8. ★ 老张要去机场接孩子。', 'correct': '✘', 'script': '老张和他妻子下星期二坐火车来北京西站，早上九点一刻到，你帮我去接一下他们吧。\n★ 老张要去机场接孩子。'},
+            {'id': 9, 'text': '9. ★ 他十年前去过那儿。', 'correct': '✔', 'script': '那个城市我去过一次，那是二零零一年冬天，我和几个同学一起去那儿玩儿，到现在已经十年了。\n★ 他十年前去过那儿。'},
+            {'id': 10, 'text': '10. ★ 现在是冬季。', 'correct': '✘', 'script': '这个季节就是这样，特别热，你还是秋天再来旅游吧，那时候天气不冷也不热。\n★ 现在是冬季。'}
+        ],
+        'part3': [
+            {'id': 11, 'text': '11. 男的要去问谁？', 'options': ['A. 老师', 'B. 学生', 'C. 司机'], 'correct': 'C', 'script': '女：奇怪，前面那辆车怎么不走了？\n男：可能是出问题了，我去问问那个司机。\n问：男的要去问谁？'},
+            {'id': 12, 'text': '12. 男的想做什么？', 'options': ['A. 买鞋', 'B. 换鞋', 'C. 穿鞋'], 'correct': 'B', 'script': '男：小姐，我昨天在这儿给孩子买了一双旅游鞋，有点儿小，能不能换双大点儿的？\n女：没问题，想要多大号的？\n问：男的想做什么？'},
+            {'id': 13, 'text': '13. 小王可能去哪儿？', 'options': ['A. 邮局', 'B. 银行', 'C. 药店'], 'correct': 'C', 'script': '女：小王，走这么快去哪儿啊？\n男：孩子病了，去给他买药。\n问：小王可能去哪儿？'},
+            {'id': 14, 'text': '14. 女的为什么不去吃午饭？', 'options': ['A. 还不饿', 'B. 等同学', 'C. 不太舒服'], 'correct': 'A', 'script': '男：十一点半了，该吃午饭了。\n女：我早上吃太多了，现在还不饿，我晚一会儿去。\n问：女的为什么不去吃午饭？'},
+            {'id': 15, 'text': '15. 男的是什么意思？', 'options': ['A. 他生病了', 'B. 今年特别冷', 'C. 每天都刮风'], 'correct': 'B', 'script': '女：北方的冬天真冷啊，我都不想出门了。\n男：以前没这么冷，今年的天气比较奇怪。\n问：男的是什么意思？'}
+        ],
+        'part4': [
+            {'id': 16, 'text': '16. 男的为什么觉得奇怪？', 'options': ['A. 他又饿了', 'B. 咖啡太甜了', 'C. 女的应该在教室'], 'correct': 'C', 'script': '男：真奇怪，你怎么在这里喝咖啡呢？\n女：在这儿喝咖啡很奇怪吗？\n男：我刚才看见你在教室里。\n女：不可能，你一定看错了，我上午一直在这儿。\n问：男的为什么觉得奇怪？'},
+            {'id': 17, 'text': '17. 小马什么时候结婚？', 'options': ['A. 星期四', 'B. 下个月', 'C. 明年夏天'], 'correct': 'B', 'script': '女：你听说了吗？小马要结婚了。\n男：是吗？什么时候？\n女：下个月十六号。\n男：这么快啊？他们认识还不到三个月吧？\n问：小马什么时候结婚？'},
+            {'id': 18, 'text': '18. 王雨现在可能在哪儿？', 'options': ['A. 楼下', 'B. 楼上', 'C. 办公室'], 'correct': 'A', 'script': '男：请问王雨在吗？\n女：对不起，他不在，下楼去送人了。\n男：他什么时候回来？\n女：几分钟就回来，他送了人就上来。\n问：王雨现在可能在哪儿？'},
+            {'id': 19, 'text': '19. 男的想看几点的电影？', 'options': ['A. 七点的', 'B. 八点半的', 'C. 几点的都可以'], 'correct': 'C', 'script': '女：这么多新电影，我们看什么？\n男：你想看什么我们就看什么。\n女：买几点的票呢？七点的还是八点半的？\n男：你说看几点的我们就看几点的。\n问：男的想看几点的电影？'},
+            {'id': 20, 'text': '20. 他们今天吃什么？', 'options': ['A. 药', 'B. 面条儿', 'C. 鸡蛋'], 'correct': 'B', 'script': '男：你吃药了吗？\n女：还没有，我吃完饭再吃。\n男：今天我们吃面条儿？\n女：是，吃鸡蛋面，马上就好。\n问：他们今天吃什么？'}
+        ]
+    },
+    'reading': {
+        'ref_part1': [
+            'A. 昨天的那个晚会演员演得好极了。',
+            'B. 她已经结婚了，孩子都两岁了。',
+            'C. 快考试了，他这几天都在家复习呢。',
+            'D. 楼下这只小狗是谁家的？',
+            'E. 当然。我们先坐公共汽车，然后换地铁。',
+            'F. 听说昨天晚上的游泳比赛他又是第一名。'
+        ],
+        'ref_part2': [
+            'A. 条',
+            'B. 完',
+            'C. 孩子',
+            'D. 厨房',
+            'E. 声音',
+            'F. 旅游'
+        ],
+        'part1': [
+            {'id': 21, 'text': '21. 我准备给你妹妹介绍个男朋友。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B'},
+            {'id': 22, 'text': '22. 真奇怪，附近人家里没有这种狗。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'D'},
+            {'id': 23, 'text': '23. 最近你弟弟怎么不来踢足球了？他忙什么呢？', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C'},
+            {'id': 24, 'text': '24. 我不喜欢看晚会。足球比赛多有意思啊！', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A'},
+            {'id': 25, 'text': '25. 他一直都很努力，所以才有那么好的成绩。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F'}
+        ],
+        'part2': [
+            {'id': 26, 'text': '26. 我试试这（   ）裤子可以吗？', 'options': ['A. 条', 'B. 完', 'C. 孩子', 'D. 厨房', 'E. 声音', 'F. 旅游'], 'correct': 'A'},
+            {'id': 27, 'text': '27. 这几年我一直忙工作，没时间去（   ）。', 'options': ['A. 条', 'B. 完', 'C. 孩子', 'D. 厨房', 'E. 声音', 'F. 旅游'], 'correct': 'F'},
+            {'id': 28, 'text': '28. 有些年轻人不爱做饭，所以他们的（   ）总是很干净。', 'options': ['A. 条', 'B. 完', 'C. 孩子', 'D. 厨房', 'E. 声音', 'F. 旅游'], 'correct': 'D'},
+            {'id': 29, 'text': '29. A：（   ）怎么又哭了？是不是饿了？\n    B：应该不是，她刚喝完牛奶。', 'options': ['A. 条', 'B. 完', 'C. 孩子', 'D. 厨房', 'E. 声音', 'F. 旅游'], 'correct': 'C'},
+            {'id': 30, 'text': '30. A：你能和我们一起出去玩儿吗？\n    B：等我一会儿，我的作业马上就做（   ）了。', 'options': ['A. 条', 'B. 完', 'C. 孩子', 'D. 厨房', 'E. 声音', 'F. 旅游'], 'correct': 'B'}
+        ],
+        'part3': [
+            {'id': 31, 'text': '31. 小明这几天不在北京，听说他和妈妈去上海旅游了。今天是5号，他们大概两个星期以后才回来。\n★ 小明大概什么时候回北京？', 'options': ['A. 7号', 'B. 18号', 'C. 19号以后'], 'correct': 'C'},
+            {'id': 32, 'text': '32. 我妹妹不喜欢画画儿、唱歌，只对踢足球感兴趣。她会踢足球，也爱看足球比赛。\n★ 我妹妹喜欢：', 'options': ['A. 唱歌', 'B. 踢足球', 'C. 画画儿'], 'correct': 'B'},
+            {'id': 33, 'text': '33. 我们班的张东比我高，但是他跑得没我快。小马比张东还高，但是跑得还没张东快。\n★ 谁跑得最快？', 'options': ['A. 我', 'B. 张东', 'C. 小马'], 'correct': 'A'},
+            {'id': 34, 'text': '34. 现在的孩子真不容易。从星期一到星期五每天都要上课，下了课还要做作业，周末也不能休息，起了床就出去学这学那，能不累吗？\n★ 现在的孩子：', 'options': ['A. 一点儿也不累', 'B. 每天都很忙', 'C. 周末起床很晚'], 'correct': 'B'},
+            {'id': 35, 'text': '35. 很多人都喜欢睡午觉。但是有些人吃了午饭就睡，这样对身体好吗？大夫告诉我们：吃了午饭要休息一下。睡午觉的时间也不能太长，一个小时最好。\n★ 睡午觉：', 'options': ['A. 对身体不好', 'B. 不能吃饭', 'C. 时间不能太长'], 'correct': 'C'}
+        ]
+    },
+    'writing': {
+        'part1': [
+            {'id': 36, 'words': '36. 小孩子 / 是 / 了 / 他们 / 已经 / 不', 'valid_answers': ['他们已经不是小孩子了。']},
+            {'id': 37, 'words': '37. 开始 / 马上 / 比赛 / 要 / 了', 'valid_answers': ['比赛马上就要开始了。']},
+            {'id': 38, 'words': '38. 哥哥 / 两岁 / 比 / 大 / 我', 'valid_answers': ['哥哥比我大两岁。']},
+            {'id': 39, 'words': '39. 没下 / 雪 / 一点儿 / 都 / 今年', 'valid_answers': ['今年一点儿雪都没下。']},
+            {'id': 40, 'words': '40. 了 / 听 / 十几分钟 / 音乐 / 昨天 / 我', 'valid_answers': ['昨天我听了十几分钟音乐。', '我昨天听了十几分钟音乐。']}
+        ],
+        'part2': [
+            {'id': 41, 'text': '41. 你不觉得这件事情很奇（guài）吗？', 'correct': '怪'},
+            {'id': 42, 'text': '42. 房间里的（dēng）怎么还开着呢？', 'correct': '灯'},
+            {'id': 43, 'text': '43. 快看，那只大熊猫爬到（shù）上去了。', 'correct': '树'},
+            {'id': 44, 'text': '44. 我和妹妹一样，都有睡觉前听音乐的习（guàn）。', 'correct': '惯'},
+            {'id': 45, 'text': '45. 这附近有个学校，每天下午都有很多爸爸妈妈接（hái）子。', 'correct': '孩'}
+        ]
+    }
+}
 
 LESSON_41_DATA = {
     'title': '第41课：我听过钢琴协奏曲《黄河》 / BÀI 5: TÔI ĐÃ NGHE BẢN HÒA TẤU ĐÀN DƯƠNG CẦM "HOÀNG HÀ"',
@@ -284,16 +737,16 @@ LESSON_41_DATA = {
             {'id': 15, 'text': '15. 男的应该往哪边走？', 'options': ['A. 东边', 'B. 西边', 'C. 北边'], 'correct': 'A', 'script': '男：你好！请问黄河公园离这儿还有多远？\n女：不远了，你向东再走六七百米就到了。\n问：男的应该往哪边走？'}
         ],
         'part4': [
-            {'id': 16, 'text': '16. 女的看过京剧吗？', 'options': ['A. 没看过', 'B. 看过', 'C. 不知道'], 'correct': 'B', 'script': '男：玛丽，来中国以后你看过京剧吗？\n女：和中国朋友一起看过一次。\n男：你觉得有意思吗？能听懂吗？\n女：怎么说呢？我觉得和唱歌不一样，我听不懂。\n问：女的看过京剧吗？'},
+            {'id': 16, 'text': '16. 女的看过京剧吗？', 'options': ['A. 没看过', 'B. 看过一次', 'C. 不知道'], 'correct': 'B', 'script': '男：玛丽，来中国以后你看过京剧吗？\n女：和中国朋友一起看过一次。\n男：你觉得有意思吗？能听懂吗？\n女：怎么说呢？我觉得和唱歌不一样，我听不懂。\n问：女的看过京剧吗？'},
             {'id': 17, 'text': '17. 关于男的，可以知道什么？', 'options': ['A. 喜欢夏天', 'B. 不喜欢热', 'C. 四个季节都喜欢'], 'correct': 'B', 'script': '女：大明，一年四季，你最喜欢哪个季节？\n男：我啊，除了夏天以外，我都喜欢。\n女：能告诉我为什么吗？\n男：我怕热啊，这儿的夏天热极了，你不觉得吗？\n问：关于男的，可以知道什么？'},
-            {'id': 18, 'text': '18. 他们在吃什么菜？', 'options': ['A. 中国菜', 'B. 日本菜', 'C. 韩国菜'], 'correct': 'C', 'script': '男：田芳，这里的牛肉好吃吗？\n女：嗯，这儿的韩国烤牛肉真好吃！挺贵的吧？\n男：是比较贵！ family/ profit/不过今天我请客，多吃点儿！\n女：谢谢，下次我请你吃中国菜！\n问：他们在吃什么菜？'},
+            {'id': 18, 'text': '18. 他们在吃什么菜？', 'options': ['A. 中国菜', 'B. 日本菜', 'C. 韩国菜'], 'correct': 'C', 'script': '男：田芳，这里的牛肉好吃吗？\n女：嗯，这儿的韩国烤牛肉真好吃！挺贵的吧？\n男：是比较贵！不过今天我请客，多吃点儿！\n女：谢谢，下次我请你吃中国菜！\n问：他们在吃什么菜？'},
             {'id': 19, 'text': '19. 男的是做什么工作的？', 'options': ['A. 司机', 'B. 校长', 'C. 服务员'], 'correct': 'A', 'script': '女：张叔叔，您开车多久了？\n男：三十多年了，从18岁一直到现在。\n女：一天八小时都在开车，多累啊！没想过换一个工作吗？\n男：但是除了开车我什么都不会啊。\n问：男的是做什么工作的？'},
             {'id': 20, 'text': '20. 男的为什么要做面条儿？', 'options': ['A. 西瓜吃完了', 'B. 没有鸡蛋了', 'C. 女的过生日'], 'correct': 'C', 'script': '男：祝你生日快乐！\n女：谢谢，谢谢。\n男：过生日要吃面条儿，这是我第一次做面条儿，看看好吃不好吃。\n女：一定很好吃。\n问：男的为什么要做面条儿？'}
         ]
     },
     'reading': {
         'ref_part1': [
-            'A. 你了解他吗？这么快就和他结婚了！',
+            'A. 你了解他吗？这么快就 和他结婚了！',
             'B. 这本历史书看了吗？',
             'C. 他们很认真、很努力地练习了一个夏天。',
             'D. 你了解中国吗？',
@@ -301,30 +754,30 @@ LESSON_41_DATA = {
             'F. 是啊，马上就要到春天了，还没下过雪呢。'
         ],
         'ref_part2': [
-            'A. 过',
-            'B. 第',
-            'C. 虽然',
-            'D. 经过',
-            'E. 声音',
-            'F. 办公室'
+            'A 过',
+            'B 第',
+            'C 虽然',
+            'D 经过',
+            'E 声音',
+            'F 办公室'
         ],
         'part1': [
             {'id': 21, 'text': '21. 今天的节目看了吗？那些学生的表演好极了。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C'},
             {'id': 22, 'text': '22. 今年北京的冬天一点儿都不冷。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F'},
             {'id': 23, 'text': '23. 第一次见面我就喜欢上他了。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A'},
-            {'id': 24, 'text': '24. 了解一点儿，但是我知道中国的黄河很有名。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'D'},
+            {'id': 24, 'text': '24. 了解一点儿，我知道中国的黄河很有名。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'D'},
             {'id': 25, 'text': '25. 《上下五千年》？我三四年级的时候就读过了。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B'}
         ],
         'part2': [
             {'id': 26, 'text': '26. 来这家银行以前，我在两家公司工作（   ）。', 'options': ['A. 过', 'B. 第', 'C. 虽然', 'D. 经过', 'E. 声音', 'F. 办公室'], 'correct': 'A'},
             {'id': 27, 'text': '27. 你看，这是我上次坐火车（   ）黄河时的照片。', 'options': ['A. 过', 'B. 第', 'C. 虽然', 'D. 经过', 'E. 声音', 'F. 办公室'], 'correct': 'D'},
             {'id': 28, 'text': '28. 我们班小明总是（   ）一个回答老师的问题。', 'options': ['A. 过', 'B. 第', 'C. 虽然', 'D. 经过', 'E. 声音', 'F. 办公室'], 'correct': 'B'},
-            {'id': 29, 'text': '29. A：你认识她吗？\n    B：（   ）我不知道她的名字，但是我看过她的照片儿。', 'options': ['A. 过', 'B. 第', 'C. 虽然', 'D. 经过', 'E. 声音', 'F. 办公室'], 'correct': 'C'},
+            {'id': 29, 'text': '29. A：你认识她吗？\n    B：（   ）我知道她的名字，但是我看过她的照片儿。', 'options': ['A. 过', 'B. 第', 'C. 虽然', 'D. 经过', 'E. 声音', 'F. 办公室'], 'correct': 'C'},
             {'id': 30, 'text': '30. A：请问，万经理的（   ）在哪儿？\n    B：前面左边第一个就是。', 'options': ['A. 过', 'B. 第', 'C. 虽然', 'D. 经过', 'E. 声音', 'F. 办公室'], 'correct': 'F'}
         ],
         'part3': [
             {'id': 31, 'text': '31. 昆明跟北京不一样，那里一年四季都是春天。\n★ 在一年中，哪个城市的气温变化小？', 'options': ['A. 上海', 'B. 昆明', 'C. 北京'], 'correct': 'B'},
-            {'id': 32, 'text': '32. 我不会打太极拳，很想学。田芳以前学过，但是她还想再学一学。听说体育老师下星期教太极拳，真是太好了！\n★ 谁会打太极拳？', 'options': ['A. 田芳', 'B. 我和田芳', 'C. 都不会'], 'correct': 'A'},
+            {'id': 32, 'text': '32. 我不会打太极拳， 很想学。田芳以前学过，但是她还想再学一学。听说体育老师下星期教太极拳，真是太好了！\n★ 谁会打太极拳？', 'options': ['A. 田芳', 'B. 我和田芳', 'C. 都不会'], 'correct': 'A'},
             {'id': 33, 'text': '33. 我在北京的时候吃过一次北京烤鸭，来这儿以后一次还没吃过呢。\n★ 他吃过烤鸭吗？', 'options': ['A. 从来没吃过', 'B. 在北京吃过一次', 'C. 在这儿吃过一次'], 'correct': 'B'},
             {'id': 34, 'text': '34. 茶是我的最爱，花茶、绿茶、红茶，我都喜欢。天冷了或者你工作累了的时候，喝杯热茶，真是舒服极了。\n★ 关于他，可以知道：', 'options': ['A. 口渴了', 'B. 没完成工作', 'C. 很喜欢喝茶'], 'correct': 'C'},
             {'id': 35, 'text': '35. 这个城市就在黄河边上，环境非常好，夏天一点儿都不热。人们都喜欢这个季节来这儿旅游。\n★ 那个城市：', 'options': ['A. 环境不好', 'B. 夏季不热', 'C. 人们很热情'], 'correct': 'B'}
@@ -333,14 +786,14 @@ LESSON_41_DATA = {
     'writing': {
         'part1': [
             {'id': 36, 'words': '36. 我 / 这个人 / 跟 / 见过 / 只 / 一次面', 'valid_answers': ['我只跟这个人见过一次面。']},
-            {'id': 37, 'words': '37. 他 / 总是 / 第一个 / 到 / 班里', 'valid_answers': ['他总是第一个到班里。']},
-            {'id': 38, 'words': '38. 去黄河 / 哪个季节 / 玩儿 / 你想', 'valid_answers': ['你想哪个季节去黄河玩儿？', '你想哪个季节去黄河玩？']},
-            {'id': 39, 'words': '39. 风景 / 极了 / 那儿 / 漂亮的', 'valid_answers': ['那儿的风光漂亮极了！', '那儿的风光漂亮极了。', '那儿的风景漂亮极了！', '那儿的风景漂亮极了。']},
+            {'id': 37, 'words': '37. 第一个 / 他总是 / 到 / 班里', 'valid_answers': ['他总是第一个到班里。']},
+            {'id': 38, 'words': '38. 去黄河 / 哪个季节 / 玩儿 / 你想', 'valid_answers': ['你想哪个季节去黄河玩儿？']},
+            {'id': 39, 'words': '39. 风景 / 极了 / 那儿 / 漂亮的', 'valid_answers': ['那儿的风光漂亮极了！', '那儿的风景漂亮极了！', '那儿的风景漂亮极了。']},
             {'id': 40, 'words': '40. 面包 / 一个 / 商店里 / 没有 / 也', 'valid_answers': ['商店里一个面包也没有。']}
         ],
         'part2': [
             {'id': 41, 'text': '41. 我妈妈生病住（yuàn）了。', 'correct': '院'},
-            {'id': 42, 'text': '42. （kǎo）鸭很好吃。', 'correct': '烤'},
+            {'id': 42, 'text': '42. 你吃过北京（kǎo）鸭吗？', 'correct': '烤'},
             {'id': 43, 'text': '43. 这家饭店的（cài）很好吃。', 'correct': '菜'},
             {'id': 44, 'text': '44. 今天下午我一杯咖啡（yě）没喝。', 'correct': '也'},
             {'id': 45, 'text': '45. 我（cān）加过三次比赛，拿了两次第一，一次第二。', 'correct': '参'}
@@ -348,97 +801,8 @@ LESSON_41_DATA = {
     }
 }
 
-LESSON_40_DATA = {
-    'title': '第40课：快上来吧，要开车了 / BÀI 4: MAU LÊN XE ĐI, XE SẮP CHẠY RỒI',
-    'listening': {
-        'part1': [
-            {'id': 1, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F', 'script': '男：快上来吧，要开车了。\n女：等一下，我拿一下包。'},
-            {'id': 2, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'E', 'script': '男：你今天怎么骑自行车来了？\n女：今天天气好，骑车锻炼一下身体。'},
-            {'id': 3, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C', 'script': '男：你看见我的护照了吗？\n女：就在桌子上呢，你自己看。'},
-            {'id': 4, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C', 'script': '男：先生，请问您买什么？\n女：我想买一条裤子。'},
-            {'id': 5, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A', 'script': '男：今天超市人真多。\n女：是啊，大家都在买东西。'}
-        ],
-        'part2': [
-            {'id': 6, 'text': '6. ★ 他回宿舍取照相机。', 'correct': '✔', 'script': '你等等我，照相机忘带了，我回趟宿舍，马上就回来。'},
-            {'id': 7, 'text': '7. ★ 那个地方的茶很有名。', 'correct': '✔', 'script': '那里的茶非常有名的，去那儿玩儿的人一般都会买一些带回来，送给家人或者朋友。'},
-            {'id': 8, 'text': '8. ★ 现在是夏天。', 'correct': '✘', 'script': '虽然已经是春天了，但天气还是很冷。你这次去开会，要多带点儿衣服，注意别感冒了。'},
-            {'id': 9, 'text': '9. ★ 他唱歌水平提高了。', 'correct': '✔', 'script': '在老师的帮助下，经过一段时间的练习，他的唱歌水平有了很大的提高。'},
-            {'id': 10, 'text': '10. ★ 这条裤子现在便宜得多。', 'correct': '✔', 'script': '我记得这条裤子上个月是八百元，现在只要四百元，我一次买了两条。'}
-        ],
-        'part3': [
-            {'id': 11, 'text': '11. 男的让女的帮他做什么？', 'options': ['A. 借书', 'B. 换书', 'C. 还书'], 'correct': 'C', 'script': '女：张东，我去图书馆借书，你陪我去好吗？\n男：对不起，我在等人，麻烦你帮我还这两本书吧。\n问：男的让女的帮他做什么？'},
-            {'id': 12, 'text': '12. 男的送什么礼物了？', 'options': ['A. 包', 'B. 鲜花', 'C. 自行车'], 'correct': 'A', 'script': '女：谢谢你送我的生日礼物！这个包我非常喜欢。\n男：不客气，祝你生日快乐！\n问：男的送什么礼物了？'},
-            {'id': 13, 'text': '13. 他们现在最可能在哪儿？', 'options': ['A. 商店', 'B. 教室', 'C. 银行'], 'correct': 'A', 'script': '女：先生，这是您的裤子，请拿好，欢迎下次再来。\n男：好的，谢谢，再见。\n问：他们现在最可能在哪儿？'},
-            {'id': 14, 'text': '14. 男的觉得那张地图怎么样？', 'options': ['A. 很贵', 'B. 字很小', 'C. 太黑了'], 'correct': 'B', 'script': '女：你不是有一张世界地图吗？\n男：那张地图上的字太小了，好多地方都看不清楚。\n问：男的觉得那张地图怎么样？'},
-            {'id': 15, 'text': '15. 谁现在不在？', 'options': ['A. 经理', 'B. 校长', 'C. 司机'], 'correct': 'B', 'script': '女：请问，这里是校长办公室吗？\n男：是的，但是校长现在不在，他正在和三年级的老师开会呢。\n问：谁现在不在？'}
-        ],
-        'part4': [
-            {'id': 16, 'text': '16. 他们要去哪儿？', 'options': ['A. 饭店', 'B. 展览馆', 'C. 图书馆'], 'correct': 'A', 'script': '男：喂，我已经到饭店门口了，你在哪儿？\n女：我正往那儿走呢，马上就到。\n男：好，那一会儿见。\n女：好的，再见。\n问：他们要去哪儿？'},
-            {'id': 17, 'text': '17. 女的可能在买什么？', 'options': ['A. 裤子', 'B. 大衣', 'C. 鞋'], 'correct': 'B', 'script': '女：麻烦给我拿一下那件红色的。\n男：您穿多大的？\n女：165的。\n男：对不起，红色的没有165的了。\n问：女的可能在买什么？'},
-            {'id': 18, 'text': '18. 男的希望女的做什么？', 'options': ['A. 走右边', 'B. 写名字', 'C. 给他介绍花'], 'correct': 'C', 'script': '男：你好，我想买些花送给妈妈。\n女：你想要哪一种呢？\n男：我也不知道，能给我介绍一下吗？\n女：当然可以，您先来左边这儿看看。\n问：男的希望女的做什么？'},
-            {'id': 19, 'text': '19. 电影几点开始？', 'options': ['A. 七点十五分', 'B. 七点半', 'C. 七点四十五分'], 'correct': 'B', 'script': '女：喂，已经七点一刻了，你怎么还没到啊？\n男：电影不是还有十五分钟才开始吗？我马上就到。\n女：我还没吃晚饭，你呢？\n男：吃了一碗面条儿，给你买了面包。\n问：电影几点开始？'},
-            {'id': 20, 'text': '20. 男的不喜欢吃什么？', 'options': ['A. 米饭', 'B. 面包', 'C. 面条儿'], 'correct': 'C', 'script': '男：天黑了，怎么不开灯呢？\n女：正想着晚上吃什么呢，忘了开了。\n男：除了面条儿，你做什么我都爱吃。\n女：好，先去洗个澡吧，半小时后吃饭。\n问：男的不喜欢吃什么？'}
-        ]
-    },
-    'reading': {
-        'ref_part1': [
-            'A. 银行马上就要关门了。',
-            'B. 服务员，这条裤子有点儿短，帮我再换一条吧。',
-            'C. 知道了，妈妈，我马上就开始复习。',
-            'D. 下周公司派我去上海，别忘了给鱼换水。',
-            'E. 当然。我们先坐公共汽车，然后换地铁。',
-            'F. 这是我送 your/你的礼物，你看喜不喜欢？'
-        ],
-        'ref_part2': [
-            'A. 双',
-            'B. 送',
-            'C. 注意',
-            'D. 裤子',
-            'E. 声音',
-            'F. 清楚'
-        ],
-        'part1': [
-            {'id': 21, 'text': '21. 没问题！大概要几天换一次水？', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'D'},
-            {'id': 22, 'text': '22. 没关系，我明天去也可以。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A'},
-            {'id': 23, 'text': '23. 哥，祝你生日快乐！', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F'},
-            {'id': 24, 'text': '24. 他正在买衣服。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'B'},
-            {'id': 25, 'text': '25. 别看电视了，你应该准备明天的考试了。', 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'C'}
-        ],
-        'part2': [
-            {'id': 26, 'text': '26. 天气冷了，请（   ）身体。', 'options': ['A. 双', 'B. 送', 'C. 注意', 'D. 裤子', 'E. 声音', 'F. 清楚'], 'correct': 'C'},
-            {'id': 27, 'text': '27. 这儿的茶特别有名，你买点儿带回去（   ）给朋友吧。', 'options': ['A. 双', 'B. 送', 'C. 注意', 'D. 裤子', 'E. 声音', 'F. 清楚'], 'correct': 'B'},
-            {'id': 28, 'text': '28. 周末你是不是要带学生去爬山？穿这条（   ）吧。', 'options': ['A. 双', 'B. 送', 'C. 注意', 'D. 裤子', 'E. 声音', 'F. 清楚'], 'correct': 'D'},
-            {'id': 29, 'text': '29. A：您好，请问这附近有中国银行吗？\n    B：对不起，我也不太（   ），你再问问别人吧。', 'options': ['A. 双', 'B. 送', 'C. 注意', 'D. 裤子', 'E. 声音', 'F. 清楚'], 'correct': 'F'},
-            {'id': 30, 'text': '30. A：服务员，我们这桌少了一（   ）筷子。\n    B：对不起，我马上给您拿。', 'options': ['A. 双', 'B. 送', 'C. 注意', 'D. 裤子', 'E. 声音', 'F. 清楚'], 'correct': 'A'}
-        ],
-        'part3': [
-            {'id': 31, 'text': '31. 这条裤子颜色、肥瘦都很合适，要是再长一点儿就好了。\n★ 这条裤子哪儿不合适？', 'options': ['A. 颜色', 'B. 肥瘦', 'C. 长短'], 'correct': 'C'},
-            {'id': 32, 'text': '32. 我12号从北京出发，先去台湾，五天后再从台湾去香港。\n★ 他16号可能在哪儿？', 'options': ['A. 北京', 'B. 台湾', 'C. 香港'], 'correct': 'B'},
-            {'id': 33, 'text': '33. 你要是去办公室找王明，最好先给他打个电话，他有的时候出去办事，不一定每天都在。\n★ 根据上面的句子，可以知道王明：', 'options': ['A. 每天都在办公室', 'B. 总出差', 'C. 有时候出去办事'], 'correct': 'C'},
-            {'id': 34, 'text': '34. 小时候爸爸妈妈对我的要求是：好好学习，天天向上。意思是要努力学习，每天都有提高，得到更好的成绩。\n★ 爸爸妈妈希望“我”：', 'options': ['A. 学习好', 'B. 身体好', 'C. 工作好'], 'correct': 'A'},
-            {'id': 35, 'text': '35. 他刚才给我打电话，说那本书里还有一个问题，一会儿你去他那儿看看。以后要注意，一定要认真。\n★ 那本书：', 'options': ['A. 很有意思', 'B. 还有问题', 'C. 有不少错字'], 'correct': 'B'}
-        ]
-    },
-    'writing': {
-        'part1': [
-            {'id': 36, 'words': '36. 教室 / 请 / 进来 / 快', 'valid_answers': ['请快进教室来。', '请快进来教室。']},
-            {'id': 37, 'words': '37. 快要 / 电影 / 了 / 开始 / 马上', 'valid_answers': ['电影马上就要开始了。', '马上电影就要开始了。']},
-            {'id': 38, 'words': '38. 她 / 带 / 忘了 / 护照', 'valid_answers': ['她忘了带护照。']},
-            {'id': 39, 'words': '39. 这条 / 长 / 了 / 裤子 / 太', 'valid_answers': ['这条裤子太长了！', '这条裤子太长了。']},
-            {'id': 40, 'words': '40. 生日礼物 / 我打算 / 一个 / 送她', 'valid_answers': ['我打算送她一个生日礼物。']}
-        ],
-        'part2': [
-            {'id': 41, 'text': '41. 妈妈给我写了一（fēng）信。', 'correct': '封'},
-            {'id': 42, 'text': '42. 您（màn）走，欢迎下次再来。', 'correct': '慢'},
-            {'id': 43, 'text': '43. 下课以后我（mǎ）上回家吃饭。', 'correct': '马'},
-            {'id': 44, 'text': '44. （sòng）给你一个小礼物，希望你能喜欢。', 'correct': '送'},
-            {'id': 45, 'text': '45. 经（guò）半年多的努力学习，她的汉语水平有了很大提高。', 'correct': '过'}
-        ]
-    }
-}
-
 LESSON_39_DATA = {
-    'title': '第39课：冬天快要到了 / BÀI 3: MÙA ĐÔNG SẮP ĐẾN RỒI',
+    'title': '第3课：冬天快要到了 / BÀI 3: MÙA ĐÔNG SẮP ĐẾN RỒI',
     'listening': {
         'part1': [
             {'id': 1, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'F', 'script': '女：这是哪儿啊？你开错了吧？我们怎么回家啊？\n男：别着急，车上有电子地图。'},
@@ -466,7 +830,7 @@ LESSON_39_DATA = {
             {'id': 17, 'text': '17. 关于女的，可以知道什么？', 'options': ['A. 正在复习', 'B. 明天没课', 'C. 打算明天还书'], 'correct': 'C', 'script': '男：小王，那两本书怎么样？\n女：很好看。我还在看，明天还你可以吗？\n男：不着急。我是说，我这儿还有几本，想看就找我。\n女：好的。再见，明天见。\n问：关于女的，可以知道什么？'},
             {'id': 18, 'text': '18. 他们最可能几点见面？', 'options': ['A. 19:00', 'B. 20:15', 'C. 21:30'], 'correct': 'B', 'script': '女：我们晚上去唱歌，你和小张也来吧？\n男：我先问问她，然后再告诉你。你们打算去哪儿唱？\n女：就在公司附近。我们八点一刻在公司门口见。\n男：好的，我知道了。\n问：他们最可能几点见面？'},
             {'id': 19, 'text': '19. 关于女的，可以知道什么？', 'options': ['A. 还没回家', 'B. 不着急', 'C. 很着急'], 'correct': 'C', 'script': '女：你怎么还不吃饭？\n男：东东还没回来呢。\n男：你别着急，吃饭吧。\n女：都这么晚了，我能不着急吗？\n问：关于女的，可以知道什么？'},
-            {'id': 20, 'text': '20. 他们最可能在哪儿？', 'options': ['A. 商店', 'B. 饭店', 'C. 银行'], 'correct': 'A', 'script': '女：还需要别的水果吗？\n男：不用了，就 these香蕉。多少钱？\n女：十三元五角。\n男：给你钱。\n女：好的，欢迎您下次再来，再见。\n问：他们最可能在哪儿？'}
+            {'id': 20, 'text': '20. 他们最可能在哪儿？', 'options': ['A. 商店', 'B. 饭店', 'C. 银行'], 'correct': 'A', 'script': '女：还需要别的水果吗？\n男：不用了，就这些香蕉。多少钱？\n女：十三元五角。\n男：给你钱。\n女：好的，欢迎您下次再来，再见。\n问：他们最可能在哪儿？'}
         ]
     },
     'reading': {
@@ -513,7 +877,7 @@ LESSON_39_DATA = {
             {'id': 36, 'words': '36. 一直 / 阴天 / 最近 / 都是', 'valid_answers': ['最近一直都是阴天。']},
             {'id': 37, 'words': '37. 离婚 / 很多 / 瘦了 / 以后 / 她', 'valid_answers': ['她离婚以后瘦了很多。']},
             {'id': 38, 'words': '38. 最 / 吃 / 我 / 西瓜 / 爱', 'valid_answers': ['我最爱吃西瓜。']},
-            {'id': 39, 'words': '39. 游泳 / 除了 / 我 / 爬山 / 愿意 / 也', 'valid_answers': ['除了游泳， headquarters/我也愿意爬山。'.replace(' headquarters/', ''), '除了爬山， headquarters/我也愿意游泳。'.replace(' headquarters/', '')]},
+            {'id': 39, 'words': '39. 游泳 / 除了 / 我 / 爬山 / 愿意 / 也', 'valid_answers': ['除了游泳，我也愿意爬山。', '除了爬山，我也愿意游泳。']},
             {'id': 40, 'words': '40. 姐姐 / 下 / 就 / 来 / 了 / 要 / 个月 / 北京', 'valid_answers': ['姐姐下个月就要来北京了。', '下个月姐姐就要来北京了。']}
         ],
         'part2': [
@@ -527,7 +891,7 @@ LESSON_39_DATA = {
 }
 
 LESSON_38_DATA = {
-    'title': '第38课：我们那儿的冬天跟北京一样冷 / BÀI 2: MÙA ĐÔNG Ở CHỖ CHÚNG TÔI LẠNH NHƯ Ở BẮC KINH',
+    'title': '第2课：我们那儿的冬天跟北京一样冷 / BÀI 2: MÙA ĐÔNG Ở CHỖ CHÚNG TÔI LẠNH NHƯ Ở BẮC KINH',
     'listening': {
         'part1': [
             {'id': 1, 'options': ['A', 'B', 'C', 'D', 'E', 'F'], 'correct': 'A', 'script': '男：我不喜欢坐飞机，不但票价贵，而且还总晚点。\n女：那是是因为最近天气不好。去远一点儿的地方还是坐飞机舒服。'},
@@ -552,7 +916,7 @@ LESSON_38_DATA = {
         ],
         'part4': [
             {'id': 16, 'text': '16. 今年放寒假的时间和以前一样吗？', 'options': ['A. 一样', 'B. 比以前早', 'C. 比以前晚'], 'correct': 'B', 'script': '男：老师，我们什么时候开始放寒假？\n女：一月二十二号。\n男：今年怎么这么晚呢？\n女：今年中国的春节比较晚，在二月十四号，开学也比以前晚一周。\n问：今年放寒假的时间和以前一样吗？'},
-            {'id': 17, 'text': '17. 男的为什么没去踢足球？', 'options': ['A. 口渴了', 'B. 风太大', 'C. 不舒服'], 'correct': 'B', 'script': '女：你怎么没去踢足球？你们今天 headquarters/不是和三班踢吗？\n男：今天不踢了。\n女：为什么不踢了？\n男：天气不好，外面风刮得太大。\n问：男的为什么没去踢足球？'.replace(' headquarters/', '')},
+            {'id': 17, 'text': '17. 男的为什么没去踢足球？', 'options': ['A. 口渴了', 'B. 风太大', 'C. 不舒服'], 'correct': 'B', 'script': '女：你怎么没去踢足球？你们今天不是和三班踢吗？\n男：今天不踢了。\n女：为什么不踢了？\n男：天气不好，外面风刮得太大。\n问：男的为什么没去踢足球？'},
             {'id': 18, 'text': '18. 男的想做什么？', 'options': ['A. 唱歌', 'B. 跳舞', 'C. 踢足球'], 'correct': 'C', 'script': '男：外面还刮风吗？\n女：是，刮得很大。你要出去吗？\n男：我一会儿要和同学去踢足球，也不知道能不能踢。\n女：明天吧，明天天气可能好一些。\n问：男的想做什么？'},
             {'id': 19, 'text': '19. 男的可能是做什么的？', 'options': ['A. 大夫', 'B. 服务员', 'C. 校长'], 'correct': 'A', 'script': '女：这么晚了，你还出去啊？\n男：接到老李的电话，有个病人出了一些问题。\n女：那你快去吧。\n男：你先睡吧，别等我了。\n问：男的可能是做什么的？'},
             {'id': 20, 'text': '20. 他们要去哪儿？', 'options': ['A. 眼镜店', 'B. 博物馆', 'C. 国家图书馆'], 'correct': 'A', 'script': '男：还有多远啊？\n女：不远了，看见国家图书馆了吧？\n男：看见了。\n女：那个眼镜店就在它的西边，再走500米就到了。\n问：他们要去哪儿？'}
@@ -594,7 +958,7 @@ LESSON_38_DATA = {
             {'id': 32, 'text': '32. 小刚的爱好比较多，喜欢游泳、跑步、打篮球。他每天早上都坚持跑步，周末游泳和打篮球。\n★ 小刚周末都做什么运动？', 'options': ['A. 游泳', 'B. 跑步和打篮球', 'C. 游泳、跑步和打篮球'], 'correct': 'C'},
             {'id': 33, 'text': '33. 我刚买了一辆20万的新车，牌子跟原来那辆不一样，颜色一样，是黑色的。价钱比原来贵两万多。\n★ 他原来的车大概多少钱？', 'options': ['A. 18万', 'B. 20万', 'C. 22万'], 'correct': 'A'},
             {'id': 34, 'text': '34. 要了解一个人，除了要听他怎么说，还要看他怎么做。\n★ 了解一个人：', 'options': ['A. 要关心他', 'B. 要看他怎么做', 'C. 不需要听他回答什么'], 'correct': 'B'},
-            {'id': 35, 'text': '35. 北京的春天一般在4月和5月，很短，风很大。夏天时间也不长，但是温度比较高。秋天是北京最美的季节，人们都喜欢在这个时候去爬长城 headquarters/或者去香山。', 'options': ['A. 春天', 'B. 夏天', 'C. 秋天'], 'correct': 'C'}
+            {'id': 35, 'text': '35. 北京的春天一般在4月和5月，很短，风很大。夏天时间也不长，但是温度比较高。秋天是北京最美的季节，人们都喜欢在这个时候去爬长城或者去香山。\n★ 哪个季节去北京旅行最好？', 'options': ['A. 春天', 'B. 夏天', 'C. 秋天'], 'correct': 'C'}
         ]
     },
     'writing': {
@@ -629,376 +993,23 @@ st.session_state["student_name"] = student_name
 if not student_name:
     st.warning("⚠️ Vui lòng nhập Họ và Tên ở đầu trang trước khi bắt đầu làm bài.")
 
-tabs = st.tabs(["📚 BÀI 5", "📚 BÀI 4", "📚 BÀI 3", "📚 BÀI 2"])
+# Bài mới nhất luôn đặt ở Tab đầu tiên (Bài 5 -> Bài 4 -> Bài 3 -> Bài 2)
+tabs = st.tabs(["📚 BÀI 6", "📚 BÀI 5", "📚 BÀI 4", "📚 BÀI 3", "📚 BÀI 2"])
 
-def render_lesson_ui(lesson_key, lesson_data, audio_prefix, img_lesson_num):
-    st.markdown(f"### 📘 {lesson_data['title']}")
-    sec_listening, sec_reading, sec_writing = st.tabs(["I. PHẦN NGHE (听力)", "II. PHẦN ĐỌC (阅读)", "III. PHẦN VIẾT (书写)"])
-
-    submitted_key = f"submitted_{lesson_key}"
-    if submitted_key not in st.session_state:
-        st.session_state[submitted_key] = {}
-
-    # --- PHẦN NGHE ---
-    with sec_listening:
-        st.subheader("I. 听力 - PHẦN NGHE (20 câu)")
-        
-        # Phần 1
-        st.markdown("#### **第一部分 (Phần 1 - Câu 1-5): Nghe đối thoại, nối hình (A - F)**")
-        play_audio(f"{audio_prefix}-1")
-        display_listening_image(img_lesson_num)
-        
-        ans_lis_p1 = {}
-        for q in lesson_data['listening']['part1']:
-            q_id = q['id']
-            ans_lis_p1[q_id] = st.selectbox(
-                f"Câu {q_id}:",
-                ["Chưa chọn"] + q['options'],
-                key=f"{lesson_key}_lis_p1_{q_id}"
-            )
-
-        st.markdown("---")
-        # Phần 2
-        st.markdown("#### **第二部分 (Phần 2 - Câu 6-10): Nghe câu, phán đoán Đúng (✔) / Sai (✘)**")
-        play_audio(f"{audio_prefix}-2")
-        
-        ans_lis_p2 = {}
-        for q in lesson_data['listening']['part2']:
-            q_id = q['id']
-            formatted_q = format_q_text(q['text'])
-            st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-            ans_lis_p2[q_id] = st.radio(
-                f"Chọn đáp án câu {q_id}:",
-                ["Chưa chọn", "✔", "✘"],
-                key=f"{lesson_key}_lis_p2_{q_id}",
-                horizontal=True
-            )
-
-        st.markdown("---")
-        # Phần 3
-        st.markdown("#### **第三部分 (Phần 3 - Câu 11-15): Nghe đối thoại ngắn, chọn đáp án**")
-        play_audio(f"{audio_prefix}-3")
-        
-        ans_lis_p3 = {}
-        for q in lesson_data['listening']['part3']:
-            q_id = q['id']
-            formatted_q = format_q_text(q['text'])
-            st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-            ans_lis_p3[q_id] = st.radio(
-                f"Lựa chọn câu {q_id}:",
-                ["Chưa chọn"] + q['options'],
-                key=f"{lesson_key}_lis_p3_{q_id}"
-            )
-
-        st.markdown("---")
-        # Phần 4
-        st.markdown("#### **第四部分 (Phần 4 - Câu 16-20): Nghe đối thoại dài, chọn đáp án**")
-        play_audio(f"{audio_prefix}-4")
-        
-        ans_lis_p4 = {}
-        for q in lesson_data['listening']['part4']:
-            q_id = q['id']
-            formatted_q = format_q_text(q['text'])
-            st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-            ans_lis_p4[q_id] = st.radio(
-                f"Lựa chọn câu {q_id}:",
-                ["Chưa chọn"] + q['options'],
-                key=f"{lesson_key}_lis_p4_{q_id}"
-            )
-
-        st.markdown("---")
-        
-        col_btn1, col_btn2 = st.columns([2, 2])
-        with col_btn1:
-            sub_lis = st.button(f"🚀 NỘP BÀI PHẦN NGHE ({lesson_key.upper()})", key=f"sub_lis_{lesson_key}")
-        with col_btn2:
-            reset_lis = st.button(f"🔄 LÀM LẠI PHẦN NGHE ({lesson_key.upper()})", key=f"reset_lis_{lesson_key}")
-
-        if reset_lis:
-            st.session_state[submitted_key]['listening'] = False
-            st.rerun()
-
-        if sub_lis:
-            if not student_name:
-                st.error("⚠️ Vui lòng nhập Họ tên ở đầu trang trước khi nộp bài!")
-            else:
-                st.session_state[submitted_key]['listening'] = True
-
-        if st.session_state[submitted_key].get('listening', False):
-            score = 0
-            wrong_q_ids = []
-            
-            all_listening_questions = []
-            all_listening_questions.extend([(q, ans_lis_p1[q['id']], 'p1') for q in lesson_data['listening']['part1']])
-            all_listening_questions.extend([(q, ans_lis_p2[q['id']], 'p2') for q in lesson_data['listening']['part2']])
-            all_listening_questions.extend([(q, ans_lis_p3[q['id']], 'p3') for q in lesson_data['listening']['part3']])
-            all_listening_questions.extend([(q, ans_lis_p4[q['id']], 'p4') for q in lesson_data['listening']['part4']])
-
-            for q, user_ans, ptype in all_listening_questions:
-                is_correct = False
-                if ptype in ['p1', 'p2']:
-                    if user_ans == q['correct']: is_correct = True
-                else:
-                    if user_ans.startswith(q['correct']): is_correct = True
-                
-                if is_correct:
-                    score += 1
-                else:
-                    wrong_q_ids.append(q['id'])
-
-            score_str = f"{score}/20"
-            pct = (score / 20) * 100
-            st.balloons()
-            st.success(f"🎉 **KẾT QUẢ PHẦN NGHE BÀI {img_lesson_num}**: **{score_str}** ({pct:.0f}% câu đúng)!")
-            send_results_to_gsheet(student_name, f"Bài {img_lesson_num}", "PHẦN NGHE", score_str)
-
-            if wrong_q_ids:
-                wrong_str = ", ".join([f"Câu {qid}" for qid in wrong_q_ids])
-                st.warning(f"🔔 **NHẮC NHỞ HỌC VIÊN {student_name.upper()}**: Bạn có **{len(wrong_q_ids)} câu chưa đúng** ({wrong_str}). Vui lòng cuộn xuống kiểm tra chi tiết các câu làm sai và đọc kỹ Script Nghe bên dưới để rút kinh nghiệm nhé!")
-
-            st.markdown("### 📊 CHẤM ĐIỂM CHI TIẾT VÀ SCRIPT NGHE TỪNG CÂU")
-            for q, user_ans, ptype in all_listening_questions:
-                qid = q['id']
-                is_correct = False
-                if ptype in ['p1', 'p2']:
-                    if user_ans == q['correct']: is_correct = True
-                else:
-                    if user_ans.startswith(q['correct']): is_correct = True
-
-                with st.expander(f"Câu {qid}: {'✅ ĐÚNG' if is_correct else '❌ SAI'} | Bạn chọn: {user_ans} | Đáp án: {q['correct']}", expanded=(not is_correct)):
-                    if is_correct:
-                        st.success(f"✅ **Chính xác!** Đáp án đúng là: **{q['correct']}**")
-                        formatted_script = format_q_text(q['script'])
-                        st.markdown(f"<div class='correct-script-box'><b>📖 Script Nghe Câu {qid}:</b><br>{formatted_script}</div>", unsafe_allow_html=True)
-                    else:
-                        st.error(f"❌ **Chưa đúng!** Bạn đã chọn: `{user_ans}`. Đáp án đúng chuẩn: **{q['correct']}**")
-                        formatted_script = format_q_text(q['script'])
-                        st.markdown(f"<div class='wrong-script-box'><b>⚠️ Script Nghe Câu {qid} (Cần xem lại):</b><br>{formatted_script}</div>", unsafe_allow_html=True)
-
-    # --- PHẦN ĐỌC ---
-    with sec_reading:
-        st.subheader("II. 阅读 - PHẦN ĐỌC (15 câu)")
-        
-        # Phần 1
-        st.markdown("#### **第一部分 (Phần 1 - Câu 21-25): Ghép câu phù hợp (A - F)**")
-        if 'ref_part1' in lesson_data['reading']:
-            st.markdown("**📋 DANH SÁCH LỰA CHỌN CÂU (MỖI CÂU 1 DÒNG):**")
-            ref_html = "<div class='reading-option-box'>" + "".join([f"<div class='reading-option-item'>{opt}</div>" for opt in lesson_data['reading']['ref_part1']]) + "</div>"
-            st.markdown(ref_html, unsafe_allow_html=True)
-        
-        ans_read_p1 = {}
-        for q in lesson_data['reading']['part1']:
-            q_id = q['id']
-            with st.container(border=True):
-                formatted_q = format_q_text(q['text'])
-                st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-                ans_read_p1[q_id] = st.selectbox(
-                    f"Nối với đáp án câu {q_id}:",
-                    ["Chưa chọn"] + q['options'],
-                    key=f"{lesson_key}_read_p1_{q_id}"
-                )
-
-        st.markdown("---")
-        # Phần 2
-        st.markdown("#### **第二部分 (Phần 2 - Câu 26-30): Chọn từ điền vào chỗ trống (A - F)**")
-        if 'ref_part2' in lesson_data['reading']:
-            st.markdown("**📋 DANH SÁCH TỪ VỰNG (MỖI CÂU / TỪ 1 DÒNG):**")
-            ref_html2 = "<div class='reading-option-box'>" + "".join([f"<div class='reading-option-item'>{opt}</div>" for opt in lesson_data['reading']['ref_part2']]) + "</div>"
-            st.markdown(ref_html2, unsafe_allow_html=True)
-
-        ans_read_p2 = {}
-        for q in lesson_data['reading']['part2']:
-            q_id = q['id']
-            with st.container(border=True):
-                formatted_q = format_q_text(q['text'])
-                st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-                ans_read_p2[q_id] = st.selectbox(
-                    f"Chọn từ câu {q_id}:",
-                    ["Chưa chọn"] + q['options'],
-                    key=f"{lesson_key}_read_p2_{q_id}"
-                )
-
-        st.markdown("---")
-        # Phần 3
-        st.markdown("#### **第三部分 (Phần 3 - Câu 31-35): Chọn đáp án đúng**")
-        
-        ans_read_p3 = {}
-        for q in lesson_data['reading']['part3']:
-            q_id = q['id']
-            with st.container(border=True):
-                formatted_q = format_q_text(q['text'])
-                st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-                ans_read_p3[q_id] = st.radio(
-                    f"Lựa chọn câu {q_id}:",
-                    ["Chưa chọn"] + q['options'],
-                    key=f"{lesson_key}_read_p3_{q_id}"
-                )
-
-        st.markdown("---")
-        
-        col_r1, col_r2 = st.columns([2, 2])
-        with col_r1:
-            sub_read = st.button(f"🚀 NỘP BÀI PHẦN ĐỌC ({lesson_key.upper()})", key=f"sub_read_{lesson_key}")
-        with col_r2:
-            reset_read = st.button(f"🔄 LÀM LẠI PHẦN ĐỌC ({lesson_key.upper()})", key=f"reset_read_{lesson_key}")
-
-        if reset_read:
-            st.session_state[submitted_key]['reading'] = False
-            st.rerun()
-
-        if sub_read:
-            if not student_name:
-                st.error("⚠️ Vui lòng nhập Họ tên ở đầu trang trước khi nộp bài!")
-            else:
-                st.session_state[submitted_key]['reading'] = True
-
-        if st.session_state[submitted_key].get('reading', False):
-            score = 0
-            wrong_q_ids = []
-            
-            all_reading_questions = []
-            all_reading_questions.extend([(q, ans_read_p1[q['id']], 'p1') for q in lesson_data['reading']['part1']])
-            all_reading_questions.extend([(q, ans_read_p2[q['id']], 'p2') for q in lesson_data['reading']['part2']])
-            all_reading_questions.extend([(q, ans_read_p3[q['id']], 'p3') for q in lesson_data['reading']['part3']])
-
-            for q, user_ans, ptype in all_reading_questions:
-                is_correct = False
-                if ptype == 'p1':
-                    if user_ans == q['correct']: is_correct = True
-                else:
-                    if user_ans.startswith(q['correct']): is_correct = True
-                
-                if is_correct: score += 1
-                else: wrong_q_ids.append(q['id'])
-
-            score_str = f"{score}/15"
-            pct = (score / 15) * 100
-            st.balloons()
-            st.success(f"🎉 **KẾT QUẢ PHẦN ĐỌC BÀI {img_lesson_num}**: **{score_str}** ({pct:.0f}% câu đúng)!")
-            send_results_to_gsheet(student_name, f"Bài {img_lesson_num}", "PHẦN ĐỌC", score_str)
-
-            if wrong_q_ids:
-                wrong_str = ", ".join([f"Câu {qid}" for qid in wrong_q_ids])
-                st.warning(f"🔔 **NHẮC NHỞ HỌC VIÊN {student_name.upper()}**: Bạn có **{len(wrong_q_ids)} câu chưa đúng** ({wrong_str}). Vui lòng kiểm tra lại đáp án từng câu bên dưới!")
-
-            st.markdown("### 📊 CHẤM ĐIỂM CHI TIẾT PHẦN ĐỌC")
-            for q, user_ans, ptype in all_reading_questions:
-                qid = q['id']
-                is_correct = False
-                if ptype == 'p1':
-                    if user_ans == q['correct']: is_correct = True
-                else:
-                    if user_ans.startswith(q['correct']): is_correct = True
-
-                with st.expander(f"Câu {qid}: {'✅ ĐÚNG' if is_correct else '❌ SAI'} | Bạn chọn: {user_ans} | Đáp án chuẩn: {q['correct']}", expanded=(not is_correct)):
-                    if is_correct:
-                        st.success(f"✅ **Chính xác!** Đáp án đúng là: **{q['correct']}**")
-                    else:
-                        st.error(f"❌ **Chưa đúng!** Bạn đã chọn: `{user_ans}`. Đáp án chuẩn: **{q['correct']}**")
-
-    # --- PHẦN VIẾT ---
-    with sec_writing:
-        st.subheader("III. 书写 - PHẦN VIẾT (10 câu)")
-        st.warning("⚠️ **Lưu ý**: Phần viết yêu cầu chính xác đến từng dấu câu (dấu chấm 。, dấu phẩy ，).")
-
-        st.markdown("#### **第一部分 (Phần 1 - Câu 36-40): Sắp xếp từ thành câu**")
-        ans_write_p1 = {}
-        for q in lesson_data['writing']['part1']:
-            q_id = q['id']
-            with st.container(border=True):
-                st.markdown(f"**Câu {q_id}:** {q['words']}")
-                ans_write_p1[q_id] = st.text_input(
-                    f"Nhập câu hoàn chỉnh cho câu {q_id}:",
-                    key=f"{lesson_key}_write_p1_{q_id}"
-                ).strip()
-
-        st.markdown("---")
-        st.markdown("#### **第二部分 (Phần 2 - Câu 41-45): Xem phiên âm, viết chữ Hán**")
-        ans_write_p2 = {}
-        for q in lesson_data['writing']['part2']:
-            q_id = q['id']
-            with st.container(border=True):
-                formatted_q = format_q_text(q['text'])
-                st.markdown(f"<div class='q-title-box'>{formatted_q}</div>", unsafe_allow_html=True)
-                ans_write_p2[q_id] = st.text_input(
-                    f"Nhập chữ Hán cho câu {q_id}:",
-                    key=f"{lesson_key}_write_p2_{q_id}"
-                ).strip()
-
-        st.markdown("---")
-        
-        col_w1, col_w2 = st.columns([2, 2])
-        with col_w1:
-            sub_write = st.button(f"🚀 NỘP BÀI PHẦN VIẾT ({lesson_key.upper()})", key=f"sub_write_{lesson_key}")
-        with col_w2:
-            reset_write = st.button(f"🔄 LÀM LẠI PHẦN VIẾT ({lesson_key.upper()})", key=f"reset_write_{lesson_key}")
-
-        if reset_write:
-            st.session_state[submitted_key]['writing'] = False
-            st.rerun()
-
-        if sub_write:
-            if not student_name:
-                st.error("⚠️ Vui lòng nhập Họ tên ở đầu trang trước khi nộp bài!")
-            else:
-                st.session_state[submitted_key]['writing'] = True
-
-        if st.session_state[submitted_key].get('writing', False):
-            score = 0
-            wrong_q_ids = []
-            
-            all_writing_questions = []
-            all_writing_questions.extend([(q, ans_write_p1[q['id']], 'p1') for q in lesson_data['writing']['part1']])
-            all_writing_questions.extend([(q, ans_write_p2[q['id']], 'p2') for q in lesson_data['writing']['part2']])
-
-            for q, user_ans, ptype in all_writing_questions:
-                is_correct = False
-                if ptype == 'p1':
-                    if user_ans in q['valid_answers']: is_correct = True
-                else:
-                    if user_ans == q['correct']: is_correct = True
-                
-                if is_correct: score += 1
-                else: wrong_q_ids.append(q['id'])
-
-            score_str = f"{score}/10"
-            pct = (score / 10) * 100
-            st.balloons()
-            st.success(f"🎉 **KẾT QUẢ PHẦN VIẾT BÀI {img_lesson_num}**: **{score_str}** ({pct:.0f}% câu đúng)!")
-            send_results_to_gsheet(student_name, f"Bài {img_lesson_num}", "PHẦN VIẾT", score_str)
-
-            if wrong_q_ids:
-                wrong_str = ", ".join([f"Câu {qid}" for qid in wrong_q_ids])
-                st.warning(f"🔔 **NHẮC NHỞ HỌC VIÊN {student_name.upper()}**: Bạn có **{len(wrong_q_ids)} câu chưa đúng** ({wrong_str}). Vui lòng đối chiếu với đáp án chuẩn bên dưới!")
-
-            st.markdown("### 📊 CHẤM ĐIỂM CHI TIẾT PHẦN VIẾT")
-            for q, user_ans, ptype in all_writing_questions:
-                qid = q['id']
-                is_correct = False
-                if ptype == 'p1':
-                    if user_ans in q['valid_answers']: is_correct = True
-                    correct_val = q['valid_answers'][0]
-                else:
-                    if user_ans == q['correct']: is_correct = True
-                    correct_val = q['correct']
-
-                with st.expander(f"Câu {qid}: {'✅ ĐÚNG' if is_correct else '❌ SAI'} | Câu trả lời của bạn: {user_ans if user_ans else '(Chưa nhập)'} | Đáp án chuẩn: {correct_val}", expanded=(not is_correct)):
-                    if is_correct:
-                        st.success(f"✅ **Chính xác!** Đáp án đúng: **{correct_val}**")
-                    else:
-                        st.error(f"❌ **Chưa đúng!** Bạn đã nhập: `{user_ans}`. Đáp án chuẩn: **{correct_val}**")
-
-# BÀI MỚI NHẤT Ở TAB ĐẦU TIÊN
+# Render Tabs
 with tabs[0]:
-    render_lesson_ui("bai5", LESSON_41_DATA, "05", "5")
+    render_lesson_ui("bai6", LESSON_42_DATA, "06", "6")
 
 with tabs[1]:
-    render_lesson_ui("bai4", LESSON_40_DATA, "04", "4")
+    render_lesson_ui("bai5", LESSON_41_DATA, "05", "5")
 
 with tabs[2]:
-    render_lesson_ui("bai3", LESSON_39_DATA, "03", "3")
+    render_lesson_ui("bai4", LESSON_40_DATA, "04", "4")
 
 with tabs[3]:
+    render_lesson_ui("bai3", LESSON_39_DATA, "03", "3")
+
+with tabs[4]:
     render_lesson_ui("bai2", LESSON_38_DATA, "02", "2")
 
 st.markdown('<div class="footer-teacher">黄宝玉老师</div>', unsafe_allow_html=True)
