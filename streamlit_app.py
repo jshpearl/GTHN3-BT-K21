@@ -315,6 +315,2448 @@ st.markdown("""
 """, unsafe_allow_html=True)
 ORDERED_GROUPS = [
     {
+        "id": "G15",
+        "title": "Nhóm 15",
+        "vocab": [
+    {
+        "hanzi": "主要",
+        "pinyin": "zhǔyào",
+        "type": "tính từ",
+        "meaning": "chủ yếu",
+        "example": "这是我们今天的主要任务。(Đây là nhiệm vụ chủ yếu của chúng ta hôm nay.)"
+    },
+    {
+        "hanzi": "把",
+        "pinyin": "bǎ",
+        "type": "giới/lượng từ",
+        "meaning": "câu chữ 把 / chiếc, cây",
+        "example": "请把门关上。(Xin hãy đóng cửa lại.)"
+    },
+    {
+        "hanzi": "位",
+        "pinyin": "wèi",
+        "type": "lượng từ",
+        "meaning": "vị (người)",
+        "example": "这几位是来自北京的客人。(Mấy vị này là khách đến từ Bắc Kinh.)"
+    },
+    {
+        "hanzi": "地图",
+        "pinyin": "dìtú",
+        "type": "danh từ",
+        "meaning": "bản đồ",
+        "example": "出门前别忘了带上地图。(Trước khi ra ngoài đừng quên mang theo bản đồ.)"
+    },
+    {
+        "hanzi": "礼物",
+        "pinyin": "lǐwù",
+        "type": "danh từ",
+        "meaning": "quà tặng",
+        "example": "这是我送给你的生日礼物。(Đây là quà sinh nhật tôi tặng bạn.)"
+    },
+    {
+        "hanzi": "短",
+        "pinyin": "duǎn",
+        "type": "tính từ",
+        "meaning": "ngắn",
+        "example": "这根绳子太短了。(Sợi dây này ngắn quá.)"
+    },
+    {
+        "hanzi": "打算",
+        "pinyin": "dǎsuàn",
+        "type": "động/danh từ",
+        "meaning": "dự định, kế hoạch",
+        "example": "假期你有什么打算？(Kỳ nghỉ bạn có dự định gì?)"
+    },
+    {
+        "hanzi": "啊",
+        "pinyin": "a",
+        "type": "trợ từ",
+        "meaning": "trợ từ khẩu ngữ",
+        "example": "这里的风景真美啊！(Phong cảnh ở đây thật đẹp!)"
+    },
+    {
+        "hanzi": "节目",
+        "pinyin": "jiémù",
+        "type": "danh từ",
+        "meaning": "chương trình",
+        "example": "今晚电视上有精彩的节目。(Tối nay trên tivi có chương trình hay.)"
+    },
+    {
+        "hanzi": "碗",
+        "pinyin": "wǎn",
+        "type": "danh/lượng từ",
+        "meaning": "bát",
+        "example": "请给我一碗热汤。(Xin cho tôi một bát canh nóng.)"
+    },
+    {
+        "hanzi": "要求",
+        "pinyin": "yāoqiú",
+        "type": "danh/động từ",
+        "meaning": "yêu cầu",
+        "example": "老师对我们的要求很严格。(Thầy giáo yêu cầu đối với chúng tôi rất nghiêm khắc.)"
+    },
+    {
+        "hanzi": "照片",
+        "pinyin": "zhàopiàn",
+        "type": "danh từ",
+        "meaning": "bức ảnh",
+        "example": "这张照片拍得非常漂亮。(Bức ảnh này chụp rất đẹp.)"
+    },
+    {
+        "hanzi": "体育",
+        "pinyin": "tǐyù",
+        "type": "danh từ",
+        "meaning": "thể dục, thể thao",
+        "example": "我非常喜欢体育运动。(Tôi rất thích vận động thể thao.)"
+    },
+    {
+        "hanzi": "只有……才",
+        "pinyin": "zhǐyǒu... cái...",
+        "type": "liên từ",
+        "meaning": "chỉ có... mới...",
+        "example": "只有努力学习才能取得好成绩。(Chỉ có nỗ lực học tập mới có thể đạt điểm cao.)"
+    },
+    {
+        "hanzi": "见面",
+        "pinyin": "jiànmiàn",
+        "type": "động từ",
+        "meaning": "gặp mặt",
+        "example": "我们很久没有见面了。(Chúng tôi đã lâu không gặp mặt rồi.)"
+    },
+    {
+        "hanzi": "电子邮件",
+        "pinyin": "diànzǐyóujiàn",
+        "type": "danh từ",
+        "meaning": "email",
+        "example": "我已经把文件发到你的电子邮件了。(Tôi đã gửi tài liệu vào email của bạn rồi.)"
+    },
+    {
+        "hanzi": "银行",
+        "pinyin": "yínháng",
+        "type": "danh từ",
+        "meaning": "ngân hàng",
+        "example": "我要去银行取一些钱。(Tôi cần đến ngân hàng rút ít tiền.)"
+    },
+    {
+        "hanzi": "以前",
+        "pinyin": "yǐqián",
+        "type": "danh từ",
+        "meaning": "trước đây",
+        "example": "五年以前我是一名学生。(5 năm trước đây tôi là một học sinh.)"
+    },
+    {
+        "hanzi": "面包",
+        "pinyin": "miànbāo",
+        "type": "danh từ",
+        "meaning": "bánh mì",
+        "example": "早上我吃面包喝牛奶。(Buổi sáng tôi ăn bánh mì uống sữa.)"
+    },
+    {
+        "hanzi": "饿",
+        "pinyin": "è",
+        "type": "tính từ",
+        "meaning": "đói",
+        "example": "我肚子很饿，想吃东西。(Bụng tôi rất đói, muốn ăn đồ ăn.)"
+    }
+],
+        "tab1": [
+    {
+        "q": "1. Tính từ '主要' nghĩa là gì?",
+        "options": [
+            "Chủ yếu",
+            "Phụ thuộc",
+            "Quan trọng",
+            "Đặc biệt"
+        ],
+        "ans": "Chủ yếu",
+        "exp": "主要 (zhǔyào) nghĩa là chủ yếu, chính yếu."
+    },
+    {
+        "q": "2. Giới từ '把' trong câu chữ 把 dùng để làm gì?",
+        "options": [
+            "So sánh hai đối tượng",
+            "Chỉ câu hỏi lựa chọn",
+            "Đưa tân ngữ lên trước động từ xử lý",
+            "Chỉ sự bị động"
+        ],
+        "ans": "Đưa tân ngữ lên trước động từ xử lý",
+        "exp": "Giới từ 把 dùng trong câu chữ 把 để xử lý tân ngữ."
+    },
+    {
+        "q": "3. Lượng từ '位' dùng để chỉ đối tượng nào?",
+        "options": [
+            "Chỉ ngôi nhà",
+            "Chỉ món ăn",
+            "Chỉ người một cách lịch sự",
+            "Chỉ con vật"
+        ],
+        "ans": "Chỉ người một cách lịch sự",
+        "exp": "位 (wèi) là lượng từ kính trọng chỉ người (một vị khách, một vị thầy giáo)."
+    },
+    {
+        "q": "4. Danh từ '地图' nghĩa là gì?",
+        "options": [
+            "Bức ảnh",
+            "Cuốn sách",
+            "Tờ báo",
+            "Bản đồ"
+        ],
+        "ans": "Bản đồ",
+        "exp": "地图 (dìtú) nghĩa là bản đồ."
+    },
+    {
+        "q": "5. Danh từ '礼物' nghĩa là gì?",
+        "options": [
+            "Tiền bạc",
+            "Quà tặng",
+            "Quần áo",
+            "Thức ăn"
+        ],
+        "ans": "Quà tặng",
+        "exp": "礼物 (lǐwù) nghĩa là quà tặng."
+    },
+    {
+        "q": "6. Tính từ '短' trái nghĩa với từ nào?",
+        "options": [
+            "胖 (Béo)",
+            "高 (Cao)",
+            "长 (Dài)",
+            "大 (To)"
+        ],
+        "ans": "长 (Dài)",
+        "exp": "短 (duǎn) nghĩa là ngắn, trái nghĩa với 长 (dài)."
+    },
+    {
+        "q": "7. Từ '打算' vừa làm động từ vừa làm danh từ nghĩa là gì?",
+        "options": [
+            "Lựa chọn",
+            "Kết quả",
+            "Nguyên nhân",
+            "Dự định, kế hoạch"
+        ],
+        "ans": "Dự định, kế hoạch",
+        "exp": "打算 (dǎsuàn) nghĩa là dự định, kế hoạch."
+    },
+    {
+        "q": "8. Trợ từ '啊' đứng cuối câu dùng làm gì?",
+        "options": [
+            "Bộc lộ cảm xúc, nhấn mạnh",
+            "Chỉ thời gian",
+            "Chỉ số lượng",
+            "Chỉ sự phủ định"
+        ],
+        "ans": "Bộc lộ cảm xúc, nhấn mạnh",
+        "exp": "啊 (a) trợ từ bộc lộ cảm xúc cuối câu cảm thán."
+    },
+    {
+        "q": "9. Danh từ '节目' chỉ nội dung nào?",
+        "options": [
+            "Chương trình (tivi, buổi diễn)",
+            "Môn học",
+            "Bài tập",
+            "Trò chơi"
+        ],
+        "ans": "Chương trình (tivi, buổi diễn)",
+        "exp": "节目 (jiémù) nghĩa là chương trình."
+    },
+    {
+        "q": "10. Từ '碗' dùng làm danh từ/lượng từ chỉ đồ vật nào?",
+        "options": [
+            "Chảo",
+            "Bát",
+            "Đĩa",
+            "Cốc"
+        ],
+        "ans": "Bát",
+        "exp": "碗 (wǎn) nghĩa là cái bát."
+    },
+    {
+        "q": "11. Từ '要求' nghĩa là gì?",
+        "options": [
+            "Động viên",
+            "Yêu cầu",
+            "Cảm ơn",
+            "Khuyên nhủ"
+        ],
+        "ans": "Yêu cầu",
+        "exp": "要求 (yāoqiú) nghĩa là yêu cầu."
+    },
+    {
+        "q": "12. Danh từ '照片' nghĩa là gì?",
+        "options": [
+            "Bức tranh",
+            "Tờ giấy",
+            "Bản đồ",
+            "Bức ảnh"
+        ],
+        "ans": "Bức ảnh",
+        "exp": "照片 (zhàopiàn) nghĩa là bức ảnh."
+    },
+    {
+        "q": "13. Danh từ '体育' chỉ lĩnh vực nào?",
+        "options": [
+            "Toán học",
+            "Thể dục, thể thao",
+            "Âm nhạc",
+            "Hội họa"
+        ],
+        "ans": "Thể dục, thể thao",
+        "exp": "体育 (tǐyù) nghĩa là thể dục, thể thao."
+    },
+    {
+        "q": "14. Cấu trúc liên từ '只有……才' nghĩa là gì?",
+        "options": [
+            "Nếu... thì...",
+            "Chỉ có... mới...",
+            "Bởi vì... cho nên...",
+            "Mặc dù... nhưng..."
+        ],
+        "ans": "Chỉ có... mới...",
+        "exp": "只有……才 chỉ điều kiện duy nhất: Chỉ có... mới..."
+    },
+    {
+        "q": "15. Động từ '见面' nghĩa là gì?",
+        "options": [
+            "Nói chuyện",
+            "Tạm biệt",
+            "Gặp mặt",
+            "Chào hỏi"
+        ],
+        "ans": "Gặp mặt",
+        "exp": "见面 (jiànmiàn) nghĩa là gặp mặt, gặp nhau."
+    },
+    {
+        "q": "16. Danh từ '电子邮件' nghĩa là gì?",
+        "options": [
+            "Email, thư điện tử",
+            "Tin nhắn",
+            "Điện thoại",
+            "Thư tay"
+        ],
+        "ans": "Email, thư điện tử",
+        "exp": "电子邮件 (diànzǐyóujiàn) nghĩa là email, thư điện tử."
+    },
+    {
+        "q": "17. Danh từ '银行' chỉ địa điểm nào?",
+        "options": [
+            "Bệnh viện",
+            "Trường học",
+            "Ngân hàng",
+            "Bưu điện"
+        ],
+        "ans": "Ngân hàng",
+        "exp": "银行 (yínháng) nghĩa là ngân hàng."
+    },
+    {
+        "q": "18. Từ chỉ thời gian '以前' nghĩa là gì?",
+        "options": [
+            "Trước đây",
+            "Sau này",
+            "Bây giờ",
+            "Tương lai"
+        ],
+        "ans": "Trước đây",
+        "exp": "以前 (yǐqián) nghĩa là trước đây, thời gian trước."
+    },
+    {
+        "q": "19. Danh từ '面包' chỉ món ăn nào?",
+        "options": [
+            "Bánh mì",
+            "Bánh kem",
+            "Mì sợi",
+            "Cơm"
+        ],
+        "ans": "Bánh mì",
+        "exp": "面包 (miànbāo) nghĩa là bánh mì."
+    },
+    {
+        "q": "20. Tính từ '饿' trái nghĩa với từ nào?",
+        "options": [
+            "渴 (Khát)",
+            "瘦 (Gầy)",
+            "饱 (No)",
+            "老 (Già)"
+        ],
+        "ans": "饱 (No)",
+        "exp": "饿 (è) nghĩa là đói, trái nghĩa với 饱 (no)."
+    }
+],
+        "tab2": [
+    {
+        "q": "1. 我们今天（  ）的任务是完成这份报告。",
+        "options": [
+            "主要",
+            "特别",
+            "一直",
+            "重要"
+        ],
+        "ans": "主要",
+        "exp": "Nhiệm vụ chủ yếu dùng 主要."
+    },
+    {
+        "q": "2. 请（  ）窗户关上，外面刮风了。",
+        "options": [
+            "把",
+            "被",
+            "向",
+            "为"
+        ],
+        "ans": "把",
+        "exp": "Xử lý tân ngữ khép cửa dùng câu chữ 把."
+    },
+    {
+        "q": "3. 这（  ）先生是我们的新校长。",
+        "options": [
+            "张",
+            "个",
+            "位",
+            "条"
+        ],
+        "ans": "位",
+        "exp": "Lượng từ lịch sự chỉ người dùng 位."
+    },
+    {
+        "q": "4. 去了新城市，建议买一张本地的（  ）。",
+        "options": [
+            "菜单",
+            "地图",
+            "照片",
+            "节目"
+        ],
+        "ans": "地图",
+        "exp": "Bản đồ đường đi dùng 地图."
+    },
+    {
+        "q": "5. 生日那天，我收到了很多漂亮的（  ）。",
+        "options": [
+            "照片",
+            "礼物",
+            "节目",
+            "面包"
+        ],
+        "ans": "礼物",
+        "exp": "Quà sinh nhật dùng 礼物."
+    },
+    {
+        "q": "6. 这条裤子有点儿（  ），有长一点儿的吗？",
+        "options": [
+            "旧",
+            "瘦",
+            "短",
+            "矮"
+        ],
+        "ans": "短",
+        "exp": "Trái nghĩa với dài dùng 短."
+    },
+    {
+        "q": "7. 假期你有什么去北方旅游的（  ）吗？",
+        "options": [
+            "关系",
+            "打算",
+            "要求",
+            "影响"
+        ],
+        "ans": "打算",
+        "exp": "Dự định kế hoạch dùng 打算."
+    },
+    {
+        "q": "8. 这里的风景真是美丽（  ）！",
+        "options": [
+            "过",
+            "啊",
+            "了",
+            "地"
+        ],
+        "ans": "啊",
+        "exp": "Thán từ cảm thán cuối câu dùng 啊."
+    },
+    {
+        "q": "9. 今晚电视上有许多精彩的春晚（  ）。",
+        "options": [
+            "故事",
+            "新闻",
+            "节目",
+            "作业"
+        ],
+        "ans": "节目",
+        "exp": "Chương trình tivi dùng 节目."
+    },
+    {
+        "q": "10. 请给我拿一（  ）热汤。",
+        "options": [
+            "盘",
+            "张",
+            "碗",
+            "瓶"
+        ],
+        "ans": "碗",
+        "exp": "Món soup/canh đựng trong bát dùng 碗."
+    },
+    {
+        "q": "11. 老师对我们提出了严格的（  ）。",
+        "options": [
+            "要求",
+            "影响",
+            "打算",
+            "关系"
+        ],
+        "ans": "要求",
+        "exp": "Yêu cầu nghiêm khắc dùng 要求."
+    },
+    {
+        "q": "12. 请看这张我们在北京照的（  ）。",
+        "options": [
+            "节目",
+            "地图",
+            "照片",
+            "礼物"
+        ],
+        "ans": "照片",
+        "exp": "Bức ảnh chụp dùng 照片."
+    },
+    {
+        "q": "13. 多参加（  ）锻炼能增强体质。",
+        "options": [
+            "历史",
+            "音乐",
+            "体育",
+            "文化"
+        ],
+        "ans": "体育",
+        "exp": "Rèn luyện thể thao dùng 体育锻炼."
+    },
+    {
+        "q": "14. （  ）认真复习，（  ）能通过考试。",
+        "options": [
+            "虽然……但是",
+            "只有……才",
+            "因为……所以",
+            "不但……而且"
+        ],
+        "ans": "只有……才",
+        "exp": "Biểu thị điều kiện duy nhất dùng 只有...才..."
+    },
+    {
+        "q": "15. 我和好久不见的老同学在咖啡馆（  ）了。",
+        "options": [
+            "见面",
+            "结婚",
+            "帮忙",
+            "聊天"
+        ],
+        "ans": "见面",
+        "exp": "Gặp mặt nhau dùng 见面."
+    },
+    {
+        "q": "16. 请把你的简历发到我的（  ）。",
+        "options": [
+            "照相机",
+            "洗手间",
+            "笔记本",
+            "电子邮件"
+        ],
+        "ans": "电子邮件",
+        "exp": "Gửi hồ sơ vào email dùng 电子邮件."
+    },
+    {
+        "q": "17. 我需要去（  ）换一些钱。",
+        "options": [
+            "银行",
+            "图书馆",
+            "机场",
+            "超市"
+        ],
+        "ans": "银行",
+        "exp": "Rút tiền đổi tiền ra ngân hàng dùng 银行."
+    },
+    {
+        "q": "18. 五年（  ），我曾经在这所学校读书。",
+        "options": [
+            "以前",
+            "刚才",
+            "以后",
+            "后来"
+        ],
+        "ans": "以前",
+        "exp": "5 năm trước đây dùng 五年以前."
+    },
+    {
+        "q": "19. 早上时间紧，我只吃了一块（  ）。",
+        "options": [
+            "蛋糕",
+            "香蕉",
+            "面包",
+            "米饭"
+        ],
+        "ans": "面包",
+        "exp": "An bánh mì điểm tâm dùng 面包."
+    },
+    {
+        "q": "20. 做了半天家务，我现在肚子很（  ）。",
+        "options": [
+            "饱",
+            "疼",
+            "渴",
+            "饿"
+        ],
+        "ans": "饿",
+        "exp": "Bụng cồn cào đói dùng 饿."
+    }
+],
+        "tab3": [
+    {
+        "q": "1. Sắp xếp: 请把 / 门 / 关上",
+        "options": [
+            "请关上把门。",
+            "门请把关上。",
+            "把门请关上。",
+            "请把门关上。"
+        ],
+        "ans": "请把门关上。",
+        "exp": "Trật tự: 请 + 把 N (门) + V (关上)."
+    },
+    {
+        "q": "2. Sắp xếp: 礼物 / 我送给你的 / 生日 / 这是",
+        "options": [
+            "我送给你的生日礼物这是。",
+            "生日礼物这是我送给你的。",
+            "这是我送给你的生日礼物。",
+            "这是生日礼物我送给你的。"
+        ],
+        "ans": "这是我送给你的生日礼物。",
+        "exp": "Trật tự: Đây là + Định ngữ + Định trung ngữ."
+    },
+    {
+        "q": "3. Sắp xếp: 假期 / 有什么 / 你 / 打算",
+        "options": [
+            "有什么打算你假期？",
+            "你有打算什么假期？",
+            "打算你有什么假期？",
+            "假期你有什么打算？"
+        ],
+        "ans": "假期你有什么打算？",
+        "exp": "Trật tự: Thời gian (假期) + S (你) + 有什么打算?"
+    },
+    {
+        "q": "4. Sắp xếp: 精彩的 / 有许多 / 节目 / 今晚",
+        "options": [
+            "今晚有许多精彩的节目。",
+            "精彩的节目今晚有许多。",
+            "有许多精彩的节目今晚。",
+            "今晚精彩的节目有许多。"
+        ],
+        "ans": "今晚有许多精彩的节目。",
+        "exp": "Trật tự: Thời gian (今晚) + 有 + 许多 + Định ngữ + N."
+    },
+    {
+        "q": "5. Sắp xếp: 照片 / 这张 / 拍得 / 很漂亮",
+        "options": [
+            "这张照片拍得很漂亮。",
+            "这张照片很漂亮拍得。",
+            "拍得很漂亮这张照片。",
+            "很漂亮这张照片拍得。"
+        ],
+        "ans": "这张照片拍得很漂亮。",
+        "exp": "Trật tự: S (这张照片) + V (拍) + 得 + 很/非常 + Adj."
+    },
+    {
+        "q": "6. Sắp xếp: 才能 / 只有 / 努力学习 / 成功",
+        "options": [
+            "成功只有努力学习才能。",
+            "才能成功只有努力学习。",
+            "只有努力学习才能成功。",
+            "努力学习只有才能成功。"
+        ],
+        "ans": "只有努力学习才能成功。",
+        "exp": "Trật tự: 只有 + Điều kiện + 才能 + Kết quả."
+    },
+    {
+        "q": "7. Sắp xếp: 很久 / 没有 / 我们 / 见面了",
+        "options": [
+            "没有见面了我们很久。",
+            "我们很久没有见面了。",
+            "我们见面了很久没有。",
+            "很久没有我们见面了。"
+        ],
+        "ans": "我们很久没有见面了。",
+        "exp": "Trật tự: S (我们) + 很久 + 没有 + V (见面了)."
+    },
+    {
+        "q": "8. Sắp xếp: 电子邮件 / 发到我的 / 把文件 / 请",
+        "options": [
+            "我的电子邮件请把文件发到。",
+            "请发到我的电子邮件把文件。",
+            "请把文件发到我的电子邮件。",
+            "把文件请发到我的电子邮件。"
+        ],
+        "ans": "请把文件发到我的电子邮件。",
+        "exp": "Trật tự: 请 + 把 N + 发到 + Địa điểm/Email."
+    },
+    {
+        "q": "9. Sắp xếp: 换钱 / 去银行 / 我打算",
+        "options": [
+            "我去银行打算换钱。",
+            "去银行换钱我打算。",
+            "我打算去银行换钱。",
+            "打算去银行换钱我。"
+        ],
+        "ans": "我打算去银行换钱。",
+        "exp": "Trật tự: S (我) + 打算 + 連動句 (去银行换钱)."
+    },
+    {
+        "q": "10. Sắp xếp: 吃一块 / 我想 / 面包",
+        "options": [
+            "我想面包吃一块。",
+            "我想吃一块面包。",
+            "一块面包我想吃。",
+            "吃一块面包我想。"
+        ],
+        "ans": "我想吃一块面包。",
+        "exp": "Trật tự: S (我想) + V (吃) + Số lượng + N."
+    }
+],
+        "tab4": [
+    {
+        "q": "1. 问：请问这几位客人是谁？<br>答：（  ）",
+        "options": [
+            "天气很好。",
+            "地图在桌子上。",
+            "他们是来自北京的专家。",
+            "我在吃面包呢。"
+        ],
+        "ans": "他们是来自北京的专家。",
+        "exp": "Trả lời thân phận mấy vị khách."
+    },
+    {
+        "q": "2. 问：把文件交了吗？<br>答：（  ）",
+        "options": [
+            "他在银行工作。",
+            "照片很漂亮。",
+            "已经把文件发到您的电子邮件了。",
+            "我不饿。"
+        ],
+        "ans": "已经把文件发到您的电子邮件了。",
+        "exp": "Xác nhận đã gửi file qua email."
+    },
+    {
+        "q": "3. 问：你需要地图吗？<br>答：（  ）",
+        "options": [
+            "我已经吃了一碗饭。",
+            "我在看电视节目。",
+            "他去体育馆了。",
+            "需要，我对这里的路不太熟悉。"
+        ],
+        "ans": "需要，我对这里的路不太熟悉。",
+        "exp": "Trả lời nhu cầu cần bản đồ."
+    },
+    {
+        "q": "4. 问：这是什么礼物？<br>答：（  ）",
+        "options": [
+            "我在去银行的路上。",
+            "只有他知道。",
+            "照片拍得很好。",
+            "这是送给你的生日蛋糕。"
+        ],
+        "ans": "这是送给你的生日蛋糕。",
+        "exp": "Trả lời món quà sinh nhật."
+    },
+    {
+        "q": "5. 问：这条裤子怎么样？<br>答：（  ）",
+        "options": [
+            "他在吃面包。",
+            "有点儿短，换一条长点儿的吧。",
+            "我们见面了。",
+            "天气真美啊。"
+        ],
+        "ans": "有点儿短，换一条长点儿的吧。",
+        "exp": "Trả lời đánh giá cái quần hơi ngắn."
+    },
+    {
+        "q": "6. 问：今晚有什么好节目？<br>答：（  ）",
+        "options": [
+            "我肚子很饿。",
+            "地图在包里。",
+            "他是我的朋友。",
+            "七点半有精彩的足球比赛。"
+        ],
+        "ans": "七点半有精彩的足球比赛。",
+        "exp": "Trả lời chương trình tivi tối nay."
+    },
+    {
+        "q": "7. 问：你饿不饿？要不要吃点儿面包？<br>答：（  ）",
+        "options": [
+            "我不去银行。",
+            "照片很旧了。",
+            "真饿了，给我一块面包吧。",
+            "他在体育锻炼。"
+        ],
+        "ans": "真饿了，给我一块面包吧。",
+        "exp": "Trả lời đang rất đói, cho bánh mì."
+    },
+    {
+        "q": "8. 问：怎么才能提高汉语水平？<br>答：（  ）",
+        "options": [
+            "我在看照片。",
+            "地图很清楚。",
+            "我去买了礼物。",
+            "只有多听多说多练习，才能提高。"
+        ],
+        "ans": "只有多听多说多练习，才能提高。",
+        "exp": "Trả lời bí quyết nâng cao trình độ tiếng Trung."
+    },
+    {
+        "q": "9. 问：你们有多久没见面了？<br>答：（  ）",
+        "options": [
+            "要求很高。",
+            "我在吃一碗面。",
+            "大概有三年没见面了。",
+            "这是电子邮件。"
+        ],
+        "ans": "大概有三年没见面了。",
+        "exp": "Trả lời khoảng thời gian không gặp nhau."
+    },
+    {
+        "q": "10. 问：你去银行做什么？<br>答：（  ）",
+        "options": [
+            "我在看节目。",
+            "面包很甜。",
+            "我去银行换一些人民币。",
+            "照片拍好了。"
+        ],
+        "ans": "我去银行换一些人民币。",
+        "exp": "Trả lời mục đích ra ngân hàng đổi tiền."
+    }
+]
+    },
+    {
+        "id": "G14",
+        "title": "Nhóm 14",
+        "vocab": [
+    {
+        "hanzi": "夏天",
+        "pinyin": "xiàtiān",
+        "type": "danh từ",
+        "meaning": "(mùa) hè",
+        "example": "北方的夏天天气非常热。(Mùa hè ở miền Bắc thời tiết rất nóng.)"
+    },
+    {
+        "hanzi": "清楚",
+        "pinyin": "qīngchu",
+        "type": "tính từ",
+        "meaning": "rõ ràng",
+        "example": "老师讲得非常清楚。(Thầy giáo giảng vô cùng rõ ràng.)"
+    },
+    {
+        "hanzi": "秋天",
+        "pinyin": "qiūtiān",
+        "type": "danh từ",
+        "meaning": "(mùa) thu",
+        "example": "北京的秋天是最美丽的季节。(Mùa thu ở Bắc Kinh là mùa đẹp nhất.)"
+    },
+    {
+        "hanzi": "包",
+        "pinyin": "bāo",
+        "type": "danh/động từ",
+        "meaning": "cặp, túi, gói",
+        "example": "请把东西包起来。(Xin hãy gói đồ lại.)"
+    },
+    {
+        "hanzi": "马",
+        "pinyin": "mǎ",
+        "type": "danh từ",
+        "meaning": "ngựa",
+        "example": "他在草地上骑马。(Anh ấy đang cưỡi ngựa trên đồng cỏ.)"
+    },
+    {
+        "hanzi": "感冒",
+        "pinyin": "gǎnmào",
+        "type": "động/danh từ",
+        "meaning": "bị cảm",
+        "example": "天气冷了，小心感冒。(Trời lạnh rồi, cẩn thận bị cảm.)"
+    },
+    {
+        "hanzi": "洗手间",
+        "pinyin": "xíshǒujiān",
+        "type": "danh từ",
+        "meaning": "nhà vệ sinh",
+        "example": "请问洗手间在哪儿？(Xin hỏi nhà vệ sinh ở đâu?)"
+    },
+    {
+        "hanzi": "自行车",
+        "pinyin": "zìxíngchē",
+        "type": "danh từ",
+        "meaning": "xe đạp",
+        "example": "我骑自行车去学校。(Tôi đi xe đạp đến trường.)"
+    },
+    {
+        "hanzi": "脸",
+        "pinyin": "liǎn",
+        "type": "danh từ",
+        "meaning": "khuôn mặt",
+        "example": "早上起床后先洗脸。(Buổi sáng thức dậy rửa mặt trước.)"
+    },
+    {
+        "hanzi": "当然",
+        "pinyin": "dāngrán",
+        "type": "phó từ",
+        "meaning": "đương nhiên",
+        "example": "你遇到困难，我当然会帮忙。(Bạn gặp khó khăn, tôi đương nhiên sẽ giúp.)"
+    },
+    {
+        "hanzi": "爬山",
+        "pinyin": "pá shān",
+        "type": "động từ",
+        "meaning": "leo núi",
+        "example": "周末我们打算去爬山。(Cuối tuần chúng tôi dự định đi leo núi.)"
+    },
+    {
+        "hanzi": "聪明",
+        "pinyin": "cōngming",
+        "type": "tính từ",
+        "meaning": "thông minh",
+        "example": "这个孩子非常聪明。(Đứa trẻ này rất thông minh.)"
+    },
+    {
+        "hanzi": "最后",
+        "pinyin": "zuìhòu",
+        "type": "danh từ",
+        "meaning": "cuối cùng",
+        "example": "经过努力，最后他赢了。(Trải qua nỗ lực, cuối cùng anh ấy đã thắng.)"
+    },
+    {
+        "hanzi": "认为",
+        "pinyin": "rènwéi",
+        "type": "động từ",
+        "meaning": "cho rằng",
+        "example": "我认为这个办法很好。(Tôi cho rằng cách này rất tốt.)"
+    },
+    {
+        "hanzi": "奇怪",
+        "pinyin": "qíguài",
+        "type": "tính từ",
+        "meaning": "kỳ lạ",
+        "example": "这件事看起来真奇怪。(Việc này nhìn thật kỳ lạ.)"
+    },
+    {
+        "hanzi": "啤酒",
+        "pinyin": "píjiǔ",
+        "type": "danh từ",
+        "meaning": "bia",
+        "example": "夏天喝冰啤酒很舒服。(Mùa hè uống bia lạnh rất dễ chịu.)"
+    },
+    {
+        "hanzi": "经常",
+        "pinyin": "jīngcháng",
+        "type": "phó từ",
+        "meaning": "thường xuyên",
+        "example": "他经常去图书馆看书。(Anh ấy thường xuyên đến thư viện đọc sách.)"
+    },
+    {
+        "hanzi": "叔叔",
+        "pinyin": "shūshu",
+        "type": "danh từ",
+        "meaning": "chú",
+        "example": "叔叔今天来我们家做客。(Chú hôm nay đến nhà chúng tôi chơi.)"
+    },
+    {
+        "hanzi": "机场",
+        "pinyin": "jīchǎng",
+        "type": "danh từ",
+        "meaning": "sân bay",
+        "example": "我打算坐出租车去机场。(Tôi dự định đi taxi ra sân bay.)"
+    },
+    {
+        "hanzi": "满意",
+        "pinyin": "mǎnyì",
+        "type": "tính/động từ",
+        "meaning": "hài lòng",
+        "example": "经理对他的工作非常满意。(Giám đốc rất hài lòng với công việc của anh ấy.)"
+    }
+],
+        "tab1": [
+    {
+        "q": "1. Danh từ '夏天' chỉ mùa nào?",
+        "options": [
+            "Mùa thu",
+            "Mùa xuân",
+            "Mùa hè",
+            "Mùa đông"
+        ],
+        "ans": "Mùa hè",
+        "exp": "夏天 (xiàtiān) nghĩa là mùa hè."
+    },
+    {
+        "q": "2. Tính từ '清楚' nghĩa là gì?",
+        "options": [
+            "Khó khăn",
+            "Phức tạp",
+            "Mơ hồ",
+            "Rõ ràng"
+        ],
+        "ans": "Rõ ràng",
+        "exp": "清楚 (qīngchu) nghĩa là rõ ràng, rành rọt."
+    },
+    {
+        "q": "3. Danh từ '秋天' chỉ mùa nào?",
+        "options": [
+            "Mùa thu",
+            "Mùa đông",
+            "Mùa hè",
+            "Mùa xuân"
+        ],
+        "ans": "Mùa thu",
+        "exp": "秋天 (qiūtiān) nghĩa là mùa thu."
+    },
+    {
+        "q": "4. Từ '包' làm danh từ mang nghĩa gì?",
+        "options": [
+            "Cặp, túi, gói",
+            "Chiếc ô",
+            "Cái mũ",
+            "Khăn quàng"
+        ],
+        "ans": "Cặp, túi, gói",
+        "exp": "包 (bāo) nghĩa là cái túi, cái cặp, gói."
+    },
+    {
+        "q": "5. Danh từ '马' chỉ con vật nào?",
+        "options": [
+            "Con ngựa",
+            "Con chim",
+            "Con mèo",
+            "Con chó"
+        ],
+        "ans": "Con ngựa",
+        "exp": "马 (mǎ) nghĩa là con ngựa."
+    },
+    {
+        "q": "6. Từ '感冒' nghĩa là gì?",
+        "options": [
+            "Sốt cao",
+            "Đau răng",
+            "Bị dị ứng",
+            "Bị cảm, bệnh cảm"
+        ],
+        "ans": "Bị cảm, bệnh cảm",
+        "exp": "感冒 (gǎnmào) nghĩa là bị cảm."
+    },
+    {
+        "q": "7. Danh từ '洗手间' nghĩa là gì?",
+        "options": [
+            "Phòng ăn",
+            "Nhà bếp",
+            "Nhà vệ sinh",
+            "Phòng khách"
+        ],
+        "ans": "Nhà vệ sinh",
+        "exp": "洗手间 (xǐshǒujiān) nghĩa là nhà vệ sinh."
+    },
+    {
+        "q": "8. Danh từ '自行车' chỉ phương tiện nào?",
+        "options": [
+            "Tàu điện",
+            "Xe máy",
+            "Xe đạp",
+            "Ô tô"
+        ],
+        "ans": "Xe đạp",
+        "exp": "自行车 (zìxíngchē) nghĩa là xe đạp."
+    },
+    {
+        "q": "9. Danh từ '脸' chỉ bộ phận nào trên cơ thể?",
+        "options": [
+            "Bàn tay",
+            "Khuôn mặt",
+            "Cánh tay",
+            "Bàn chân"
+        ],
+        "ans": "Khuôn mặt",
+        "exp": "脸 (liǎn) nghĩa là khuôn mặt."
+    },
+    {
+        "q": "10. Phó từ '当然' nghĩa là gì?",
+        "options": [
+            "Không hẳn",
+            "Có lẽ",
+            "Đột nhiên",
+            "Đương nhiên"
+        ],
+        "ans": "Đương nhiên",
+        "exp": "当然 (dāngrán) nghĩa là đương nhiên, tất nhiên."
+    },
+    {
+        "q": "11. Động từ '爬山' nghĩa là gì?",
+        "options": [
+            "Chạy bộ",
+            "Leo núi",
+            "Bơi lội",
+            "Đá bóng"
+        ],
+        "ans": "Leo núi",
+        "exp": "爬山 (pá shān) nghĩa là leo núi."
+    },
+    {
+        "q": "12. Tính từ '聪明' trái nghĩa với từ nào?",
+        "options": [
+            "瘦 (Gầy)",
+            "短 (Ngắn)",
+            "老 (Già)",
+            "笨 (Ngu ngốc)"
+        ],
+        "ans": "笨 (Ngu ngốc)",
+        "exp": "聪明 (cōngming) nghĩa là thông minh, trái nghĩa với 笨 (ngu ngốc/vụng về)."
+    },
+    {
+        "q": "13. Danh từ chỉ thứ tự '最后' nghĩa là gì?",
+        "options": [
+            "Cuối cùng",
+            "Đầu tiên",
+            "Ban đầu",
+            "Bây giờ"
+        ],
+        "ans": "Cuối cùng",
+        "exp": "最后 (zuìhòu) nghĩa là cuối cùng, sau cùng."
+    },
+    {
+        "q": "14. Động từ '认为' nghĩa là gì?",
+        "options": [
+            "Quên mất",
+            "Thắc mắc",
+            "Nghe thấy",
+            "Cho rằng, nghĩ rằng"
+        ],
+        "ans": "Cho rằng, nghĩ rằng",
+        "exp": "认为 (rènwéi) nghĩa là cho rằng, nghĩ rằng."
+    },
+    {
+        "q": "15. Tính từ '奇怪' nghĩa là gì?",
+        "options": [
+            "Kỳ lạ",
+            "Dễ chịu",
+            "Quen thuộc",
+            "Bình thường"
+        ],
+        "ans": "Kỳ lạ",
+        "exp": "奇怪 (qíguài) nghĩa là kỳ lạ, lạ bỡn."
+    },
+    {
+        "q": "16. Danh từ '啤酒' chỉ đồ uống nào?",
+        "options": [
+            "Rượu vang",
+            "Nước ngọt",
+            "Bia",
+            "Cà phê"
+        ],
+        "ans": "Bia",
+        "exp": "啤酒 (píjiǔ) nghĩa là bia."
+    },
+    {
+        "q": "17. Phó từ '经常' đồng nghĩa với từ nào?",
+        "options": [
+            "突然 (Bất ngờ)",
+            "常常 (Thường xuyên)",
+            "几乎 (Hầu như)",
+            "不常 (Hiếm khi)"
+        ],
+        "ans": "常常 (Thường xuyên)",
+        "exp": "经常 (jīngcháng) nghĩa là thường xuyên, đồng nghĩa 常常."
+    },
+    {
+        "q": "18. Danh từ '叔叔' chỉ ai trong gia đình?",
+        "options": [
+            "Dì",
+            "Cậu",
+            "Chú",
+            "Bác"
+        ],
+        "ans": "Chú",
+        "exp": "叔叔 (shūshu) nghĩa là chú."
+    },
+    {
+        "q": "19. Danh từ '机场' chỉ địa điểm nào?",
+        "options": [
+            "Bến xe",
+            "Sân bay",
+            "Bến cảng",
+            "Ga tàu"
+        ],
+        "ans": "Sân bay",
+        "exp": "机场 (jīchǎng) nghĩa là sân bay."
+    },
+    {
+        "q": "20. Từ '满意' nghĩa là gì?",
+        "options": [
+            "Hài lòng",
+            "Tức giận",
+            "Thất vọng",
+            "Lo lắng"
+        ],
+        "ans": "Hài lòng",
+        "exp": "满意 (mǎnyì) nghĩa là hài lòng, ưng ý."
+    }
+],
+        "tab2": [
+    {
+        "q": "1. 北方的（  ）天气非常热，大家喜欢吃西瓜。",
+        "options": [
+            "冬天",
+            "秋天",
+            "夏天",
+            "春天"
+        ],
+        "ans": "夏天",
+        "exp": "Mùa hè thời tiết rất nóng dùng 夏天."
+    },
+    {
+        "q": "2. 老师讲得非常（  ），大家都听懂了。",
+        "options": [
+            "简单",
+            "清楚",
+            "方便",
+            "安静"
+        ],
+        "ans": "清楚",
+        "exp": "Giảng bài rõ ràng rành rọt dùng 清楚."
+    },
+    {
+        "q": "3. 树叶变黄落下来的季节是（  ）。",
+        "options": [
+            "秋天",
+            "夏天",
+            "冬天",
+            "春天"
+        ],
+        "ans": "秋天",
+        "exp": "Mùa lá vàng rụng là mùa thu dùng 秋天."
+    },
+    {
+        "q": "4. 你的书包太重了，把重书拿出来吧。",
+        "options": [
+            "碗",
+            "包",
+            "盘子",
+            "瓶子"
+        ],
+        "ans": "包",
+        "exp": "Cặp sách dùng 包."
+    },
+    {
+        "q": "5. 在草原上，有人正在快乐地骑（  ）。",
+        "options": [
+            "鱼",
+            "猫",
+            "马",
+            "鸟"
+        ],
+        "ans": "马",
+        "exp": "Cưỡi ngựa dùng 骑马."
+    },
+    {
+        "q": "6. 天气冷了，衣服穿少了容易（  ）。",
+        "options": [
+            "生气",
+            "感冒",
+            "发烧",
+            "放心"
+        ],
+        "ans": "感冒",
+        "exp": "Bị cảm lạnh dùng 感冒."
+    },
+    {
+        "q": "7. 请问，这栋楼的（  ）在几层？",
+        "options": [
+            "办公室",
+            "图书馆",
+            "超市",
+            "洗手间"
+        ],
+        "ans": "洗手间",
+        "exp": "Hỏi nhà vệ sinh dùng 洗手间."
+    },
+    {
+        "q": "8. 他每天骑（  ）去上学，既环保又方便。",
+        "options": [
+            "出租车",
+            "自行车",
+            "船",
+            "地铁"
+        ],
+        "ans": "自行车",
+        "exp": "Đi xe đạp dùng 自行车."
+    },
+    {
+        "q": "9. 早上洗（  ）能让人精神振奋。",
+        "options": [
+            "嘴",
+            "脸",
+            "脚",
+            "耳朵"
+        ],
+        "ans": "脸",
+        "exp": "Rửa mặt dùng 洗脸."
+    },
+    {
+        "q": "10. 你遇到困难，我作为朋友（  ）会帮忙。",
+        "options": [
+            "突然",
+            "重新",
+            "本来",
+            "当然"
+        ],
+        "ans": "当然",
+        "exp": "Đương nhiên sẽ giúp dùng 当然."
+    },
+    {
+        "q": "11. 周末天气晴朗，我们打算去郊外（  ）。",
+        "options": [
+            "跑步",
+            "跳舞",
+            "爬山",
+            "游泳"
+        ],
+        "ans": "爬山",
+        "exp": "Đi leo núi dùng 爬山."
+    },
+    {
+        "q": "12. 这个小男孩非常（  ），一教就会。",
+        "options": [
+            "热情",
+            "聪明",
+            "认真",
+            "安静"
+        ],
+        "ans": "聪明",
+        "exp": "Đứa trẻ thông minh dùng 聪明."
+    },
+    {
+        "q": "13. 经过几轮比赛，（  ）他拿到了第一名。",
+        "options": [
+            "最后",
+            "刚才",
+            "比较",
+            "主要"
+        ],
+        "ans": "最后",
+        "exp": "Sau cùng đạt giải nhất dùng 最后."
+    },
+    {
+        "q": "14. 大家都（  ）这个方案非常合理。",
+        "options": [
+            "要求",
+            "认为",
+            "同意",
+            "决定"
+        ],
+        "ans": "认为",
+        "exp": "Cho rằng/nghĩ rằng dùng 认为."
+    },
+    {
+        "q": "15. 门自动开了，这件事看起来真（  ）。",
+        "options": [
+            "简单",
+            "舒服",
+            "方便",
+            "奇怪"
+        ],
+        "ans": "奇怪",
+        "exp": "Chuyện lạ kỳ dùng 奇怪."
+    },
+    {
+        "q": "16. 天热的时候，爸爸喜欢喝冰（  ）。",
+        "options": [
+            "水",
+            "牛奶",
+            "茶",
+            "啤酒"
+        ],
+        "ans": "啤酒",
+        "exp": "Bia lạnh dùng 冰啤酒."
+    },
+    {
+        "q": "17. 他（  ）利用周末的时间去图书馆查资料。",
+        "options": [
+            "经常",
+            "主要",
+            "偶尔",
+            "突然"
+        ],
+        "ans": "经常",
+        "exp": "Thường xuyên làm gì dùng 经常."
+    },
+    {
+        "q": "18. 今天（  ）来我们家做客，带了很多水果。",
+        "options": [
+            "叔叔",
+            "经理",
+            "司机",
+            "校长"
+        ],
+        "ans": "叔叔",
+        "exp": "Chú đến chơi nhà dùng 叔叔."
+    },
+    {
+        "q": "19. 我打算坐出租车去（  ）赶飞机。",
+        "options": [
+            "车站",
+            "银行",
+            "机场",
+            "公园"
+        ],
+        "ans": "机场",
+        "exp": "Bắt máy bay ra sân bay dùng 机场."
+    },
+    {
+        "q": "20. 老师对大家这次的考试成绩非常（  ）。",
+        "options": [
+            "着急",
+            "健康",
+            "高兴",
+            "满意"
+        ],
+        "ans": "满意",
+        "exp": "Hài lòng với kết quả dùng 满意."
+    }
+],
+        "tab3": [
+    {
+        "q": "1. Sắp xếp: 清楚 / 讲得 / 老师 / 非常",
+        "options": [
+            "老师非常清楚讲得。",
+            "非常清楚老师讲得。",
+            "老师讲得非常清楚。",
+            "讲得非常清楚老师。"
+        ],
+        "ans": "老师讲得非常清楚。",
+        "exp": "Trật tự: S (老师) + V + 得 + 很/非常 + Adj (清楚)."
+    },
+    {
+        "q": "2. Sắp xếp: 骑自行车 / 去学校 / 他 / 每天",
+        "options": [
+            "骑自行车他每天去学校。",
+            "他每天骑自行车去学校。",
+            "每天他去学校骑自行车。",
+            "去学校他每天骑自行车。"
+        ],
+        "ans": "他每天骑自行车去学校。",
+        "exp": "Trật tự: S (他) + 时间 (每天) + 方式 (骑自行车) + V (去学校)."
+    },
+    {
+        "q": "3. Sắp xếp: 去爬山 / 打算 / 周末 / 我们",
+        "options": [
+            "周末去爬山打算我们。",
+            "我们去爬山打算周末。",
+            "打算去爬山周末我们。",
+            "周末我们打算去爬山。"
+        ],
+        "ans": "周末我们打算去爬山。",
+        "exp": "Trật tự: Thời gian (周末) + S (我们) + 打算 + V (去爬山)."
+    },
+    {
+        "q": "4. Sắp xếp: 聪明 / 这个孩子 / 非常",
+        "options": [
+            "聪明非常这个孩子。",
+            "这个孩子非常聪明。",
+            "非常聪明这个孩子。",
+            "这个孩子聪明非常。"
+        ],
+        "ans": "这个孩子非常聪明。",
+        "exp": "Trật tự: S ( cái đứa trẻ này) + 非常 + Adj (聪明)."
+    },
+    {
+        "q": "5. Sắp xếp: 获得了 / 最后 / 第一名 / 他",
+        "options": [
+            "获得了第一名最后他。",
+            "最后他获得了第一名。",
+            "他第一名获得了最后。",
+            "第一名最后他获得了。"
+        ],
+        "ans": "最后他获得了第一名。",
+        "exp": "Trật tự: Thời gian (最后) + S (他) + V (获得了) + Tân ngữ."
+    },
+    {
+        "q": "6. Sắp xếp: 认为 / 我 / 这个办法 / 很好",
+        "options": [
+            "这个办法很好我认为。",
+            "我认为这个办法很好。",
+            "很好我认为这个办法。",
+            "我认为很好这个办法。"
+        ],
+        "ans": "我认为这个办法很好。",
+        "exp": "Trật tự: S (我) + 认为 + V/Clause."
+    },
+    {
+        "q": "7. Sắp xếp: 经常 / 图书馆 / 去看书 / 她",
+        "options": [
+            "她经常去图书馆看书。",
+            "她去图书馆看书经常。",
+            "经常她去图书馆看书。",
+            "去图书馆看书她经常。"
+        ],
+        "ans": "她经常去图书馆看书。",
+        "exp": "Trật tự: S (她) + 经常 + 地点 (去图书馆) + V (看书)."
+    },
+    {
+        "q": "8. Sắp xếp: 坐出租车 / 打算 / 去机场 / 我",
+        "options": [
+            "我打算坐出租车去机场。",
+            "去机场我打算坐出租车。",
+            "打算去机场我坐出租车。",
+            "坐出租车我打算去机场。"
+        ],
+        "ans": "我打算坐出租车去机场。",
+        "exp": "Trật tự: S (我) + 打算 + 坐出租车 + 去机场."
+    },
+    {
+        "q": "9. Sắp xếp: 非常满意 / 成绩 / 对他的 / 老师",
+        "options": [
+            "非常满意老师对他的成绩。",
+            "老师对他的成绩非常满意。",
+            "老师非常满意对他的成绩。",
+            "对他的成绩老师非常满意。"
+        ],
+        "ans": "老师对他的成绩非常满意。",
+        "exp": "Trật tự: S (老师) + 对 N + 非常满意."
+    },
+    {
+        "q": "10. Sắp xếp: 洗手间 / 在哪里 / 请问",
+        "options": [
+            "洗手间在哪里请问？",
+            "请问洗手间在哪里？",
+            "在哪里请问洗手间？",
+            "请问在哪里洗手间？"
+        ],
+        "ans": "请问洗手间在哪里？",
+        "exp": "Câu hỏi lịch sự: 请问 + N + 在哪里?"
+    }
+],
+        "tab4": [
+    {
+        "q": "1. 问：你喜欢夏天还是秋天？<br>答：（  ）",
+        "options": [
+            "今天星期一。",
+            "我已经买好机票了。",
+            "我在看电视呢。",
+            "我更喜欢秋天，天气凉快。"
+        ],
+        "ans": "我更喜欢秋天，天气凉快。",
+        "exp": "Trả lời lựa chọn mùa yêu thích: Thích mùa thu hơn."
+    },
+    {
+        "q": "2. 问：老师讲的内容你听清楚了吗？<br>答：（  ）",
+        "options": [
+            "他去爬山了。",
+            "我在洗脸呢。",
+            "听清楚了，讲得非常明白。",
+            "包很重。"
+        ],
+        "ans": "听清楚了，讲得非常明白。",
+        "exp": "Xác nhận đã nghe rõ bài giảng."
+    },
+    {
+        "q": "3. 问：请问洗手间在哪儿？<br>答：（  ）",
+        "options": [
+            "他是我的叔叔。",
+            "今天天气很好。",
+            "我喜欢喝啤酒。",
+            "就在前面拐角处。"
+        ],
+        "ans": "就在前面拐角处。",
+        "exp": "Chỉ đường đến nhà vệ sinh."
+    },
+    {
+        "q": "4. 问：你怎么去公司？<br>答：（  ）",
+        "options": [
+            "机场很大。",
+            "我在吃面包。",
+            "天气很冷。",
+            "我每天骑自行车去。"
+        ],
+        "ans": "我每天骑自行车去。",
+        "exp": "Trả lời phương tiện đi làm: Xe đạp."
+    },
+    {
+        "q": "5. 问：你感冒了吗？要不要去医院？<br>答：（  ）",
+        "options": [
+            "自行车坏了。",
+            "我在爬山呢。",
+            "他很聪明。",
+            "不用，吃了药好多了。"
+        ],
+        "ans": "不用，吃了药好多了。",
+        "exp": "Trả lời tình trạng cảm cúm."
+    },
+    {
+        "q": "6. 问：周末你有什么打算？<br>答：（  ）",
+        "options": [
+            "我在看新闻。",
+            "我和朋友打算去爬山。",
+            "这是叔叔的包。",
+            "洗手间在二楼。"
+        ],
+        "ans": "我和朋友打算去爬山。",
+        "exp": "Trả lời kế hoạch cuối tuần: đi leo núi."
+    },
+    {
+        "q": "7. 问：你觉得这个孩子怎么样？<br>答：（  ）",
+        "options": [
+            "他在吃西瓜。",
+            "天黑了。",
+            "我也去机场。",
+            "非常聪明，而且很懂礼貌。"
+        ],
+        "ans": "非常聪明，而且很懂礼貌。",
+        "exp": "Đánh giá đứa trẻ thông minh và ngoan."
+    },
+    {
+        "q": "8. 问：你认为这个方案可行吗？<br>答：（  ）",
+        "options": [
+            "我不喜欢喝啤酒。",
+            "他在洗脸。",
+            "我认为非常好，完全可行！",
+            "今天刮风了。"
+        ],
+        "ans": "我认为非常好，完全可行！",
+        "exp": "Nêu ý kiến cho rằng phương án rất tốt."
+    },
+    {
+        "q": "9. 问：你经常去图书馆吗？<br>答：（  ）",
+        "options": [
+            "叔叔不在家。",
+            "是的，我经常去借书看。",
+            "我在骑马。",
+            "这个包很便宜。"
+        ],
+        "ans": "是的，我经常去借书看。",
+        "exp": "Xác nhận tần suất đến thư viện."
+    },
+    {
+        "q": "10. 问：经理对你的表现满意吗？<br>答：（  ）",
+        "options": [
+            "天气很热。",
+            "非常满意，还表扬了我！",
+            "我在去机场的路上。",
+            "洗了洗脸。"
+        ],
+        "ans": "非常满意，还表扬了我！",
+        "exp": "Trả lời thái độ hài lòng của giám đốc."
+    }
+]
+    },
+    {
+        "id": "G13",
+        "title": "Nhóm 13",
+        "vocab": [
+    {
+        "hanzi": "蓝",
+        "pinyin": "lán",
+        "type": "tính từ",
+        "meaning": "màu xanh da trời",
+        "example": "晴朗的天空非常蓝。(Bầu trời quang đãng rất xanh.)"
+    },
+    {
+        "hanzi": "着急",
+        "pinyin": "zháojí",
+        "type": "tính từ",
+        "meaning": "lo lắng, sốt ruột",
+        "example": "别着急，问题总能解决。(Đừng sốt ruột, vấn đề luôn có thể giải quyết.)"
+    },
+    {
+        "hanzi": "一边",
+        "pinyin": "yìbiān",
+        "type": "phó từ",
+        "meaning": "vừa... (vừa)",
+        "example": "他喜欢一边听音乐一边跑步。(Anh ấy thích vừa nghe nhạc vừa chạy bộ.)"
+    },
+    {
+        "hanzi": "放",
+        "pinyin": "fàng",
+        "type": "động từ",
+        "meaning": "đặt, để",
+        "example": "请把书放在桌子上。(Xin hãy đặt sách lên bàn.)"
+    },
+    {
+        "hanzi": "决定",
+        "pinyin": "juédìng",
+        "type": "động/danh từ",
+        "meaning": "quyết định",
+        "example": "我们决定下周去旅游。(Chúng tôi quyết định tuần sau đi du lịch.)"
+    },
+    {
+        "hanzi": "用",
+        "pinyin": "yòng",
+        "type": "động từ",
+        "meaning": "dùng, sử dụng",
+        "example": "你可以用我的汉语词典。(Bạn có thể dùng từ điển tiếng Trung của tôi.)"
+    },
+    {
+        "hanzi": "环境",
+        "pinyin": "huánjìng",
+        "type": "danh từ",
+        "meaning": "môi trường",
+        "example": "这里的学习环境非常好。(Môi trường học tập ở đây rất tốt.)"
+    },
+    {
+        "hanzi": "结束",
+        "pinyin": "jiéshù",
+        "type": "động từ",
+        "meaning": "kết thúc",
+        "example": "会议将在五点钟结束。(Cuộc họp sẽ kết thúc lúc 5 giờ.)"
+    },
+    {
+        "hanzi": "完成",
+        "pinyin": "wánchéng",
+        "type": "động từ",
+        "meaning": "hoàn thành",
+        "example": "我已经按时完成了作业。(Tôi đã hoàn thành bài tập đúng giờ.)"
+    },
+    {
+        "hanzi": "了解",
+        "pinyin": "liǎojiě",
+        "type": "động từ",
+        "meaning": "hiểu rõ",
+        "example": "他非常了解中国的历史。(Anh ấy rất hiểu rõ lịch sử Trung Quốc.)"
+    },
+    {
+        "hanzi": "突然",
+        "pinyin": "tūrán",
+        "type": "phó/tính từ",
+        "meaning": "đột nhiên",
+        "example": "天突然下起了大雨。(Trời đột nhiên đổ mưa to.)"
+    },
+    {
+        "hanzi": "月亮",
+        "pinyin": "yuèliang",
+        "type": "danh từ",
+        "meaning": "mặt trăng",
+        "example": "今晚的月亮又圆又亮。(Mặt trăng tối nay vừa tròn vừa sáng.)"
+    },
+    {
+        "hanzi": "树",
+        "pinyin": "shù",
+        "type": "danh từ",
+        "meaning": "cây",
+        "example": "公园里种着许多大树。(Trong công viên trồng rất nhiều cây lớn.)"
+    },
+    {
+        "hanzi": "经过",
+        "pinyin": "jīngguò",
+        "type": "động/giới từ",
+        "meaning": "trải qua, đi qua",
+        "example": "经过努力，他的成绩提高了。(Trải qua nỗ lực, thành tích của anh ấy đã nâng cao.)"
+    },
+    {
+        "hanzi": "机会",
+        "pinyin": "jīhuì",
+        "type": "danh từ",
+        "meaning": "cơ hội",
+        "example": "这是一个非常好的工作机会。(Đây là một cơ hội việc làm rất tốt.)"
+    },
+    {
+        "hanzi": "多么",
+        "pinyin": "duōme",
+        "type": "phó từ",
+        "meaning": "bao nhiêu, mấy",
+        "example": "这里的风景多么美丽啊！(Phong cảnh ở đây đẹp bao nhiêu!)"
+    },
+    {
+        "hanzi": "一会儿",
+        "pinyin": "yíhuìr",
+        "type": "danh/phó từ",
+        "meaning": "một lát, một lúc",
+        "example": "请稍微等一会儿。(Xin hãy đợi một lúc.)"
+    },
+    {
+        "hanzi": "舒服",
+        "pinyin": "shūfu",
+        "type": "tính từ",
+        "meaning": "dễ chịu, thoải mái",
+        "example": "睡了一觉感觉舒服多了。(Ngủ một giấc cảm thấy thoải mái hơn nhiều.)"
+    },
+    {
+        "hanzi": "地",
+        "pinyin": "de",
+        "type": "trợ từ",
+        "meaning": "trợ từ nối trạng ngữ",
+        "example": "同学们认真地听老师讲课。(Các học sinh nghe cô giáo giảng bài một cách nghiêm túc.)"
+    },
+    {
+        "hanzi": "甜",
+        "pinyin": "tián",
+        "type": "tính từ",
+        "meaning": "ngọt",
+        "example": "这个西瓜非常甜。(Quả dưa hấu này rất ngọt.)"
+    }
+],
+        "tab1": [
+    {
+        "q": "1. Từ '蓝' chỉ màu sắc nào?",
+        "options": [
+            "Màu vàng",
+            "Màu xanh da trời",
+            "Màu đỏ",
+            "Màu xanh lá cây"
+        ],
+        "ans": "Màu xanh da trời",
+        "exp": "蓝 (lán) nghĩa là màu xanh da trời."
+    },
+    {
+        "q": "2. Tính từ '着急' nghĩa là gì?",
+        "options": [
+            "Lo lắng, sốt ruột",
+            "Nhiệt tình",
+            "Tức giận",
+            "Bình tĩnh"
+        ],
+        "ans": "Lo lắng, sốt ruột",
+        "exp": "着急 (zháojí) nghĩa là lo lắng, sốt ruột."
+    },
+    {
+        "q": "3. Cụm cấu trúc '一边...一边...' có ý nghĩa gì?",
+        "options": [
+            "Chỉ nguyên nhân kết quả",
+            "Thực hiện hành động trước sau",
+            "Thực hiện hai hành động cùng lúc",
+            "Chỉ sự lựa chọn"
+        ],
+        "ans": "Thực hiện hai hành động cùng lúc",
+        "exp": "一边...一边... diễn tả hai hành động diễn ra song song."
+    },
+    {
+        "q": "4. Động từ '放' nghĩa là gì?",
+        "options": [
+            "Mang, xách",
+            "Đặt, để",
+            "Cầm, lấy",
+            "Mượn, vay"
+        ],
+        "ans": "Đặt, để",
+        "exp": "放 (fàng) nghĩa là đặt, để."
+    },
+    {
+        "q": "5. Từ '决定' thuộc từ loại gì và mang nghĩa gì?",
+        "options": [
+            "Giới từ - Ngoại trừ",
+            "Động/Danh từ - Quyết định",
+            "Tính từ - Rõ ràng",
+            "Phó từ - Luôn luôn"
+        ],
+        "ans": "Động/Danh từ - Quyết định",
+        "exp": "决定 (juédìng) vừa là động từ vừa là danh từ, nghĩa là quyết định."
+    },
+    {
+        "q": "6. Động từ '用' nghĩa là gì?",
+        "options": [
+            "Mua, bán",
+            "Sửa chữa",
+            "Thay đổi",
+            "Dùng, sử dụng"
+        ],
+        "ans": "Dùng, sử dụng",
+        "exp": "用 (yòng) nghĩa là dùng, sử dụng."
+    },
+    {
+        "q": "7. Danh từ '环境' nghĩa là gì?",
+        "options": [
+            "Địa điểm",
+            "Thời tiết",
+            "Môi trường",
+            "Không khí"
+        ],
+        "ans": "Môi trường",
+        "exp": "环境 (huánjìng) nghĩa là môi trường."
+    },
+    {
+        "q": "8. Động từ '结束' trái nghĩa với từ nào?",
+        "options": [
+            "解决 (Giải quyết)",
+            "完成 (Hoàn thành)",
+            "开始 (Bắt đầu)",
+            "了解 (Hiểu rõ)"
+        ],
+        "ans": "开始 (Bắt đầu)",
+        "exp": "结束 (jiéshù) nghĩa là kết thúc, trái nghĩa với 开始 (bắt đầu)."
+    },
+    {
+        "q": "9. Động từ '完成' nghĩa là gì?",
+        "options": [
+            "Trì hoãn",
+            "Từ bỏ",
+            "Bắt đầu",
+            "Hoàn thành"
+        ],
+        "ans": "Hoàn thành",
+        "exp": "完成 (wánchéng) nghĩa là hoàn thành."
+    },
+    {
+        "q": "10. Động từ '了解' nghĩa là gì?",
+        "options": [
+            "Nghi ngờ",
+            "Nghe nói",
+            "Hiểu rõ",
+            "Quên mất"
+        ],
+        "ans": "Hiểu rõ",
+        "exp": "了解 (liǎojiě) nghĩa là hiểu rõ, nắm rõ."
+    },
+    {
+        "q": "11. Phó từ '突然' nghĩa là gì?",
+        "options": [
+            "Tất nhiên",
+            "Thường xuyên",
+            "Đột nhiên",
+            "Cuối cùng"
+        ],
+        "ans": "Đột nhiên",
+        "exp": "突然 (tūrán) nghĩa là đột nhiên, bất ngờ."
+    },
+    {
+        "q": "12. Danh từ '月亮' nghĩa là gì?",
+        "options": [
+            "Đám mây",
+            "Mặt trăng",
+            "Ngôi sao",
+            "Mặt trời"
+        ],
+        "ans": "Mặt trăng",
+        "exp": "月亮 (yuèliang) nghĩa là mặt trăng."
+    },
+    {
+        "q": "13. Danh từ '树' nghĩa là gì?",
+        "options": [
+            "Cỏ",
+            "Hoa",
+            "Lá",
+            "Cây"
+        ],
+        "ans": "Cây",
+        "exp": "树 (shù) nghĩa là cây."
+    },
+    {
+        "q": "14. Từ '经过' làm động từ/giới từ nghĩa là gì?",
+        "options": [
+            "Đi qua, trải qua",
+            "Trở về",
+            "Dừng lại",
+            "Bắt đầu"
+        ],
+        "ans": "Đi qua, trải qua",
+        "exp": "经过 (jīngguò) nghĩa là đi qua, trải qua."
+    },
+    {
+        "q": "15. Danh từ '机会' nghĩa là gì?",
+        "options": [
+            "Kết quả",
+            "Kế hoạch",
+            "Cơ hội",
+            "Thách thức"
+        ],
+        "ans": "Cơ hội",
+        "exp": "机会 (jīhuì) nghĩa là cơ hội."
+    },
+    {
+        "q": "16. Phó từ '多么' trong câu cảm thán nghĩa là gì?",
+        "options": [
+            "Ở đâu",
+            "Bao nhiêu, mấy",
+            "Tại sao",
+            "Thế nào"
+        ],
+        "ans": "Bao nhiêu, mấy",
+        "exp": "多么 (duōme) dùng trong câu cảm thán, nghĩa là bao nhiêu, mấy."
+    },
+    {
+        "q": "17. Từ chỉ thời gian '一会儿' nghĩa là gì?",
+        "options": [
+            "Một ngày",
+            "Một năm",
+            "Mãi mãi",
+            "Một lát, một lúc"
+        ],
+        "ans": "Một lát, một lúc",
+        "exp": "一会儿 (yíhuìr) nghĩa là một lát, một lúc."
+    },
+    {
+        "q": "18. Tính từ '舒服' nghĩa là gì?",
+        "options": [
+            "Mệt mỏi",
+            "Dễ chịu, thoải mái",
+            "Lo lắng",
+            "Đau đớn"
+        ],
+        "ans": "Dễ chịu, thoải mái",
+        "exp": "舒服 (shūfu) nghĩa là dễ chịu, thoải mái."
+    },
+    {
+        "q": "19. Trợ từ '地' dùng trong trường hợp nào?",
+        "options": [
+            "Đứng cuối câu hỏi",
+            "Đứng sau động từ chỉ bổ ngữ",
+            "Đứng giữa định ngữ và trung tâm ngữ",
+            "Đứng sau trạng ngữ bổ nghĩa cho động từ"
+        ],
+        "ans": "Đứng sau trạng ngữ bổ nghĩa cho động từ",
+        "exp": "Trợ từ 地 (de) dùng sau trạng ngữ bổ nghĩa cho động từ (Trạng ngữ + 地 + Động từ)."
+    },
+    {
+        "q": "20. Tính từ '甜' nghĩa là gì?",
+        "options": [
+            "Ngọt",
+            "Cay",
+            "Đắng",
+            "Chua"
+        ],
+        "ans": "Ngọt",
+        "exp": "甜 (tián) nghĩa là ngọt."
+    }
+],
+        "tab2": [
+    {
+        "q": "1. 今天晴空万里，天空非常（  ）。",
+        "options": [
+            "树",
+            "甜",
+            "蓝",
+            "绿"
+        ],
+        "ans": "蓝",
+        "exp": "Bầu trời quang đãng xanh ngắt dùng 蓝."
+    },
+    {
+        "q": "2. 别（  ），离考试还有一个小时呢，时间完全够。",
+        "options": [
+            "舒服",
+            "突然",
+            "清楚",
+            "着急"
+        ],
+        "ans": "着急",
+        "exp": "Khuyên đừng lo lắng sốt ruột dùng 别着急."
+    },
+    {
+        "q": "3. 他习惯写字的时候（  ）思考问题。 ",
+        "options": [
+            "突然",
+            "一边",
+            "主要",
+            "经常"
+        ],
+        "ans": "一边",
+        "exp": "Thói quen vừa làm việc này vừa làm việc khác dùng 一边."
+    },
+    {
+        "q": "4. 请把书包包放在桌子上，不要（  ）在地上。",
+        "options": [
+            "放",
+            "换",
+            "拿",
+            "骑"
+        ],
+        "ans": "放",
+        "exp": "Đặt để đồ vật dùng 放在."
+    },
+    {
+        "q": "5. 经过大家讨论，我们（  ）下个月去北方旅游。",
+        "options": [
+            "决定",
+            "同意",
+            "了解",
+            "要求"
+        ],
+        "ans": "决定",
+        "exp": "Quyết định làm gì dùng 决定."
+    },
+    {
+        "q": "6. 查资料的时候，你可以（  ）我的电脑。",
+        "options": [
+            "带",
+            "借",
+            "用",
+            "做"
+        ],
+        "ans": "用",
+        "exp": "Sử dụng đồ vật dùng 用."
+    },
+    {
+        "q": "7. 这所学校周围的生态（  ）非常优雅安静。",
+        "options": [
+            "城市",
+            "节目",
+            "国家",
+            "环境"
+        ],
+        "ans": "环境",
+        "exp": "Môi trường xung quanh dùng 环境."
+    },
+    {
+        "q": "8. 随着铃声响起，今天这节课终于（  ）了。",
+        "options": [
+            "结束",
+            "遇到",
+            "开始",
+            "完成"
+        ],
+        "ans": "结束",
+        "exp": "Kết thúc tiết học dùng 结束."
+    },
+    {
+        "q": "9. 他每天都能按时（  ）老师交代的各项作业。",
+        "options": [
+            "提高",
+            "解决",
+            "完成",
+            "检查"
+        ],
+        "ans": "完成",
+        "exp": "Hoàn thành bài tập dùng 完成作业."
+    },
+    {
+        "q": "10. 经过这段时间的相处，我对他的性格有了深层的（  ）。",
+        "options": [
+            "满意",
+            "了解",
+            "相信",
+            "关心"
+        ],
+        "ans": "了解",
+        "exp": "Hiểu rõ đối phương dùng 了解."
+    },
+    {
+        "q": "11. 走在路上的时候，天（  ）下起了大雨。",
+        "options": [
+            "终于",
+            "特别",
+            "突然",
+            "一直"
+        ],
+        "ans": "突然",
+        "exp": "Xảy ra bất ngờ dùng 突然."
+    },
+    {
+        "q": "12. 中秋节的夜晚，天空中的（  ）又大又亮。",
+        "options": [
+            "月亮",
+            "太阳",
+            "角",
+            "树"
+        ],
+        "ans": "月亮",
+        "exp": "Mặt trăng đêm trung thu dùng 月亮."
+    },
+    {
+        "q": "13. 公园里种着许多高大的绿（  ）。",
+        "options": [
+            "米",
+            "树",
+            "草",
+            "把"
+        ],
+        "ans": "树",
+        "exp": "Cây cối rậm rạp dùng 树."
+    },
+    {
+        "q": "14. （  ）多年的勤奋努力，他终于考上了理想的大学。",
+        "options": [
+            "经过",
+            "根据",
+            "关于",
+            "除了"
+        ],
+        "ans": "经过",
+        "exp": "Trải qua nhiều năm nỗ lực dùng 经过."
+    },
+    {
+        "q": "15. 能够去海外留学是一个难得的好（  ）。",
+        "options": [
+            "文化",
+            "比赛",
+            "会议",
+            "机会"
+        ],
+        "ans": "机会",
+        "exp": "Cơ hội tốt hiếm có dùng 机会."
+    },
+    {
+        "q": "16. 看到多年未见的老朋友，心里（  ）高兴啊！",
+        "options": [
+            "更",
+            "比较",
+            "多么",
+            "主要"
+        ],
+        "ans": "多么",
+        "exp": "Câu cảm thán khen ngợi dùng 多么...啊."
+    },
+    {
+        "q": "17. 请你在休息室稍微坐（  ），老师马上就来。",
+        "options": [
+            "一会儿",
+            "一段",
+            "一直",
+            "一次"
+        ],
+        "ans": "一会儿",
+        "exp": "Đợi một lát dùng 稍微坐一会儿."
+    },
+    {
+        "q": "18. 运动完洗个热水澡，感觉全身都很（  ）。",
+        "options": [
+            "安静",
+            "着急",
+            "舒服",
+            "难过"
+        ],
+        "ans": "舒服",
+        "exp": "Cảm thấy thoải mái sảng khoái dùng 舒服."
+    },
+    {
+        "q": "19. 学生们正在认真（  ）回答老师提出的问题。",
+        "options": [
+            "了",
+            "得",
+            "的",
+            "地"
+        ],
+        "ans": "地",
+        "exp": "Trạng ngữ + 地 + Động từ (认真地回答)."
+    },
+    {
+        "q": "20. 这个买回来的西瓜（  ）极了，大家都爱吃。",
+        "options": [
+            "旧",
+            "蓝",
+            "短",
+            "甜"
+        ],
+        "ans": "甜",
+        "exp": "Dưa hấu rất ngọt dùng 甜."
+    }
+],
+        "tab3": [
+    {
+        "q": "1. Sắp xếp: 一边 / 听音乐 / 他 / 一边 / 跑步",
+        "options": [
+            "他听音乐一边一边跑步。",
+            "他一边听音乐一边跑步。",
+            "一边听音乐他一边跑步。",
+            "他一边跑步听音乐一边。"
+        ],
+        "ans": "他一边听音乐一边跑步。",
+        "exp": "Trật tự: S (他) + 一边 V1 + 一边 V2."
+    },
+    {
+        "q": "2. Sắp xếp: 把书 / 桌子上 / 请 / 放在",
+        "options": [
+            "请放在桌子上把书。",
+            "桌子上请把书放在。",
+            "请把书放在桌子上。",
+            "把书请放在桌子上。"
+        ],
+        "ans": "请把书放在桌子上。",
+        "exp": "Trật tự: 请 + 把 N + 放在 + Địa điểm."
+    },
+    {
+        "q": "3. Sắp xếp: 决定 / 我们 / 去北方 / 旅游 / 下周",
+        "options": [
+            "我们去北方旅游决定下周。",
+            "我们决定下周去北方旅游。",
+            "决定我们下周去北方旅游。",
+            "下周我们去北方决定旅游。"
+        ],
+        "ans": "我们决定下周去北方旅游。",
+        "exp": "Trật tự: S (我们) + 决定 + Thời gian + V."
+    },
+    {
+        "q": "4. Sắp xếp: 学习环境 / 这里的 / 非常 / 安静",
+        "options": [
+            "非常安静这里的学习环境。",
+            "这里的学习环境非常安静。",
+            "这里的非常安静学习环境。",
+            "学习环境这里的非常安静。"
+        ],
+        "ans": "这里的学习环境非常安静。",
+        "exp": "Trật tự: Định ngữ (这里的) + Định trung ngữ (学习环境) + 很/非常 + Adj."
+    },
+    {
+        "q": "5. Sắp xếp: 结束了 / 会议 / 已经 / 准时",
+        "options": [
+            "会议已经准时结束了。",
+            "已经会议准时结束了。",
+            "会议准时已经结束了。",
+            "准时结束了会议已经。"
+        ],
+        "ans": "会议已经准时结束了。",
+        "exp": "Trật tự: S (会议) + 已经 + 准时 + V (结束了)."
+    },
+    {
+        "q": "6. Sắp xếp: 了解 / 他的历史 / 我 / 非常",
+        "options": [
+            "我非常了解他的历史。",
+            "了解我非常他的历史。",
+            "我的历史非常了解他。",
+            "非常了解我他的历史。"
+        ],
+        "ans": "我非常了解他的历史。",
+        "exp": "Trật tự: S (我) + 非常 + V (了解) + Tân ngữ."
+    },
+    {
+        "q": "7. Sắp xếp: 突然 / 下起了 / 大雨 / 天空中",
+        "options": [
+            "天空中突然下起了大雨。",
+            "下起了大雨天空中突然。",
+            "大雨天空中突然下起了。",
+            "突然天空中下起了大雨。"
+        ],
+        "ans": "天空中突然下起了大雨。",
+        "exp": "Trật tự: Địa điểm (天空中) + 突然 + V (下起了) + Tân ngữ."
+    },
+    {
+        "q": "8. Sắp xếp: 多么 / 这里的风景 / 漂亮啊",
+        "options": [
+            "漂亮啊这里的风景多么！",
+            "这里的风景多么漂亮啊！",
+            "这里的风景漂亮啊多么！",
+            "多么这里的风景漂亮啊！"
+        ],
+        "ans": "这里的风景多么漂亮啊！",
+        "exp": "Trật tự: Chủ ngữ + 多么 + Tính từ + 啊."
+    },
+    {
+        "q": "9. Sắp xếp: 认真地 / 听课 / 学生们 / 正在",
+        "options": [
+            "学生们认真地正在听课。",
+            "学生们正在认真地听课。",
+            "听课学生们正在认真地。",
+            "正在认真地听课学生们。"
+        ],
+        "ans": "学生们正在认真地听课。",
+        "exp": "Trật tự: S (学生们) + 正在 + Trạng ngữ (认真地) + V (听课)."
+    },
+    {
+        "q": "10. Sắp xếp: 请 / 稍微 / 等 / 一会儿",
+        "options": [
+            "请稍微等一会儿。",
+            "等一会儿请稍微。",
+            "稍微请等一会儿。",
+            "请等一会儿稍微。"
+        ],
+        "ans": "请稍微等一会儿。",
+        "exp": "Trật tự câu: 请 + 稍微 + Động từ (等一会儿)."
+    }
+],
+        "tab4": [
+    {
+        "q": "1. 问：你为什么看起来这么着急？<br>答：（  ）",
+        "options": [
+            "今天的月亮很圆。",
+            "我在看电视呢。",
+            "公园里树很多。",
+            "因为我的护照找不到了。"
+        ],
+        "ans": "因为我的护照找不到了。",
+        "exp": "Giải thích lý do lo lắng: Bị mất hộ chiếu."
+    },
+    {
+        "q": "2. 问：你喜欢一边工作一边听音乐吗？<br>答：（  ）",
+        "options": [
+            "会议已经结束了。",
+            "我明天去买衣服。",
+            "是的，这样感觉很轻松舒服。",
+            "天空是蓝色的。"
+        ],
+        "ans": "是的，这样感觉很轻松舒服。",
+        "exp": "Trả lời thói quen vừa làm vừa nghe nhạc."
+    },
+    {
+        "q": "3. 问：把我的词典放在哪里？<br>答：（  ）",
+        "options": [
+            "今天很冷。",
+            "请放在书桌中间吧。",
+            "我已经吃饱了。",
+            "他长得很大。"
+        ],
+        "ans": "请放在书桌中间吧。",
+        "exp": "Trả lời vị trí đặt từ điển: Đặt trên bàn học."
+    },
+    {
+        "q": "4. 问：你们决定什么时候去旅游？<br>答：（  ）",
+        "options": [
+            "决定下个星期五出发。",
+            "我已经买到西瓜了。",
+            "学校环境很好。",
+            "天气突然冷了。"
+        ],
+        "ans": "决定下个星期五出发。",
+        "exp": "Trả lời thời gian quyết định đi du lịch."
+    },
+    {
+        "q": "5. 问：这里的环境怎么样？<br>答：（  ）",
+        "options": [
+            "空气清新，而且非常安静。",
+            "他去了洗手间。",
+            "我已经请假了。",
+            "我有很多工作。"
+        ],
+        "ans": "空气清新，而且非常安静。",
+        "exp": "Mô tả môi trường xung quanh: Không khí trong lành và yên tĩnh."
+    },
+    {
+        "q": "6. 问：会议什么时候结束？<br>答：（  ）",
+        "options": [
+            "今天星期三。",
+            "大概还有十分钟就结束了。",
+            "他非常聪明。",
+            "我在看小说。"
+        ],
+        "ans": "大概还有十分钟就结束了。",
+        "exp": "Trả lời thời gian kết thúc cuộc họp: Khoảng 10 phút nữa."
+    },
+    {
+        "q": "7. 问：你了解这位新同事吗？<br>答：（  ）",
+        "options": [
+            "我刚买了一辆自行车。",
+            "我不喜欢吃甜食。",
+            "今天天气很好。",
+            "了解，我们以前是大学同学。"
+        ],
+        "ans": "了解，我们以前是大学同学。",
+        "exp": "Trả lời mức độ hiểu rõ đồng nghiệp."
+    },
+    {
+        "q": "8. 问：今晚的月亮好看吗？<br>答：（  ）",
+        "options": [
+            "特别好看，又大又亮！",
+            "我已经做完作业了。",
+            "他在骑马。",
+            "我不去图书馆。"
+        ],
+        "ans": "特别好看，又大又亮！",
+        "exp": "Mô tả trăng tròn đẹp đêm nay."
+    },
+    {
+        "q": "9. 问：你觉得这次机会怎么样？<br>答：（  ）",
+        "options": [
+            "非常难得，我一定要好好把握！",
+            "我在吃水果。",
+            "西瓜很甜。",
+            "今天刮大风。"
+        ],
+        "ans": "非常难得，我一定要好好把握！",
+        "exp": "Đánh giá cơ hội hiếm có."
+    },
+    {
+        "q": "10. 问：休息了一会儿感觉怎么样？<br>答：（  ）",
+        "options": [
+            "天黑了。",
+            "我已经买票了。",
+            "好多了，身体舒服多了，谢谢！",
+            "我在看电视。"
+        ],
+        "ans": "好多了，身体舒服多了，谢谢！",
+        "exp": "Trả lời cảm giác sau khi nghỉ ngơi."
+    }
+]
+    },
+    {
     "id": "G12",
     "title": "Nhóm 12",
     "vocab": [
@@ -10090,6 +12532,730 @@ ORDERED_GROUPS = [
 # =============================================================================
 EXAM_DATA = [
     {
+        "id": "H31007",
+        "title": "Mã đề: H31007",
+        "audio_url": "https://example.com/audio/hsk3_31007.mp3",
+        "listening": [
+            {
+                "id": "L1",
+                "num": 1,
+                "question": "1. 女：你在看什么呢？\n男：你不是说今年夏天想去北方玩儿吗？我在看去哪个城市好。\n问：男的在看什么？",
+                "options": [
+                    "A. 看电视",
+                    "B. 看北方城市的旅游路线",
+                    "C. 看报纸"
+                ],
+                "ans": "B. 看北方城市的旅游路线",
+                "exp": "男的说'我在看去哪个城市好'，指研究去北方城市旅游。"
+            },
+            {
+                "id": "L2",
+                "num": 2,
+                "question": "2. 男：你愿意和我结婚吗？\n女：这是真的吗？太突然了。我，我愿意。\n问：女的回答是什么？",
+                "options": [
+                    "A. 拒绝",
+                    "B. 愿意",
+                    "C. 考虑"
+                ],
+                "ans": "B. 愿意",
+                "exp": "女的明确回答'我，我愿意' (Wǒ yuànyì)."
+            },
+            {
+                "id": "L3",
+                "num": 3,
+                "question": "3. 女：你怎么了？不舒服吗？\n男：没事，昨晚睡得晚，有点儿头疼。\n问：男的怎么了？",
+                "options": [
+                    "A. 发烧了",
+                    "B. 有点儿头疼",
+                    "C. 脚疼"
+                ],
+                "ans": "B. 有点儿头疼",
+                "exp": "男的指出'昨晚睡得晚，有点儿头疼'。"
+            },
+            {
+                "id": "L4",
+                "num": 4,
+                "question": "4. 男：这些旧报纸你要搬哪儿去？要我帮忙吗？\n女：谢谢，不用了，我把它放桌子上就可以了。\n问：女的打算把旧报纸放在哪儿？",
+                "options": [
+                    "A. 地面上",
+                    "B. 放桌子上",
+                    "C. 扔掉"
+                ],
+                "ans": "B. 放桌子上",
+                "exp": "女的回答'我把它放桌子上就可以了'。"
+            },
+            {
+                "id": "L5",
+                "num": 5,
+                "question": "5. 女：这条裤子你觉得怎么样？\n男：有点儿短，而且颜色也不太好，再看看其他的吧。\n问：男的觉得这条裤子怎么样？",
+                "options": [
+                    "A. 有点儿短且颜色不太好",
+                    "B. 非常合适",
+                    "C. 太长了"
+                ],
+                "ans": "A. 有点儿短且颜色不太好",
+                "exp": "男的描述'有点儿短，而且颜色也不太好'。"
+            },
+            {
+                "id": "L6",
+                "num": 6,
+                "question": "6. 男：就站这儿吧，我给你照张相。\n女：我坐在草地上怎么样？\n问：女的想在哪儿照相？",
+                "options": [
+                    "A. 树上",
+                    "B. 坐在草地上",
+                    "C. 椅子上"
+                ],
+                "ans": "B. 坐在草地上",
+                "exp": "女的建议'我坐在草地上怎么样？'。"
+            },
+            {
+                "id": "L7",
+                "num": 7,
+                "question": "7. 女：不要一边走一边看手机，对眼睛不好。\n男：知道了，我这就关掉。\n问：女的劝男的什么？",
+                "options": [
+                    "A. 不要吃东西",
+                    "B. 不要一边走一边看",
+                    "C. 多锻炼身体"
+                ],
+                "ans": "B. 不要一边走一边看",
+                "exp": "女的提醒'不要一边走一边看，对眼睛不好'。"
+            },
+            {
+                "id": "L8",
+                "num": 8,
+                "question": "8. 男：请问，去百货大楼坐哪路公交车？\n女：你可以坐 320 路，向前走 100 米就是车站。\n问：去车站怎么走？",
+                "options": [
+                    "A. 向前走 100 米",
+                    "B. 向后走",
+                    "C. 坐出租车"
+                ],
+                "ans": "A. 向前走 100 米",
+                "exp": "女的说明'向前走 100 米就是车站'。"
+            },
+            {
+                "id": "L9",
+                "num": 9,
+                "question": "9. 女：先生，您的房间在四层 408。\n男：好的，谢谢，电梯在哪儿？\n问：男的在问什么？",
+                "options": [
+                    "A. 洗手间",
+                    "B. 电梯的位置",
+                    "C. 餐厅"
+                ],
+                "ans": "B. 电梯的位置",
+                "exp": "男的问'电梯在哪儿？'。"
+            },
+            {
+                "id": "L10",
+                "num": 10,
+                "question": "10. 男：你复习得怎么样了？明天的考试有信心吗？\n女：没问题，我把课文都记熟了。\n问：女的对考试感觉如何？",
+                "options": [
+                    "A. 很担心",
+                    "B. 有信心",
+                    "C. 还没复习"
+                ],
+                "ans": "B. 有信心",
+                "exp": "女的回答'没问题，我把课文都记熟了'，表现出有信心。"
+            }
+        ],
+        "reading": [
+            {
+                "part_title": "第一部分：选词填空（将词语填入对应句子中）",
+                "word_bank": "A. 害怕 | B. 清楚 | C. 习惯 | D. 新鲜 | E. 应该 | F. 影响",
+                "items": [
+                    {
+                        "num": 1,
+                        "q": "1. 请大家保持安静，不要（  ）其他人阅读。",
+                        "options": [
+                            "A. 害怕",
+                            "B. 清楚",
+                            "C. 习惯",
+                            "D. 新鲜",
+                            "E. 应该",
+                            "F. 影响"
+                        ],
+                        "ans": "F. 影响",
+                        "exp": "影响其他人 (ảnh hưởng người khác)."
+                    },
+                    {
+                        "num": 2,
+                        "q": "2. 老师讲得非常（  ），大家都听懂了。",
+                        "options": [
+                            "A. 害怕",
+                            "B. 清楚",
+                            "C. 习惯",
+                            "D. 新鲜",
+                            "E. 应该",
+                            "F. 影响"
+                        ],
+                        "ans": "B. 清楚",
+                        "exp": "讲得非常清楚 (giảng rất rõ ràng)."
+                    },
+                    {
+                        "num": 3,
+                        "q": "3. 这里的蔬菜和水果都非常（  ）。",
+                        "options": [
+                            "A. 害怕",
+                            "B. 清楚",
+                            "C. 习惯",
+                            "D. 新鲜",
+                            "E. 应该",
+                            "F. 影响"
+                        ],
+                        "ans": "D. 新鲜",
+                        "exp": "非常新鲜 (rất tươi ngon)."
+                    },
+                    {
+                        "num": 4,
+                        "q": "4. 遇到困难时，我们（  ）勇敢面对，而不是逃避。",
+                        "options": [
+                            "A. 害怕",
+                            "B. 清楚",
+                            "C. 习惯",
+                            "D. 新鲜",
+                            "E. 应该",
+                            "F. 影响"
+                        ],
+                        "ans": "E. 应该",
+                        "exp": "我们应该勇敢面对 (chúng ta nên dũng cảm đối mặt)."
+                    },
+                    {
+                        "num": 5,
+                        "q": "5. 他已经（  ）了每天早起跑步。",
+                        "options": [
+                            "A. 害怕",
+                            "B. 清楚",
+                            "C. 习惯",
+                            "D. 新鲜",
+                            "E. 应该",
+                            "F. 影响"
+                        ],
+                        "ans": "C. 习惯",
+                        "exp": "习惯了早起 (đã quen với việc dậy sớm)."
+                    }
+                ]
+            },
+            {
+                "part_title": "第二部分：阅读理解（阅读短文并选择正确答案）",
+                "word_bank": "",
+                "items": [
+                    {
+                        "num": 6,
+                        "q": "6. 最近几年，这里的变化很大，车辆更多了，街道更干净了，天更蓝了，树更绿了。\n问：这里最近几年怎么样？",
+                        "options": [
+                            "A. 环境变好了",
+                            "B. 和过去相同",
+                            "C. 变得更差了"
+                        ],
+                        "ans": "A. 环境变好了",
+                        "exp": "文中描述街道更干净、天更蓝、树更绿，总结为'环境变好了'。"
+                    },
+                    {
+                        "num": 7,
+                        "q": "7. 14 日，终于下雪了，大雪使校园变得更干净了。下课后，孩子们高兴地在校园里跑来跑去，头发上都是雪，一张张笑脸都红红的。\n问：根据这段话，孩子们：",
+                        "options": [
+                            "A. 很聪明",
+                            "B. 喜欢下雪天",
+                            "C. 在教室里玩儿"
+                        ],
+                        "ans": "B. 喜欢下雪天",
+                        "exp": "文中写'孩子们高兴地在校园里跑来跑去'，表明喜欢下雪天。"
+                    },
+                    {
+                        "num": 8,
+                        "q": "8. 汉字有多少个？这个问题谁也回答不清楚，《汉语大字典》里有五六万字，普通的小字典，一本也有八九千字。但人们常用的也就两千多个，认识这两千多个字，读书看报就没什么问题了。\n问：这段话的主要意思是：",
+                        "options": [
+                            "A. 汉字很难写",
+                            "B. 要学会查字典",
+                            "C. 常用汉字不多"
+                        ],
+                        "ans": "C. 常用汉字不多",
+                        "exp": "文段强调'常用也就两千多个'，说明常用汉字不多。"
+                    },
+                    {
+                        "num": 9,
+                        "q": "9. 一些新老师刚开始讲课的时候，都很担心讲不好，学生不喜欢。但时间长了，多练习几次，就敢讲了。\n问：有些新老师会担心什么？",
+                        "options": [
+                            "A. 讲不好且学生不喜欢",
+                            "B. 收入太低",
+                            "C. 学校环境差"
+                        ],
+                        "ans": "A. 讲不好且学生不喜欢",
+                        "exp": "文中明确提到'很担心讲不好，学生不喜欢'。"
+                    },
+                    {
+                        "num": 10,
+                        "q": "10. 经常吃水果对健康非常有益。苹果含有丰富的水分，香蕉能补充体力，选择新鲜的水果吃最好。\n问：根据这段话，吃水果有什么好处？",
+                        "options": [
+                            "A. 对健康非常有益",
+                            "B. 能节省花销",
+                            "C. 能代替正餐"
+                        ],
+                        "ans": "A. 对健康非常有益",
+                        "exp": "文中指出'经常吃水果对健康非常有益'。"
+                    }
+                ]
+            }
+        ],
+        "writing": {
+            "reorder": [
+                {
+                    "num": 1,
+                    "components": [
+                        "非常好",
+                        "他的作业",
+                        "写得"
+                    ],
+                    "ans": "他的作业写得非常好。",
+                    "exp": "Trật tự câu: S (他的作业) + V (写得) + Bổ ngữ (非常好)."
+                },
+                {
+                    "num": 2,
+                    "components": [
+                        "打扫干净了",
+                        "把房间",
+                        "妹妹"
+                    ],
+                    "ans": "妹妹把房间打扫干净了。",
+                    "exp": "Câu chữ 把: S (妹妹) + 把 + Tân ngữ (房间) + V + Bổ ngữ (打扫干净了)."
+                },
+                {
+                    "num": 3,
+                    "components": [
+                        "照得真好看",
+                        "这张照片",
+                        ""
+                    ],
+                    "ans": "这张照片照得真好看。",
+                    "exp": "Trật tự: S (这张照片) + V (照得) + Bổ ngữ (真好看)."
+                },
+                {
+                    "num": 4,
+                    "components": [
+                        "打算下个月",
+                        "去大理旅游",
+                        "我们"
+                    ],
+                    "ans": "我们打算下个月去大理旅游。",
+                    "exp": "Trật tự: S (我们) + Năng nguyện (打算) + Thời gian (下个月) + V (去大理旅游)."
+                },
+                {
+                    "num": 5,
+                    "components": [
+                        "对大家的表达",
+                        "很满意",
+                        "经理"
+                    ],
+                    "ans": "经理对大家的表达很满意。",
+                    "exp": "Mẫu câu: S (经理) + 对 + N (大家的表达) + Adj (很满意)."
+                }
+            ],
+            "pinyin_fill": [
+                {
+                    "num": 6,
+                    "pinyin": "Tai",
+                    "sentence": "（  ）阳出来了，新的一天开始了。",
+                    "ans": "太",
+                    "full_ans": "太阳出来了，新的一天开始了。",
+                    "exp": "Từ cần điền là 太 (trong 太阳 - tàiyáng)."
+                },
+                {
+                    "num": 7,
+                    "pinyin": "nin",
+                    "sentence": "电影院在 8 层，（  ）可以坐旁边的电梯。",
+                    "ans": "您",
+                    "full_ans": "电影院在 8 层，您可以坐旁边的电梯。",
+                    "exp": "Từ cần điền là 您 (nín - đại từ kính trọng)."
+                },
+                {
+                    "num": 8,
+                    "pinyin": "li",
+                    "sentence": "冰箱（  ）还有饮料吗？我有点儿渴了。",
+                    "ans": "里",
+                    "full_ans": "冰箱里还有饮料吗？我有点儿渴了。",
+                    "exp": "Từ cần điền là 里 (trong 冰箱里 - bīngxiāng lǐ)."
+                },
+                {
+                    "num": 9,
+                    "pinyin": "ting",
+                    "sentence": "我和妹妹一样，都有睡觉前（  ）音乐的习惯。",
+                    "ans": "听",
+                    "full_ans": "我和妹妹一样，都有睡觉前听音乐的习惯。",
+                    "exp": "Từ cần điền là 听 (tīng - nghe)."
+                },
+                {
+                    "num": 10,
+                    "pinyin": "jie",
+                    "sentence": "下一个（  ）目就是我们班的了，大家准备一下。",
+                    "ans": "节",
+                    "full_ans": "下一个节目就是我们班的了，大家准备一下。",
+                    "exp": "Từ cần điền là 节 (trong 节目 - jiémù)."
+                }
+            ]
+        }
+    },
+    {
+        "id": "H31003",
+        "title": "Mã đề: H31003",
+        "audio_url": "https://example.com/audio/hsk3_31003.mp3",
+        "listening": [
+            {
+                "id": "L1",
+                "num": 1,
+                "question": "1. 女：下了飞机，就给我来电话。\n男：好的。你到中国以后，自己照顾好自己。\n问：男的嘱咐女的什么？",
+                "options": [
+                    "A. 多买东西",
+                    "B. 照顾好自己",
+                    "C. 早点儿回来"
+                ],
+                "ans": "B. 照顾好自己",
+                "exp": "男的说'你自己照顾好自己' (Zhàogù hǎo zìjǐ)."
+            },
+            {
+                "id": "L2",
+                "num": 2,
+                "question": "2. 男：请问，二零四房间在哪儿？\n女：请这边走，前面左边第二个就是。\n问：女的在做什么？",
+                "options": [
+                    "A. 指路",
+                    "B. 吃饭",
+                    "C. 打电话"
+                ],
+                "ans": "A. 指路",
+                "exp": "女的告诉男的房间方向'请这边走，前面左边第二个就是'，在指路。"
+            },
+            {
+                "id": "L3",
+                "num": 3,
+                "question": "3. 女：眼药水用了吗？有作用没？\n男：有作用，现在眼睛已经不红了。\n问：男的眼睛现在怎么样了？",
+                "options": [
+                    "A. 很疼",
+                    "B. 不红了",
+                    "C. 看不清"
+                ],
+                "ans": "B. 不红了",
+                "exp": "男的说明'现在眼睛已经不红了'。"
+            },
+            {
+                "id": "L4",
+                "num": 4,
+                "question": "4. 男：这些书我可以借多长时间？\n女：一个月。如果看不完，可以再借一个月。\n问：书最多可以借多长时间？",
+                "options": [
+                    "A. 一个月",
+                    "B. 两个月",
+                    "C. 三个月"
+                ],
+                "ans": "B. 两个月",
+                "exp": "女的说一个月，看不完可再借一个月，共两个月。"
+            },
+            {
+                "id": "L5",
+                "num": 5,
+                "question": "5. 女：这张画是你画的吗？\n男：对，画得不好，让您笑了。\n问：男的对自己的画感觉怎么样？",
+                "options": [
+                    "A. 非常满意",
+                    "B. 觉得画得不好",
+                    "C. 觉得很贵"
+                ],
+                "ans": "B. 觉得画得不好",
+                "exp": "男的谦虚说'画得不好，让您笑了'。"
+            },
+            {
+                "id": "L6",
+                "num": 6,
+                "question": "6. 女：图书馆在哪儿？\n男：我看看这张校园地图。在办公楼的下面。\n女：知道了，我们从办公楼向南走就是。\n问：他们要去哪儿？",
+                "options": [
+                    "A. 银行",
+                    "B. 图书馆",
+                    "C. 医院"
+                ],
+                "ans": "B. 图书馆",
+                "exp": "对话明确问'图书馆在哪儿？'，他们要去图书馆。"
+            },
+            {
+                "id": "L7",
+                "num": 7,
+                "question": "7. 男：上次你们参加表演的照片，我洗出来了。\n女：太好了，这两个大笑的是二年级的。\n问：他们在做什么？",
+                "options": [
+                    "A. 看照片",
+                    "B. 听音乐",
+                    "C. 买衣服"
+                ],
+                "ans": "A. 看照片",
+                "exp": "对话提到'表演的照片，我洗出来了...我看看'，指看照片。"
+            },
+            {
+                "id": "L8",
+                "num": 8,
+                "question": "8. 女：这个山我来过很多次，叫什么名字？\n男：它叫“九日山”，以前九月九人们都来爬山。\n问：为什么叫“九日山”？",
+                "options": [
+                    "A. 因为山很高",
+                    "B. 以前九月九人们来爬山",
+                    "C. 上面有九棵树"
+                ],
+                "ans": "B. 以前九月九人们来爬山",
+                "exp": "男的解释'以前，九月九人们都要来这儿爬山'。"
+            },
+            {
+                "id": "L9",
+                "num": 9,
+                "question": "9. 男：你复习得怎么样了？算法题都会了吗？\n女：差不多了，难的几道题老师讲过了。\n问：女的复习得怎么样？",
+                "options": [
+                    "A. 完全没复习",
+                    "B. 复习得差不多了",
+                    "C. 觉得非常难"
+                ],
+                "ans": "B. 复习得差不多了",
+                "exp": "女的回答'差不多了' (Chàbuduō le)."
+            },
+            {
+                "id": "L10",
+                "num": 10,
+                "question": "10. 女：天气冷了，出门多穿点儿衣服。\n男：好的，知道了，我拿上帽子。\n问：男的拿了什么？",
+                "options": [
+                    "A. 伞",
+                    "B. 帽子",
+                    "C. 护照"
+                ],
+                "ans": "B. 帽子",
+                "exp": "男的说'我拿上帽子' (màozi)."
+            }
+        ],
+        "reading": [
+            {
+                "part_title": "第一部分：选词填空（将词语填入对应句子中）",
+                "word_bank": "A. 了解 | B. 记得 | C. 决定 | D. 清楚 | E. 办法 | F. 帮助",
+                "items": [
+                    {
+                        "num": 1,
+                        "q": "1. 经过沟通，他终于（  ）把手机送给弟弟。",
+                        "options": [
+                            "A. 了解",
+                            "B. 记得",
+                            "C. 决定",
+                            "D. 清楚",
+                            "E. 办法",
+                            "F. 帮助"
+                        ],
+                        "ans": "C. 决定",
+                        "exp": "决定把手机送给弟弟 (quyết định tặng điện thoại cho em)."
+                    },
+                    {
+                        "num": 2,
+                        "q": "2. 你还（  ）我们第一次见面的地方吗？",
+                        "options": [
+                            "A. 了解",
+                            "B. 记得",
+                            "C. 决定",
+                            "D. 清楚",
+                            "E. 办法",
+                            "F. 帮助"
+                        ],
+                        "ans": "B. 记得",
+                        "exp": "还记得...吗 (còn nhớ... không)."
+                    },
+                    {
+                        "num": 3,
+                        "q": "3. 我在这个城市住了十年，对这里非常（  ）。",
+                        "options": [
+                            "A. 了解",
+                            "B. 记得",
+                            "C. 决定",
+                            "D. 清楚",
+                            "E. 办法",
+                            "F. 帮助"
+                        ],
+                        "ans": "A. 了解",
+                        "exp": "对这里非常了解 (rất hiểu rõ nơi này)."
+                    },
+                    {
+                        "num": 4,
+                        "q": "4. 这道数学题很难，你想出解决的（  ）了吗？",
+                        "options": [
+                            "A. 了解",
+                            "B. 记得",
+                            "C. 决定",
+                            "D. 清楚",
+                            "E. 办法",
+                            "F. 帮助"
+                        ],
+                        "ans": "E. 办法",
+                        "exp": "解决的办法 (biện pháp/cách giải quyết)."
+                    },
+                    {
+                        "num": 5,
+                        "q": "5. 老师讲得非常（  ），大家都明白了。",
+                        "options": [
+                            "A. 了解",
+                            "B. 记得",
+                            "C. 决定",
+                            "D. 清楚",
+                            "E. 办法",
+                            "F. 帮助"
+                        ],
+                        "ans": "D. 清楚",
+                        "exp": "讲得非常清楚 (giảng rất rõ ràng)."
+                    }
+                ]
+            },
+            {
+                "part_title": "第二部分：阅读理解（阅读短文并选择正确答案）",
+                "word_bank": "",
+                "items": [
+                    {
+                        "num": 6,
+                        "q": "6. 我哥哥是出租车司机，这么多年来，他的车几乎到过这个城市的每个地方，所以他对这个城市非常了解。\n问：关于他哥哥，可以知道什么？",
+                        "options": [
+                            "A. 要离开那儿",
+                            "B. 总是骑车上班",
+                            "C. 很了解这个城市"
+                        ],
+                        "ans": "C. 很了解这个城市",
+                        "exp": "文中总结'所以他对这个城市非常了解'。"
+                    },
+                    {
+                        "num": 7,
+                        "q": "7. “张”是我的姓，“雪”才是我的名字。中国人习惯把姓放在前面，把名字放在后面，这跟你们国家不一样。\n问：中国人的名字：",
+                        "options": [
+                            "A. 很简单",
+                            "B. 一般很长",
+                            "C. 姓在最前面"
+                        ],
+                        "ans": "C. 姓在最前面",
+                        "exp": "文中说明'中国人习惯把姓放在前面'。"
+                    },
+                    {
+                        "num": 8,
+                        "q": "8. 经过这件事，我们两个的关系变得比以前更好了，现在我们经常下班后一起吃饭、看电影。\n问：他们两个：",
+                        "options": [
+                            "A. 很少见面",
+                            "B. 关系更好了",
+                            "C. 结婚很久了"
+                        ],
+                        "ans": "B. 关系更好了",
+                        "exp": "文中写'两个的关系变得比以前更好了'。"
+                    },
+                    {
+                        "num": 9,
+                        "q": "9. 有些女孩儿认为越瘦越好看，为了能变瘦，有时候饭也不吃，这样做对身体很不好。其实，健康才是最重要的。\n问：这段话告诉我们：",
+                        "options": [
+                            "A. 不要吃得太饱",
+                            "B. 健康比漂亮重要",
+                            "C. 不要为小事生气"
+                        ],
+                        "ans": "B. 健康比漂亮重要",
+                        "exp": "文段强调'其实，健康才是最重要的'。"
+                    },
+                    {
+                        "num": 10,
+                        "q": "10. 我们常说做决定前一定要认真想想，但有时你会发现机会不等人，所以想清楚后就必须马上去做，不要以为机会会一直在那儿等着你。\n问：根据这段话，我们应该：",
+                        "options": [
+                            "A. 关心别人",
+                            "B. 认识更多朋友",
+                            "C. 想好了就去做"
+                        ],
+                        "ans": "C. 想好了就去做",
+                        "exp": "文中指出'想清楚后就必须马上去做'。"
+                    }
+                ]
+            }
+        ],
+        "writing": {
+            "reorder": [
+                {
+                    "num": 1,
+                    "components": [
+                        "把手机",
+                        "送给弟弟",
+                        "她决定"
+                    ],
+                    "ans": "她决定把手机送给弟弟。",
+                    "exp": "Trật tự: S (她) + Năng nguyện (决定) + 把 + Tân ngữ (手机) + V (送给弟弟)."
+                },
+                {
+                    "num": 2,
+                    "components": [
+                        "很久没见面了",
+                        "我和这个学生",
+                        ""
+                    ],
+                    "ans": "我和这个学生很久没见面了。",
+                    "exp": "Trật tự: S (我和这个学生) + Trạng ngữ (很久) + V (没见面了)."
+                },
+                {
+                    "num": 3,
+                    "components": [
+                        "经常刮风",
+                        "这个城市的春天",
+                        ""
+                    ],
+                    "ans": "这个城市的春天经常刮风。",
+                    "exp": "Trật tự: S (这个城市的春天) + Phó từ (经常) + V (刮风)."
+                },
+                {
+                    "num": 4,
+                    "components": [
+                        "写得很漂亮",
+                        "他的汉字",
+                        ""
+                    ],
+                    "ans": "他的汉字写得很漂亮。",
+                    "exp": "Trật tự: S (他的汉字) + V (写得) + Bổ ngữ (很漂亮)."
+                },
+                {
+                    "num": 5,
+                    "components": [
+                        "花了 900 块钱",
+                        "叔叔的太阳镜",
+                        ""
+                    ],
+                    "ans": "叔叔的太阳镜花了 900 块钱。",
+                    "exp": "Trật tự: S (叔叔的太阳镜) + V (花了) + Tân ngữ (900 块钱)."
+                }
+            ],
+            "pinyin_fill": [
+                {
+                    "num": 6,
+                    "pinyin": "yue",
+                    "sentence": "八月十五的（  ）亮又大又圆。",
+                    "ans": "月",
+                    "full_ans": "八月十五的月亮又大又圆。",
+                    "exp": "Từ cần điền là 月 (trong 月亮 - yuèliang)."
+                },
+                {
+                    "num": 7,
+                    "pinyin": "bai",
+                    "sentence": "老师讲得很清楚，我已经明（  ）了。",
+                    "ans": "白",
+                    "full_ans": "老师讲得很清楚，我已经明白了。",
+                    "exp": "Từ cần điền là 白 (trong 明白 - míngbai)."
+                },
+                {
+                    "num": 8,
+                    "pinyin": "qian",
+                    "sentence": "一（  ）万年前，动物们出现了吗？",
+                    "ans": "千",
+                    "full_ans": "一千万年前，动物们出现了吗？",
+                    "exp": "Từ cần điền là 千 (qiān - nghìn)."
+                },
+                {
+                    "num": 9,
+                    "pinyin": "xin",
+                    "sentence": "外面下雪了，你让孩子路上小（  ）点儿。",
+                    "ans": "心",
+                    "full_ans": "外面下雪了，你让孩子路上小心点儿。",
+                    "exp": "Từ cần điền là 心 (trong 小心 - xiǎoxīn)."
+                },
+                {
+                    "num": 10,
+                    "pinyin": "yin",
+                    "sentence": "生病了要注意休息，（  ）为健康最重要。",
+                    "ans": "因",
+                    "full_ans": "生病了要注意休息，เพราะ健康最重要。",
+                    "exp": "Từ cần điền là 因 (trong 因为 - yīnwèi)."
+                }
+            ]
+        }
+    },
+    {
         "id": "H31002",
         "title": "Mã đề: H31002",
         "audio_url": "https://example.com/audio/hsk3_31002.mp3",
@@ -10098,7 +13264,11 @@ EXAM_DATA = [
                 "id": "L1",
                 "num": 1,
                 "question": "1. 女：喝点儿水吧，今天踢得怎么样？\n男：我们班的水平比他们高，我们进了五个球！\n问：男的今天做了什么？",
-                "options": ["A. 看电影", "B. 踢足球", "C. 跑步"],
+                "options": [
+                    "A. 看电影",
+                    "B. 踢足球",
+                    "C. 跑步"
+                ],
                 "ans": "B. 踢足球",
                 "exp": "男的提到'进了五个球'，指踢足球 (tí zúqiú)."
             },
@@ -10106,7 +13276,11 @@ EXAM_DATA = [
                 "id": "L2",
                 "num": 2,
                 "question": "2. 女：每天都要洗碗和盘子，累不累？\n男：不累，我们家那位做饭，我来洗是应该的。\n问：女的在家做什么？",
-                "options": ["A. 做饭", "B. 洗碗和盘子", "C. 扫地"],
+                "options": [
+                    "A. 做饭",
+                    "B. 洗碗和盘子",
+                    "C. 扫地"
+                ],
                 "ans": "B. 洗碗和盘子",
                 "exp": "女的提及每天洗碗和盘子 (xǐ wǎn hé pánzi)."
             },
@@ -10114,7 +13288,11 @@ EXAM_DATA = [
                 "id": "L3",
                 "num": 3,
                 "question": "3. 女：十四床的病人今天好些了吧？\n男：好多了，下个星期应该可以出院了。\n问：病人什么时候可以出院？",
-                "options": ["A. 今天", "B. 明天", "C. 下个星期"],
+                "options": [
+                    "A. 今天",
+                    "B. 明天",
+                    "C. 下个星期"
+                ],
                 "ans": "C. 下个星期",
                 "exp": "男的说'下个星期应该可以出院了'。"
             },
@@ -10122,7 +13300,11 @@ EXAM_DATA = [
                 "id": "L4",
                 "num": 4,
                 "question": "4. 男：我们是去年秋天结婚的，你看，这张照片就是那会儿照的。\n女：你爱人真漂亮！\n问：他们是什么时候结婚的？",
-                "options": ["A. 去年夏天", "B. 去年秋天", "C. 今年春天"],
+                "options": [
+                    "A. 去年夏天",
+                    "B. 去年秋天",
+                    "C. 今年春天"
+                ],
                 "ans": "B. 去年秋天",
                 "exp": "男的明确说是'去年秋天结婚的'。"
             },
@@ -10130,7 +13312,11 @@ EXAM_DATA = [
                 "id": "L5",
                 "num": 5,
                 "question": "5. 女：你看见我的照相机了吗？我记得放在包里了啊。\n男：没看见，别着急，慢慢找。\n问：女的在找什么？",
-                "options": ["A. 照相机", "B. 护照", "C. 手机"],
+                "options": [
+                    "A. 照相机",
+                    "B. 护照",
+                    "C. 手机"
+                ],
                 "ans": "A. 照相机",
                 "exp": "女的问'你看见我的照相机了吗' (zhàoxiàngjī)."
             },
@@ -10138,7 +13324,11 @@ EXAM_DATA = [
                 "id": "L6",
                 "num": 6,
                 "question": "6. 男：姐，祝您生日快乐！\n女：谢谢你，谢谢你的礼物。\n问：男的送给女的什么？",
-                "options": ["A. 蛋糕", "B. 生日礼物", "C. 照相机"],
+                "options": [
+                    "A. 蛋糕",
+                    "B. 生日礼物",
+                    "C. 照相机"
+                ],
                 "ans": "B. 生日礼物",
                 "exp": "女的表达感谢'谢谢你的礼物'。"
             },
@@ -10146,7 +13336,11 @@ EXAM_DATA = [
                 "id": "L7",
                 "num": 7,
                 "question": "7. 女：吃的午饭再走吧，我做两个菜，很快的。\n男：简单吃点儿面条儿就可以了。\n问：男的想吃什么？",
-                "options": ["A. 米饭", "B. 面条", "C. 蛋糕"],
+                "options": [
+                    "A. 米饭",
+                    "B. 面条",
+                    "C. 蛋糕"
+                ],
                 "ans": "B. 面条",
                 "exp": "男的说'简单吃点儿面条儿就可以了'。"
             },
@@ -10154,7 +13348,11 @@ EXAM_DATA = [
                 "id": "L8",
                 "num": 8,
                 "question": "8. 男：你这次要离开多长时间？\n女：还没决定，一周或者两周吧。\n问：女的可能离开多久？",
-                "options": ["A. 一天", "B. 一周或者两周", "C. 一个月"],
+                "options": [
+                    "A. 一天",
+                    "B. 一周或者两周",
+                    "C. 一个月"
+                ],
                 "ans": "B. 一周或者两周",
                 "exp": "女的回答'一周或者两周吧'。"
             },
@@ -10162,7 +13360,11 @@ EXAM_DATA = [
                 "id": "L9",
                 "num": 9,
                 "question": "9. 女：我明天穿什么衣服好？你帮我选选？\n男：你想穿裙子还是裤子？女：我想穿裙子。\n问：女的想穿什么？",
-                "options": ["A. 衬衫", "B. 裙子", "C. 裤子"],
+                "options": [
+                    "A. 衬衫",
+                    "B. 裙子",
+                    "C. 裤子"
+                ],
                 "ans": "B. 裙子",
                 "exp": "女的表达意愿'我想穿裙子'。"
             },
@@ -10170,7 +13372,11 @@ EXAM_DATA = [
                 "id": "L10",
                 "num": 10,
                 "question": "10. 男：你等一下，我去把电视的声音关小一些。\n问：男的去干什么？",
-                "options": ["A. 看电视", "B. 关小电视声音", "C. 睡觉"],
+                "options": [
+                    "A. 看电视",
+                    "B. 关小电视声音",
+                    "C. 睡觉"
+                ],
                 "ans": "B. 关小电视声音",
                 "exp": "男的说'去把电视的声音关小一些'。"
             }
@@ -10180,11 +13386,76 @@ EXAM_DATA = [
                 "part_title": "第一部分：选词填空（将词语填入对应句子中）",
                 "word_bank": "A. 向 | B. 然后 | C. 花 | D. 筷子 | E. 声音 | F. 相同",
                 "items": [
-                    {"num": 1, "q": "1. 您站中间就可以了，好，再（  ）左边一点儿，非常好！", "options": ["A. 向", "B. 然后", "C. 花", "D. 筷子", "E. 声音", "F. 相同"], "ans": "A. 向", "exp": "向左边 (về phía bên trái)."},
-                    {"num": 2, "q": "2. 服务员，请你再给我拿一双（  ）。", "options": ["A. 向", "B. 然后", "C. 花", "D. 筷子", "E. 声音", "F. 相同"], "ans": "D. 筷子", "exp": "一双筷子 (một đôi đũa)."},
-                    {"num": 3, "q": "3. 虽然这两个问题不一样，但是解决的办法是（  ）的。", "options": ["A. 向", "B. 然后", "C. 花", "D. 筷子", "E. 声音", "F. 相同"], "ans": "F. 相同", "exp": "办法是相同的 (phương pháp giống nhau)."},
-                    {"num": 4, "q": "4. 这次出去旅游，一共去了 7 个城市，（  ）了一万多块钱。", "options": ["A. 向", "B. 然后", "C. 花", "D. 筷子", "E. 声音", "F. 相同"], "ans": "C. 花", "exp": "花了钱 (tiêu tốn tiền)."},
-                    {"num": 5, "q": "5. 明天早上我先去银行，（  ）再去找你。", "options": ["A. 向", "B. 然后", "C. 花", "D. 筷子", "E. 声音", "F. 相同"], "ans": "B. 然后", "exp": "先...然后... (đầu tiên... sau đó...)."}
+                    {
+                        "num": 1,
+                        "q": "1. 您站中间就可以了，好，再（  ）左边一点儿，非常好！",
+                        "options": [
+                            "A. 向",
+                            "B. 然后",
+                            "C. 花",
+                            "D. 筷子",
+                            "E. 声音",
+                            "F. 相同"
+                        ],
+                        "ans": "A. 向",
+                        "exp": "向左边 (về phía bên trái)."
+                    },
+                    {
+                        "num": 2,
+                        "q": "2. 服务员，请你再给我拿一双（  ）。",
+                        "options": [
+                            "A. 向",
+                            "B. 然后",
+                            "C. 花",
+                            "D. 筷子",
+                            "E. 声音",
+                            "F. 相同"
+                        ],
+                        "ans": "D. 筷子",
+                        "exp": "一双筷子 (một đôi đũa)."
+                    },
+                    {
+                        "num": 3,
+                        "q": "3. 虽然这两个问题不一样，但是解决的办法是（  ）的。",
+                        "options": [
+                            "A. 向",
+                            "B. 然后",
+                            "C. 花",
+                            "D. 筷子",
+                            "E. 声音",
+                            "F. 相同"
+                        ],
+                        "ans": "F. 相同",
+                        "exp": "办法是相同的 (phương pháp giống nhau)."
+                    },
+                    {
+                        "num": 4,
+                        "q": "4. 这次出去旅游，一共去了 7 个城市，（  ）了一万多块钱。",
+                        "options": [
+                            "A. 向",
+                            "B. 然后",
+                            "C. 花",
+                            "D. 筷子",
+                            "E. 声音",
+                            "F. 相同"
+                        ],
+                        "ans": "C. 花",
+                        "exp": "花了钱 (tiêu tốn tiền)."
+                    },
+                    {
+                        "num": 5,
+                        "q": "5. 明天早上我先去银行，（  ）再去找你。",
+                        "options": [
+                            "A. 向",
+                            "B. 然后",
+                            "C. 花",
+                            "D. 筷子",
+                            "E. 声音",
+                            "F. 相同"
+                        ],
+                        "ans": "B. 然后",
+                        "exp": "先...然后... (đầu tiên... sau đó...)."
+                    }
                 ]
             },
             {
@@ -10194,35 +13465,55 @@ EXAM_DATA = [
                     {
                         "num": 6,
                         "q": "6. 经常吃甜的东西容易变胖，所以我不吃糖。这种蛋糕不甜，没放糖。\n问：女的为什么吃这种蛋糕？",
-                        "options": ["A. 因为蛋糕很好吃", "B. 因为这种蛋糕没放糖", "C. 因为她喜欢甜食"],
+                        "options": [
+                            "A. 因为蛋糕很好吃",
+                            "B. 因为这种蛋糕没放糖",
+                            "C. 因为她喜欢甜食"
+                        ],
                         "ans": "B. 因为这种蛋糕没放糖",
                         "exp": "文段中女的说'这种蛋糕不甜，没放糖'。"
                     },
                     {
                         "num": 7,
                         "q": "7. 图书馆里非常安静，大家都在认真地看书或查资料。如果你有问题，请去外面讨论。\n问：在图书馆里应该怎么样？",
-                        "options": ["A. 大声说话", "B. 保持安静", "C. 吃蛋糕"],
+                        "options": [
+                            "A. 大声说话",
+                            "B. 保持安静",
+                            "C. 吃蛋糕"
+                        ],
                         "ans": "B. 保持安静",
                         "exp": "文段指出'图书馆里非常安静，大家都在认真地看书'。"
                     },
                     {
                         "num": 8,
                         "q": "8. 小王每天骑自行车上班，不仅能锻炼身体，而且非常环保和方便。\n问：小王选择骑自行车上班的原因是什么？",
-                        "options": ["A. 既锻炼身体又方便环保", "B. 因为买不起车", "C. 因为公交车很挤"],
+                        "options": [
+                            "A. 既锻炼身体又方便环保",
+                            "B. 因为买不起车",
+                            "C. 因为公交车很挤"
+                        ],
                         "ans": "A. 既锻炼身体又方便环保",
                         "exp": "文中总结'不仅能锻炼身体，而且非常环保和方便'。"
                     },
                     {
                         "num": 9,
                         "q": "9. 学习汉语最重要的是多听多说。每天坚持听半个小时录音，汉语提高得很快。\n问：怎样才能快速提高汉语水平？",
-                        "options": ["A. 每天多看电视", "B. 每天坚持多听多说", "C. 常常去买东西"],
+                        "options": [
+                            "A. 每天多看电视",
+                            "B. 每天坚持多听多说",
+                            "C. 常常去买东西"
+                        ],
                         "ans": "B. 每天坚持多听多说",
                         "exp": "文中说明'学习汉语最重要的是多听多说'。"
                     },
                     {
                         "num": 10,
                         "q": "10. 世界上每一个国家都有自己独特的节日和文化。了解这些文化能让我们开阔眼界。\n问：了解各国的文化有什么好处？",
-                        "options": ["A. 能开阔眼界", "B. 能赚很多钱", "C. 能学会做饭"],
+                        "options": [
+                            "A. 能开阔眼界",
+                            "B. 能赚很多钱",
+                            "C. 能学会做饭"
+                        ],
                         "ans": "A. 能开阔眼界",
                         "exp": "文中提到'了解这些文化能让我们开阔眼界'。"
                     }
@@ -10310,7 +13601,11 @@ EXAM_DATA = [
                 "id": "L1",
                 "num": 1,
                 "question": "1. 女：你一直看手表，有什么着急的事情吗？\n男：我九点前必须回到办公室，经理有事情找我，再见。\n问：男的为什么着急？",
-                "options": ["A. 要赶飞机", "B. 要回办公室见经理", "C. 要去踢足球"],
+                "options": [
+                    "A. 要赶飞机",
+                    "B. 要回办公室见经理",
+                    "C. 要去踢足球"
+                ],
                 "ans": "B. 要回办公室见经理",
                 "exp": "男的说九点前必须回到办公室，经理找他。"
             },
@@ -10318,7 +13613,11 @@ EXAM_DATA = [
                 "id": "L2",
                 "num": 2,
                 "question": "2. 男：你想什么呢？要出去吗？\n女：明天同学结婚，我在想穿哪双鞋好呢。\n问：女的在想什么？",
-                "options": ["A. 买新鞋", "B. 选衣服", "C. 明天穿哪双鞋"],
+                "options": [
+                    "A. 买新鞋",
+                    "B. 选衣服",
+                    "C. 明天穿哪双鞋"
+                ],
                 "ans": "C. 明天穿哪双鞋",
                 "exp": "女的明确说'在想穿哪双鞋好呢'。"
             },
@@ -10326,7 +13625,11 @@ EXAM_DATA = [
                 "id": "L3",
                 "num": 3,
                 "question": "3. 女：你每天都骑自行车上下班？\n男：是，我骑了四个月了，一共瘦了六斤。\n问：男的骑自行车多久了？",
-                "options": ["A. 4个月", "B. 6个月", "C. 1年"],
+                "options": [
+                    "A. 4个月",
+                    "B. 6个月",
+                    "C. 1年"
+                ],
                 "ans": "A. 4个月",
                 "exp": "男的说骑了四个月了。"
             },
@@ -10334,7 +13637,11 @@ EXAM_DATA = [
                 "id": "L4",
                 "num": 4,
                 "question": "4. 女：听说你要去国外读书？\n男：是，下周五的飞机。\n问：女的希望男的怎么样？",
-                "options": ["A. 学习更上一层楼", "B. 早点回来", "C. 买新裤子"],
+                "options": [
+                    "A. 学习更上一层楼",
+                    "B. 早点回来",
+                    "C. 买新裤子"
+                ],
                 "ans": "A. 学习更上一层楼",
                 "exp": "女的祝男的在新年里学习更上一层楼。"
             },
@@ -10342,7 +13649,11 @@ EXAM_DATA = [
                 "id": "L5",
                 "num": 5,
                 "question": "5. 男：我的护照在你包里吗？\n女：你看看，在你自己的衬衫里呢。\n问：护照是在哪儿找到的？",
-                "options": ["A. 在包里", "B. 在衬衫里", "C. 在桌子上"],
+                "options": [
+                    "A. 在包里",
+                    "B. 在衬衫里",
+                    "C. 在桌子上"
+                ],
                 "ans": "B. 在衬衫里",
                 "exp": "女的提醒在男的自己的衬衫里找到。"
             },
@@ -10350,7 +13661,11 @@ EXAM_DATA = [
                 "id": "L6",
                 "num": 6,
                 "question": "6. 女：你在忙什么呢？刚才打你的手机你也不接。\n男：对不起，我刚洗了个澡，没听见。\n问：男的刚才为什么没接电话？",
-                "options": ["A. 在看电视", "B. 在洗澡没听见", "C. 在开会"],
+                "options": [
+                    "A. 在看电视",
+                    "B. 在洗澡没听见",
+                    "C. 在开会"
+                ],
                 "ans": "B. 在洗澡没听见",
                 "exp": "男的说'刚洗了个澡，没听见'。"
             },
@@ -10358,7 +13673,11 @@ EXAM_DATA = [
                 "id": "L7",
                 "num": 7,
                 "question": "7. 男：阿姨，我把水果洗好了，您吃一点儿吧。\n女：好的，真谢谢你！\n问：男的给阿姨拿了什么？",
-                "options": ["A. 茶", "B. 水果", "C. 面包"],
+                "options": [
+                    "A. 茶",
+                    "B. 水果",
+                    "C. 面包"
+                ],
                 "ans": "B. 水果",
                 "exp": "男的说'我把水果洗好了'。"
             },
@@ -10366,7 +13685,11 @@ EXAM_DATA = [
                 "id": "L8",
                 "num": 8,
                 "question": "8. 女：外面的风很大，多穿一件衣服吧。\n男：没关系，我不冷，很快就回来。\n问：外面的天气怎么样？",
-                "options": ["A. 下雪了", "B. 刮大风", "C. 很热"],
+                "options": [
+                    "A. 下雪了",
+                    "B. 刮大风",
+                    "C. 很热"
+                ],
                 "ans": "B. 刮大风",
                 "exp": "女的提醒'外面的风很大'。"
             },
@@ -10374,7 +13697,11 @@ EXAM_DATA = [
                 "id": "L9",
                 "num": 9,
                 "question": "9. 男：请问去图书馆应该怎么走？\n女：一直往前走，过两个路口向右转就到了。\n问：图书馆在哪里？",
-                "options": ["A. 往前走过两个路口向右转", "B. 在车站对面", "C. 在超市隔壁"],
+                "options": [
+                    "A. 往前走过两个路口向右转",
+                    "B. 在车站对面",
+                    "C. 在超市隔壁"
+                ],
                 "ans": "A. 往前走过两个路口向右转",
                 "exp": "女的给出的路线是'一直往前走，过两个路口向右转'。"
             },
@@ -10382,7 +13709,11 @@ EXAM_DATA = [
                 "id": "L10",
                 "num": 10,
                 "question": "10. 女：你喜欢秋天还是冬天？\n男：我更喜欢秋天，因为天气不冷也不热。\n问：男的为什么喜欢秋天？",
-                "options": ["A. 经常下雪", "B. 天气不冷也不热", "C. 假期很长"],
+                "options": [
+                    "A. 经常下雪",
+                    "B. 天气不冷也不热",
+                    "C. 假期很长"
+                ],
                 "ans": "B. 天气不冷也不热",
                 "exp": "男的指出原因'因为天气不冷也不热'。"
             }
@@ -10392,11 +13723,76 @@ EXAM_DATA = [
                 "part_title": "第一部分：选词填空（将词语填入对应句子中）",
                 "word_bank": "A. 影响 | B. 简单 | C. 解决 | D. 发现 | E. 机会 | F. 必须",
                 "items": [
-                    {"num": 1, "q": "1. 这个问题很（  ），我们很快就能做完。", "options": ["A. 影响", "B. 简单", "C. 解决", "D. 发现", "E. 机会", "F. 必须"], "ans": "B. 简单", "exp": "很简单 (rất đơn giản)."},
-                    {"num": 2, "q": "2. 遇到困难时，一定要想办法（  ）它。", "options": ["A. 影响", "B. 简单", "C. 解决", "D. 发现", "E. 机会", "F. 必须"], "ans": "C. 解决", "exp": "解决困难 (giải quyết khó khăn)."},
-                    {"num": 3, "q": "3. 请不要在图书馆大声说话，会（  ）别人看书。", "options": ["A. 影响", "B. 简单", "C. 解决", "D. 发现", "E. 机会", "F. 必须"], "ans": "A. 影响", "exp": "影响别人 (ảnh hưởng người khác)."},
-                    {"num": 4, "q": "4. 出门前你（  ）带上钥匙和手机。", "options": ["A. 影响", "B. 简单", "C. 解决", "D. 发现", "E. 机会", "F. 必须"], "ans": "F. 必须", "exp": "必须带上 (bắt buộc mang theo)."},
-                    {"num": 5, "q": "5. 经过认真检查，他（  ）了一个小错误。", "options": ["A. 影响", "B. 简单", "C. 解决", "D. 发现", "E. 机会", "F. 必须"], "ans": "D. 发现", "exp": "发现了错误 (phát hiện ra lỗi)."}
+                    {
+                        "num": 1,
+                        "q": "1. 这个问题很（  ），我们很快就能做完。",
+                        "options": [
+                            "A. 影响",
+                            "B. 简单",
+                            "C. 解决",
+                            "D. 发现",
+                            "E. 机会",
+                            "F. 必须"
+                        ],
+                        "ans": "B. 简单",
+                        "exp": "很简单 (rất đơn giản)."
+                    },
+                    {
+                        "num": 2,
+                        "q": "2. 遇到困难时，一定要想办法（  ）它。",
+                        "options": [
+                            "A. 影响",
+                            "B. 简单",
+                            "C. 解决",
+                            "D. 发现",
+                            "E. 机会",
+                            "F. 必须"
+                        ],
+                        "ans": "C. 解决",
+                        "exp": "解决困难 (giải quyết khó khăn)."
+                    },
+                    {
+                        "num": 3,
+                        "q": "3. 请不要在图书馆大声说话，会（  ）别人看书。",
+                        "options": [
+                            "A. 影响",
+                            "B. 简单",
+                            "C. 解决",
+                            "D. 发现",
+                            "E. 机会",
+                            "F. 必须"
+                        ],
+                        "ans": "A. 影响",
+                        "exp": "影响别人 (ảnh hưởng người khác)."
+                    },
+                    {
+                        "num": 4,
+                        "q": "4. 出门前你（  ）带上钥匙和手机。",
+                        "options": [
+                            "A. 影响",
+                            "B. 简单",
+                            "C. 解决",
+                            "D. 发现",
+                            "E. 机会",
+                            "F. 必须"
+                        ],
+                        "ans": "F. 必须",
+                        "exp": "必须带上 (bắt buộc mang theo)."
+                    },
+                    {
+                        "num": 5,
+                        "q": "5. 经过认真检查，他（  ）了一个小错误。",
+                        "options": [
+                            "A. 影响",
+                            "B. 简单",
+                            "C. 解决",
+                            "D. 发现",
+                            "E. 机会",
+                            "F. 必须"
+                        ],
+                        "ans": "D. 发现",
+                        "exp": "发现了错误 (phát hiện ra lỗi)."
+                    }
                 ]
             },
             {
@@ -10406,35 +13802,55 @@ EXAM_DATA = [
                     {
                         "num": 6,
                         "q": "6. 每个人都有自己的生活习惯。有的人喜欢早起，有的人喜欢晚睡。最重要的是保持身体健康。\n问：这段话主要告诉我们什么？",
-                        "options": ["A. 要早起", "B. 要晚睡", "C. 最重要的是保持身体健康"],
+                        "options": [
+                            "A. 要早起",
+                            "B. 要晚睡",
+                            "C. 最重要的是保持身体健康"
+                        ],
                         "ans": "C. 最重要的是保持身体健康",
                         "exp": "文中总结'最重要的是保持身体健康'。"
                     },
                     {
                         "num": 7,
                         "q": "7. 中国人过春节的时候喜欢穿红色的衣服，因为在传统文化里，红色代表着吉祥和快乐。\n问：春节时穿红色衣服代表什么？",
-                        "options": ["A. 吉祥和快乐", "B. 悲伤", "C. 天气很冷"],
+                        "options": [
+                            "A. 吉祥和快乐",
+                            "B. 悲伤",
+                            "C. 天气很冷"
+                        ],
                         "ans": "A. 吉祥和快乐",
                         "exp": "文中说明'红色代表着吉祥和快乐'。"
                     },
                     {
                         "num": 8,
                         "q": "8. 运动能让人心情愉快，还能增强体质。每周坚持运动三次是很好的习惯。\n问：每周坚持运动有什么好处？",
-                        "options": ["A. 让人心情愉快且增强体质", "B. 节省时间", "C. 让人非常疲倦"],
+                        "options": [
+                            "A. 让人心情愉快且增强体质",
+                            "B. 节省时间",
+                            "C. 让人非常疲倦"
+                        ],
                         "ans": "A. 让人心情愉快且增强体质",
                         "exp": "文中强调'运动能让人心情愉快，还能增强体质'。"
                     },
                     {
                         "num": 9,
                         "q": "9. 老师常常对我们说，遇到不懂的问题要及时问，不要害羞。\n问：遇到不懂的问题应该怎么做？",
-                        "options": ["A. 及时向老师问", "B. 放弃不学", "C. 假装明白"],
+                        "options": [
+                            "A. 及时向老师问",
+                            "B. 放弃不学",
+                            "C. 假装明白"
+                        ],
                         "ans": "A. 及时向老师问",
                         "exp": "文中提到'遇到不懂的问题要及时问，不要害羞'。"
                     },
                     {
                         "num": 10,
                         "q": "10. 这家店的蛋糕味道非常棒，价格也比较便宜，所以每天来买的人都很多。\n问：为什么这家店买蛋糕的人很多？",
-                        "options": ["A. 味道棒且价格便宜", "B. 店面非常大", "C. 位置很难找"],
+                        "options": [
+                            "A. 味道棒且价格便宜",
+                            "B. 店面非常大",
+                            "C. 位置很难找"
+                        ],
                         "ans": "A. 味道棒且价格便宜",
                         "exp": "文中提到'蛋糕味道非常棒，价格也比较便宜'。"
                     }
@@ -10515,15 +13931,6 @@ EXAM_DATA = [
     }
 ]
 
-# --- GIAO DIỆN CHÍNH ---
-st.markdown('<div class="header-box"><div class="main-title">✨ CHINH PHỤC HSK 3 - CÔ BẢO NGỌC ✨</div><br><div class="sub-title">Ôn từ vựng 9 nhóm & Luyện đề thi HSK3 chính thức</div></div>', unsafe_allow_html=True)
-
-# Khung nhập tên người học
-st.markdown('<div class="user-info-card">', unsafe_allow_html=True)
-user_name = st.text_input("👤 Họ và tên người học (Bắt buộc nhập tên để nộp bài):", value="", placeholder="Vui lòng nhập họ và tên của bạn tại đây...", key="user_name_input")
-st.markdown('</div>', unsafe_allow_html=True)
-
-# LỰA CHỌN 2 CHẾ ĐỘ LỚN: ÔN TỪ VỰNG & LÀM ĐỀ HSK3
 main_mode_tabs = st.tabs(["🎴 ÔN TỪ VỰNG HSK 3", "📝 LÀM ĐỀ THI HSK 3"])
 
 # =============================================================================
